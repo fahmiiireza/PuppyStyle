@@ -12,7 +12,6 @@
 		5838B3F02B1F7C3300E43B91 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5838B3EF2B1F7C3300E43B91 /* Item.swift */; };
 		5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5838B3F12B1F7C3400E43B91 /* Assets.xcassets */; };
 		5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5838B3F42B1F7C3400E43B91 /* Preview Assets.xcassets */; };
-		5838B3FC2B1F7C6F00E43B91 /* .gitignore.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5838B3FB2B1F7C6F00E43B91 /* .gitignore.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +21,6 @@
 		5838B3EF2B1F7C3300E43B91 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5838B3F12B1F7C3400E43B91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5838B3F42B1F7C3400E43B91 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5838B3FB2B1F7C6F00E43B91 /* .gitignore.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +55,6 @@
 			children = (
 				5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
-				5838B3FB2B1F7C6F00E43B91 /* .gitignore.txt */,
 				5838B3EF2B1F7C3300E43B91 /* Item.swift */,
 				5838B3F12B1F7C3400E43B91 /* Assets.xcassets */,
 				5838B3F32B1F7C3400E43B91 /* Preview Content */,
@@ -132,7 +129,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */,
-				5838B3FC2B1F7C6F00E43B91 /* .gitignore.txt in Resources */,
 				5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
