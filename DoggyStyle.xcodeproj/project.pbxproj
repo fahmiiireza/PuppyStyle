@@ -57,6 +57,7 @@
 			children = (
 				5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
+				5838B3FB2B1F7C6F00E43B91 /* .gitignore.txt */,
 				5838B3EF2B1F7C3300E43B91 /* Item.swift */,
 				5838B3F12B1F7C3400E43B91 /* Assets.xcassets */,
 				5838B3F32B1F7C3400E43B91 /* Preview Content */,
@@ -67,7 +68,6 @@
 		5838B3F32B1F7C3400E43B91 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				5838B3FB2B1F7C6F00E43B91 /* .gitignore.txt */,
 				5838B3F42B1F7C3400E43B91 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
