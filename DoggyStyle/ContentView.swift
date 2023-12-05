@@ -7,11 +7,18 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseCore
+import FirebaseFirestore // Import FirebaseFirestore
+
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
+    
+    // Add Firestore reference
+    let db = Firestore.firestore()
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -38,22 +45,29 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-
+    
     private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+           withAnimation {
+               let newItem = Item(timestamp: Date())
+               modelContext.insert(newItem)
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
+               // Add the item to Firestore
+               db.collection("items").addDocument(data: [
+                   "timestamp": "nfelix"
+               ]) { err in
+                   if let err = err {
+                       print("Error adding document: \(err)")
+                   } else {
+                       print("Document added with ID: \(newItem.timestamp)")
+                   }
+               }
+           }
+       }
+
+       private func deleteItems(offsets: IndexSet) {
+           // ... your existing code
+       }
+   }
 
 #Preview {
     ContentView()
