@@ -11,7 +11,9 @@ import FirebaseCore
 import FirebaseFirestore // Import FirebaseFirestore
 
 
+
 struct ContentView: View {
+    
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
