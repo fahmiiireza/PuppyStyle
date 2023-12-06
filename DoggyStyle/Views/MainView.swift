@@ -10,14 +10,15 @@ import SwiftUI
 struct MainView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(BackgroundLogic.self) private var backgroundLogic
     
     var body: some View {
         if horizontalSizeClass == .compact {
             ///IPHONE SECTION
             TabView{
-                MyDogsView()
+                MyDogsView(backgroundLogic: backgroundLogic)
                     .tabItem { Label("My Dogs", systemImage: "dog.fill") }
-                MyDogsView()
+                SearchView()
                     .tabItem { Label("Search", systemImage: "magnifyingglass") }
             }
         }else{
@@ -26,7 +27,7 @@ struct MainView: View {
                 NavigationStack{
                     List{
                         NavigationLink {
-                            MyDogsView()
+                            MyDogsView(backgroundLogic: backgroundLogic)
                         } label: {
                             Label("My Dogs", systemImage: "dog")
                         }
@@ -34,7 +35,7 @@ struct MainView: View {
                     .navigationTitle("Sidebar")
                 }
             } detail: {
-                MyDogsView()
+                MyDogsView(backgroundLogic: backgroundLogic)
             }
         }
     }
@@ -42,4 +43,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environment(BackgroundLogic())
 }

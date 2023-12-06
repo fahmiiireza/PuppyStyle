@@ -37,11 +37,14 @@ struct DoggyStyleApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    @State private var backgroundLogic = BackgroundLogic()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
+        .environment(backgroundLogic)
         .modelContainer(sharedModelContainer)
     }
 }
