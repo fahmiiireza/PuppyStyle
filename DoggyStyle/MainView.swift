@@ -8,8 +8,35 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if horizontalSizeClass == .compact {
+            ///IPHONE SECTION
+            TabView{
+                MyDogsView()
+                    .tabItem { Label("My Dogs", systemImage: "dog.fill") }
+                MyDogsView()
+                    .tabItem { Label("Search", systemImage: "magnifyingglass") }
+            }
+        }else{
+            ///IPAD SECTION
+            NavigationSplitView {
+                NavigationStack{
+                    List{
+                        NavigationLink {
+                            MyDogsView()
+                        } label: {
+                            Label("My Dogs", systemImage: "dog")
+                        }
+                    }
+                    .navigationTitle("Sidebar")
+                }
+            } detail: {
+                MyDogsView()
+            }
+        }
     }
 }
 
