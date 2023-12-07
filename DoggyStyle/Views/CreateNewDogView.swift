@@ -4,7 +4,7 @@
 //
 //  Created by Felix Parey on 06/12/23.
 //
-
+//
 import SwiftUI
 /*struct ImagePicker: View {
     @Binding var selectedImage: Image?
@@ -39,8 +39,12 @@ struct CreateNewDogView: View {
     @State private var vaccination: String = ""
     @State private var chronicdeseases: String = ""
     @State private var lastvetvisit: String = ""
-    
-    @State private var testingGithub: String = ""
+    @State private var lenth: String = ""
+    @State private var energylevel: String = ""
+    @State private var friendliness: String = ""
+    @State private var travelinglevel: String = ""
+
+ 
     
     var body: some View {
         NavigationStack {
@@ -55,13 +59,22 @@ struct CreateNewDogView: View {
                         .keyboardType(.numberPad)
                     TextField("Size", text: $size)
                         .keyboardType(.numberPad)
+                    TextField("Lenth", text: $lenth)
+                        .keyboardType(.numberPad)
                 }
+                
+                
                 Section(header: Text("Medical Information")) {
                     TextField("Allergies", text: $allergies )
                     TextField("Vaccination", text: $vaccination )
                     TextField("Chronic deseases", text: $chronicdeseases )
                     TextField("Last vet visit", text: $lastvetvisit )
-                    .datePickerStyle(GraphicalDatePickerStyle())
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                Section(header: Text("Сharacter")) {
+                    TextField("Energy level", text: $energylevel)
+                    TextField("Friendliness", text: $friendliness)
+                    TextField("Traveling level", text: $travelinglevel)
                 }
             }
             .toolbar {
@@ -70,13 +83,13 @@ struct CreateNewDogView: View {
                         dismiss.callAsFunction()
                     }
                 }
-
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button("Done") {
                         // Handle the creation of the new dog with the entered information
-//                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
+                        //                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
                         // Add logic to handle the new dog data!!
-
+                        
                         // Dismiss the sheet after handling the data
                         dismiss.callAsFunction()
                     }
@@ -85,9 +98,9 @@ struct CreateNewDogView: View {
             }
             .navigationTitle("Create New Dog")
             .navigationBarTitleDisplayMode(.inline)
-        }
+        }}
     }
-}
+
 
 #Preview {
     CreateNewDogView()
