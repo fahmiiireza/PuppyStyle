@@ -61,14 +61,15 @@ struct CreateNewDogView: View {
                         .keyboardType(.numberPad)
                     TextField("Lenth", text: $lenth)
                         .keyboardType(.numberPad)
-                    
                 }
+                
+                
                 Section(header: Text("Medical Information")) {
                     TextField("Allergies", text: $allergies )
                     TextField("Vaccination", text: $vaccination )
                     TextField("Chronic deseases", text: $chronicdeseases )
                     TextField("Last vet visit", text: $lastvetvisit )
-                    .datePickerStyle(GraphicalDatePickerStyle())
+                        .datePickerStyle(GraphicalDatePickerStyle())
                 }
                 Section(header: Text("Сharacter")) {
                     TextField("Energy level", text: $energylevel)
@@ -82,13 +83,13 @@ struct CreateNewDogView: View {
                         dismiss.callAsFunction()
                     }
                 }
-
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button("Done") {
                         // Handle the creation of the new dog with the entered information
-//                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
+                        //                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
                         // Add logic to handle the new dog data!!
-
+                        
                         // Dismiss the sheet after handling the data
                         dismiss.callAsFunction()
                     }
@@ -97,9 +98,9 @@ struct CreateNewDogView: View {
             }
             .navigationTitle("Create New Dog")
             .navigationBarTitleDisplayMode(.inline)
-        }
+        }}
     }
-}
+
 
 #Preview {
     CreateNewDogView()

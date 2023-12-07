@@ -19,5 +19,7 @@ final class Item {
 
 //Just for UI testing purposes
 struct Dog: Hashable{
+    
     var name = "bello"
+    
 }
