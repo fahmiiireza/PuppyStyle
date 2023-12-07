@@ -24,7 +24,7 @@ struct MyDogsView: View {
                     
             }
             .navigationDestination(for: Dog.self, destination: { dog in
-                OwnDogView(dog: dog)
+                OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
             })
             .sheet(isPresented: $backgroundLogic.sheetPresented, content: {
                 CreateNewDogView()

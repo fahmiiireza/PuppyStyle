@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OwnDogView: View {
     
+    @Bindable var backgroundLogic: BackgroundLogic
     var dog : Dog
     
     var body: some View {
@@ -58,17 +59,35 @@ struct OwnDogView: View {
                 }
                 
             }
+            .navigationBarBackButtonHidden(true)
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         
                     } label: {
-                        Image(systemName: "plus")
-                            .font(.caption)
-                            .bold()
-                            .padding(5)
-                            .background(.ultraThickMaterial)
-                            .clipShape(Circle())
+                        ZStack{
+                            Circle()
+                                .foregroundStyle(.ultraThickMaterial)
+                                .frame(width: 25)
+                            Image(systemName: "plus")
+                                .font(.caption)
+                                .bold()
+                        }
+                    }
+
+                }
+                ToolbarItem(placement: .navigation) {
+                    Button {
+                        backgroundLogic.path.removeLast()
+                    } label: {
+                        ZStack{
+                            Circle()
+                                .foregroundStyle(.ultraThickMaterial)
+                                .frame(width: 25)
+                            Image(systemName: "chevron.backward")
+                                .font(.caption)
+                                .bold()
+                        }
                     }
 
                 }
@@ -90,5 +109,5 @@ struct OwnDogView: View {
 }
 
 #Preview {
-    OwnDogView(dog: Dog(name: "Nalu"))
+    OwnDogView(backgroundLogic: BackgroundLogic(), dog: Dog(name: "Nalu"))
 }
