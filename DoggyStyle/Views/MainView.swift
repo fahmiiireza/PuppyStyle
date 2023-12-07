@@ -18,7 +18,7 @@ struct MainView: View {
             TabView{
                 MyDogsView(backgroundLogic: backgroundLogic)
                     .tabItem { Label("My Dogs", systemImage: "dog.fill") }
-                SearchView()
+                SearchView(backroundLogic: backgroundLogic)
                     .tabItem { Label("Search", systemImage: "magnifyingglass") }
             }
         }else{
