@@ -12,6 +12,7 @@ struct CreateNewDogView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
+        
         NavigationStack{
             
             Text("Create New Dog Here")
