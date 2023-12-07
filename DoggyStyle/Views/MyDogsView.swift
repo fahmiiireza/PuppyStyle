@@ -16,13 +16,16 @@ struct MyDogsView: View {
             ScrollView{
                 
                 Button(action: {
-                    
+                    backgroundLogic.path.append(Dog(name: "Pupsi"))
                 }, label: {
                     DogCardView()
                 })
                 
                     
             }
+            .navigationDestination(for: Dog.self, destination: { dog in
+                OwnDogView(dog: dog)
+            })
             .sheet(isPresented: $backgroundLogic.sheetPresented, content: {
                 CreateNewDogView()
             })

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OwnDogView: View {
+    
+    var dog : Dog
+    
     var body: some View {
             ScrollView{
                 GeometryReader{ geometry in
@@ -22,7 +25,7 @@ struct OwnDogView: View {
                                 .clipped()
                                 .offset(y: getHeaderOffset(for: geometry))
                                 .overlay(alignment: .bottomLeading) {
-                                    Text("DogName")
+                                    Text(dog.name)
                                         .foregroundStyle(.white)
                                         .font(.largeTitle)
                                         .bold()
@@ -87,5 +90,5 @@ struct OwnDogView: View {
 }
 
 #Preview {
-    OwnDogView()
+    OwnDogView(dog: Dog(name: "Nalu"))
 }

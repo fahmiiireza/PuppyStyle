@@ -16,3 +16,8 @@ final class Item {
         self.timestamp = timestamp
     }
 }
+
+//Just for UI testing purposes
+struct Dog: Hashable{
+    var name = "bello"
+}
