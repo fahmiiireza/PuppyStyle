@@ -14,7 +14,7 @@
 		4DB0AA582B2131F900E08AAE /* BackgroundLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */; };
 		4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */; };
 		4DB0AA5B2B2137CC00E08AAE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */; };
-		4DB399D22B1FEB570021782B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DB399D12B1FEB570021782B /* GoogleService-Info.plist */; };
+		4DB0AA652B22651200E08AAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DB0AA642B22651200E08AAE /* GoogleService-Info.plist */; };
 		581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */; };
 		581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFD2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion */; };
 		581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFF2B1F824C004B7140 /* FirebaseAnalyticsSwift */; };
@@ -36,7 +36,8 @@
 		4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLogic.swift; sourceTree = "<group>"; };
 		4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewDogView.swift; sourceTree = "<group>"; };
 		4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		4DB399D12B1FEB570021782B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4DB0AA632B2264E700E08AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DB0AA642B22651200E08AAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoggyStyle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoggyStyleApp.swift; sourceTree = "<group>"; };
 		5838B3ED2B1F7C3300E43B91 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,7 +109,8 @@
 				4DB0AA5C2B213B4800E08AAE /* Views */,
 				5838B3EF2B1F7C3300E43B91 /* Item.swift */,
 				5838B3F12B1F7C3400E43B91 /* Assets.xcassets */,
-				4DB399D12B1FEB570021782B /* GoogleService-Info.plist */,
+				4DB0AA632B2264E700E08AAE /* Info.plist */,
+				4DB0AA642B22651200E08AAE /* GoogleService-Info.plist */,
 				5838B3F32B1F7C3400E43B91 /* Preview Content */,
 			);
 			path = DoggyStyle;
@@ -193,7 +195,7 @@
 			files = (
 				5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */,
 				5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */,
-				4DB399D22B1FEB570021782B /* GoogleService-Info.plist in Resources */,
+				4DB0AA652B22651200E08AAE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +352,7 @@
 				DEVELOPMENT_TEAM = QA9FXHQ3QW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -382,6 +385,7 @@
 				DEVELOPMENT_TEAM = QA9FXHQ3QW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
