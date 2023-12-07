@@ -40,6 +40,8 @@ struct CreateNewDogView: View {
     @State private var chronicdeseases: String = ""
     @State private var lastvetvisit: String = ""
     
+    @State private var testingGithub: String = ""
+    
     var body: some View {
         NavigationStack {
             Form {
