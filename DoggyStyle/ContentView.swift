@@ -13,6 +13,32 @@ import GoogleSignIn
 import GoogleSignInSwift
 import FirebaseAuth
 
+struct Dog: Codable {
+    let image_link: String
+    let good_with_children: Int
+    let good_with_other_dogs: Int
+    let shedding: Int
+    let grooming: Int
+    let drooling: Int
+    let coat_length: Int
+    let good_with_strangers: Int
+    let playfulness: Int
+    let protectiveness: Int
+    let trainability: Int
+    let energy: Int
+    let barking: Int
+    let min_life_expectancy: Double
+    let max_life_expectancy: Double
+    let max_height_male: Double
+    let max_height_female: Double
+    let max_weight_male: Double
+    let max_weight_female: Double
+    let min_height_male: Double
+    let min_height_female: Double
+    let min_weight_male: Double
+    let min_weight_female: Double
+    let name: String
+}
 
 // ContentView is the main view for the app
 struct ContentView: View {
@@ -64,6 +90,9 @@ struct ContentView: View {
                     }
                 }
             }
+            .task {
+                await callApi()
+            }
         } detail: {
             // Detail view displays "Select an item"
             Text("Select an item")
@@ -99,7 +128,39 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         // ... your existing code
     }
+    private func callApi() async {
+        
+//            let url = "https://api.api-ninjas.com/v1/dogs"
+            let parameters = ["name": "golden retriever",]
+            let headers = [ "x-api-key": "PWdZ9vYedxLnnG9/ARstmw==mOKPLvqw1L6DhSR8"]
+            var urlComponents = URLComponents(string: "https://api.api-ninjas.com/v1/dogs")!
 
+//                var urlComponents = URLComponents(string: url)
+
+            var queryItems = [URLQueryItem]()
+            for (key, value) in parameters {
+                queryItems.append(URLQueryItem(name: key, value: value))
+            }
+            
+            urlComponents.queryItems = queryItems
+
+            var request = URLRequest(url: (urlComponents.url)!)
+            request.httpMethod = "GET"
+
+            for (key, value) in headers {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+            do {
+                let (data,_) = try await URLSession.shared.data(for: request)
+                let dogs = try JSONDecoder().decode([Dog].self, from: data)
+                print(dogs[0].image_link)
+                print(data)
+                print(type(of: data))
+//                    print(response)
+            } catch {
+                print(error)
+            }
+    }
     // Function to perform Google Sign-In
 //    func signInWithGoogle() async -> Bool {
 //        // Obtain the root view controller for Google Sign-In
