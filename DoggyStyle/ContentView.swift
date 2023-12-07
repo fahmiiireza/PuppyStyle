@@ -42,6 +42,11 @@ struct Dog: Codable {
 
 // ContentView is the main view for the app
 struct ContentView: View {
+    // Function to get the API key from Info.plist
+      func getAPIKey() -> String? {
+          return Bundle.main.object(forInfoDictionaryKey: "NINJA_API_KEY") as? String
+      }
+    
     // Inject the AuthenticationViewModel as an environment object
     @EnvironmentObject var viewModel: AuthenticationViewModel
     // Access the model context from the environment
@@ -132,7 +137,10 @@ struct ContentView: View {
         
 //            let url = "https://api.api-ninjas.com/v1/dogs"
             let parameters = ["name": "golden retriever",]
-            let headers = [ "x-api-key": "PWdZ9vYedxLnnG9/ARstmw==mOKPLvqw1L6DhSR8"]
+        guard let apiKey = getAPIKey() else {
+            return
+        }
+            let headers = [ "x-api-key": apiKey]
             var urlComponents = URLComponents(string: "https://api.api-ninjas.com/v1/dogs")!
 
 //                var urlComponents = URLComponents(string: url)
@@ -161,37 +169,6 @@ struct ContentView: View {
                 print(error)
             }
     }
-    // Function to perform Google Sign-In
-//    func signInWithGoogle() async -> Bool {
-//        // Obtain the root view controller for Google Sign-In
-//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//              let window = windowScene.windows.first,
-//              let rootViewController = window.rootViewController else {
-//            print("no root view")
-//            return false
-//        }
-//        do {
-//            // Perform Google Sign-In and obtain user information
-//            let userAuthentication = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
-//            let user = userAuthentication.user
-//            guard let idToken = user.idToken else {
-//                print("ID Token is missing")
-//                fatalError()
-//            }
-//            let accessToken = user.accessToken
-//            // Create Firebase credential with Google Sign-In tokens
-//            let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
-//            // Sign in with Firebase using Google credentials
-//            let result = try await Auth.auth().signIn(with: credential)
-//            let firebaseUser = result.user
-//            print("\(firebaseUser.uid) with email \(firebaseUser.email ?? "unknown")")
-//            return true
-//        } catch {
-//            // Handle errors during Google Sign-In
-//            print(error.localizedDescription)
-//            return false
-//        }
-//    }
 }
 
 
