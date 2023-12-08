@@ -11,6 +11,7 @@ import SwiftUI
 class BackgroundLogic{
     
     var path = NavigationPath()
-    var sheetPresented = false
+    var addDogSheetPresented = false
+    var profileSheetPresented = false
     
 }

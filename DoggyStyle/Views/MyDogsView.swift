@@ -26,13 +26,13 @@ struct MyDogsView: View {
             .navigationDestination(for: Dog.self, destination: { dog in
                 OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
             })
-            .sheet(isPresented: $backgroundLogic.sheetPresented, content: {
+            .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
                 CreateNewDogView()
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        backgroundLogic.sheetPresented = true
+                        backgroundLogic.addDogSheetPresented = true
                     }, label: {
                         Image(systemName: "plus")
                     })

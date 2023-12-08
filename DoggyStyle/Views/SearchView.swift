@@ -25,13 +25,13 @@ struct SearchView: View {
                     Spacer()
                     
                     Button(action: {
-                        backroundLogic.sheetPresented = true
+                        backroundLogic.profileSheetPresented = true
                     }, label: {
                         Image("Appicon")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .clipShape(Circle())
-                            .frame(height: 35)
+                            .frame(height: 40)
                     })
                     
                         
@@ -63,7 +63,7 @@ struct SearchView: View {
                 })
                 .padding(.horizontal)
             }
-            .sheet(isPresented: $backroundLogic.sheetPresented, content: {
+            .sheet(isPresented: $backroundLogic.profileSheetPresented, content: {
                 
                 //Later handle if User is signed in
                 

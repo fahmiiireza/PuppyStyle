@@ -14,6 +14,7 @@ enum FocusedField {
 struct SignUpView: View {
     
     @FocusState private var focusField: FocusedField?
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var mail = ""
     @State private var password = ""
@@ -77,28 +78,34 @@ struct SignUpView: View {
                         }
                         
                         TextField("E-Mail", text: $mail)
+                            .focused($focusField, equals: .mail)
                             .keyboardType(.emailAddress)
                             .textFieldStyle(.plain)
                             .padding(10)
                             .background(.gray.opacity(0.3))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .autocorrectionDisabled()
-                            .focused($focusField, equals: .mail)
+                            .textContentType(.emailAddress)
                             .onSubmit() {
-                                focusField = .password
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
+                                    focusField = .password
+                                }
                             }
                             
                         SecureField("Password", text: $password)
-                            
+                            .focused($focusField, equals: .password)
                             .textFieldStyle(.plain)
                             .padding(10)
                             .background(.gray.opacity(0.3))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .focused($focusField, equals: .password)
-                            .autocorrectionDisabled()
+                            .textContentType(.password)
                             .onSubmit() {
                                 if signingUp{
-                                    focusField = .confirmedPassword
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
+                                        focusField = .confirmedPassword
+                                    }
+                                    
                                 }else{
                                     //check if correct and sign in
                                     print("Signed In")
@@ -108,12 +115,12 @@ struct SignUpView: View {
                         
                         if signingUp{
                             SecureField("Confirm Password", text: $confirmedPassword)
+                                .focused($focusField, equals: .confirmedPassword)
                                 .textFieldStyle(.plain)
                                 .padding(10)
                                 .background(.gray.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .focused($focusField, equals: .confirmedPassword)
-                                .autocorrectionDisabled()
+                                .textContentType(.password)
                                 .onSubmit() {
                                     //check if correct and sign up
                                     print("Signed Up")
@@ -134,18 +141,17 @@ struct SignUpView: View {
                             }, label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(.white)
                                         .frame(height: 50)
-                                        .shadow(color: .gray.opacity(0.4), radius: 5)
+                                        .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
+                                        .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
                                         
                                     HStack{
                                         Image("Google")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                         Text("Sign up with Google")
-                                            .font(.title3)
-                                            
-                                            .foregroundStyle(.black)
+                                            .font(.headline)
+                                            .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                                         Spacer()
                                     }
                                     .padding(10)
@@ -158,18 +164,17 @@ struct SignUpView: View {
                             }, label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
                                         .frame(height: 50)
-                                        .shadow(color: .gray.opacity(0.4), radius: 5)
+                                        .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
                                         
                                     HStack{
                                         Image("Google")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                         Text("Sign In with Google")
-                                            .font(.title3)
-                                            
-                                            .foregroundStyle(.black)
+                                            .font(.headline)
+                                            .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                                         Spacer()
                                     }
                                     .padding(10)
