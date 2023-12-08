@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 enum FocusedField {
-        case mail, password, confirmedPassword
-    }
+    case mail, password, confirmedPassword
+}
 
 struct SignUpView: View {
+    
+    // Inject the AuthenticationViewModel as an environment object
+    @EnvironmentObject var viewModel: AuthenticationViewModel
     
     @FocusState private var focusField: FocusedField?
     @Environment(\.colorScheme) private var colorScheme
@@ -20,6 +24,15 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var confirmedPassword = ""
     @State private var signingUp = true
+    
+    // Perform Google Sign-In when the corresponding button is tapped
+    private func signInWithGoogle() {
+        Task {
+            if await viewModel.signInWithGoogle() == true {
+                dismiss()
+            }
+        }
+    }
     
     var body: some View {
         
@@ -91,7 +104,7 @@ struct SignUpView: View {
                                     focusField = .password
                                 }
                             }
-                            
+                        
                         SecureField("Password", text: $password)
                             .focused($focusField, equals: .password)
                             .textFieldStyle(.plain)
@@ -101,7 +114,6 @@ struct SignUpView: View {
                             .textContentType(.password)
                             .onSubmit() {
                                 if signingUp{
-                                    
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
                                         focusField = .confirmedPassword
                                     }
@@ -136,15 +148,13 @@ struct SignUpView: View {
                         
                         //Sign in with Google Button
                         if signingUp {
-                            Button(action: {
-                                
-                            }, label: {
+                            Button(action: signInWithGoogle , label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
                                         .frame(height: 50)
                                         .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
                                         .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
-                                        
+                                    
                                     HStack{
                                         Image("Google")
                                             .resizable()
@@ -159,15 +169,13 @@ struct SignUpView: View {
                                 }
                             })
                         }else{
-                            Button(action: {
-                                
-                            }, label: {
+                            Button(action: signInWithGoogle, label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
                                         .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
                                         .frame(height: 50)
                                         .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
-                                        
+                                    
                                     HStack{
                                         Image("Google")
                                             .resizable()
@@ -214,7 +222,7 @@ struct SignUpView: View {
                 }
                 
                 
-                    
+                
             }
             .toolbar(content: {
                 ToolbarItem(placement: .cancellationAction) {
@@ -224,6 +232,24 @@ struct SignUpView: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
+                        if signingUp {
+                            Auth.auth().createUser(withEmail: mail, password: password) { authResult, error in
+                                if let err = error {
+                                    print(err.localizedDescription)
+                                } else {
+                                    print(authResult ?? "test")
+                                }
+                            }
+                        } else {
+                            Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
+                                if let err = error {
+                                    print(err.localizedDescription)
+                                } else {
+                                    print(authResult ?? "test")
+                                }
+                            }
+
+                        }
                         dismiss.callAsFunction()
                     }label: {
                         Text(signingUp ? "Sign Up" : "Sign In")
