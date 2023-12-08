@@ -7,13 +7,17 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 enum FocusedField {
     case mail, password, confirmedPassword
 }
 
+
 struct SignUpView: View {
-    
+    let db = Firestore.firestore()
+
     // Inject the AuthenticationViewModel as an environment object
     @EnvironmentObject var viewModel: AuthenticationViewModel
     
@@ -103,6 +107,23 @@ struct SignUpView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01){
                                     focusField = .password
                                 }
+                            }
+                            .onChange(of: mail) {
+                                db.collection("user").whereField("email", isEqualTo: mail)
+                                    .getDocuments() { (querySnapshot, err) in
+                                        if let err = err {
+                                            print("Error getting documents: \(err)")
+                                        } else {
+                                            print(querySnapshot!.documents)
+                                            if querySnapshot!.documents.isEmpty {
+                                                print("user not found")
+                                            } else {
+                                                for document in querySnapshot!.documents {
+                                                    print("\(document.documentID) => \(document.data())")
+                                                }
+                                            }
+                                        }
+                                    }
                             }
                         
                         SecureField("Password", text: $password)
@@ -248,7 +269,7 @@ struct SignUpView: View {
                                     print(authResult ?? "test")
                                 }
                             }
-
+                            
                         }
                         dismiss.callAsFunction()
                     }label: {
