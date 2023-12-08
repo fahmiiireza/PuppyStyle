@@ -14,25 +14,22 @@ struct MyDogsView: View {
     var body: some View {
         NavigationStack(path: $backgroundLogic.path) {
             ScrollView{
-                
                 Button(action: {
                     backgroundLogic.path.append(Dog(name: "Pupsi"))
                 }, label: {
                     DogCardView()
                 })
-                
-                    
             }
             .navigationDestination(for: Dog.self, destination: { dog in
                 OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
             })
-            .sheet(isPresented: $backgroundLogic.sheetPresented, content: {
+            .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
                 CreateNewDogView()
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        backgroundLogic.sheetPresented = true
+                        backgroundLogic.addDogSheetPresented = true
                     }, label: {
                         Image(systemName: "plus")
                     })

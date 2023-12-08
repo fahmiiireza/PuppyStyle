@@ -18,7 +18,7 @@ struct MainView: View {
             TabView{
                 MyDogsView(backgroundLogic: backgroundLogic)
                     .tabItem { Label("My Dogs", systemImage: "dog.fill") }
-                SearchView()
+                SearchView(backroundLogic: backgroundLogic)
                     .tabItem { Label("Search", systemImage: "magnifyingglass") }
             }
         }else{
@@ -31,8 +31,13 @@ struct MainView: View {
                         } label: {
                             Label("My Dogs", systemImage: "dog")
                         }
+                        NavigationLink {
+                            SearchView(backroundLogic: backgroundLogic)
+                        } label: {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
                     }
-                    .navigationTitle("Sidebar")
+                    .navigationTitle("Doggy Style")
                 }
             } detail: {
                 MyDogsView(backgroundLogic: backgroundLogic)

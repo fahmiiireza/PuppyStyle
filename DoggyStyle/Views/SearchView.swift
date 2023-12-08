@@ -9,12 +9,36 @@ import SwiftUI
 
 struct SearchView: View {
     
+    @Bindable var backroundLogic: BackgroundLogic
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
         NavigationStack{
             ScrollView{
+                HStack(alignment: .bottom) {
+                    
+                    Text("Search")
+                        .font(.largeTitle)
+                        .bold()
+                        
+                    Spacer()
+                    
+                    Button(action: {
+                        backroundLogic.profileSheetPresented = true
+                    }, label: {
+                        Image("Appicon")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                            .frame(height: 40)
+                    })
+                    
+                        
+                }
+                .padding([.horizontal, .top])
+                
+                
                 RoundedRectangle(cornerRadius: 20)
                     .frame(height: 100)
                     .padding(.horizontal)
@@ -39,19 +63,31 @@ struct SearchView: View {
                 })
                 .padding(.horizontal)
             }
+            .sheet(isPresented: $backroundLogic.profileSheetPresented, content: {
+                
+                //Later handle if User is signed in
+                
+                //if user not signed in:
+                SignUpView()
+                
+                //if user is Signed in:
+                
+            })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {}, label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                     })
                 }
+                
             })
-            .navigationTitle("Search")
+            
+            
         }
         
     }
 }
 
 #Preview {
-    SearchView()
+    SearchView(backroundLogic: BackgroundLogic())
 }
