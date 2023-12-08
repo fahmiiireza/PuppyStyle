@@ -11,25 +11,26 @@ import FirebaseCore
 
 // Needed for Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 }
 
 @main
 struct DoggyStyleApp: App {
+    @StateObject private var authenticationViewModel = AuthenticationViewModel()
     
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+        
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
@@ -38,12 +39,13 @@ struct DoggyStyleApp: App {
     }()
     
     @State private var backgroundLogic = BackgroundLogic()
-
+    
     var body: some Scene {
         WindowGroup {
             MainView()
         }
         .environment(backgroundLogic)
+        .environmentObject(authenticationViewModel)
         .modelContainer(sharedModelContainer)
     }
 }
