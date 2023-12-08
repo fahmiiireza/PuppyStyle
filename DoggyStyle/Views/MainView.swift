@@ -31,8 +31,13 @@ struct MainView: View {
                         } label: {
                             Label("My Dogs", systemImage: "dog")
                         }
+                        NavigationLink {
+                            SearchView(backroundLogic: backgroundLogic)
+                        } label: {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
                     }
-                    .navigationTitle("Sidebar")
+                    .navigationTitle("Doggy Style")
                 }
             } detail: {
                 MyDogsView(backgroundLogic: backgroundLogic)

@@ -78,6 +78,7 @@ struct OwnDogView: View {
                 }
                 ToolbarItem(placement: .navigation) {
                     Button {
+                        //Still some error on ipad sometimes
                         backgroundLogic.path.removeLast()
                     } label: {
                         ZStack{

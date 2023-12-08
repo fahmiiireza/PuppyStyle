@@ -200,6 +200,7 @@ struct SignUpView: View {
                         Text("Sign In")
                             .underline()
                     })
+                    .padding(.bottom)
                 }else{
                     Text("Don't have an account yet?")
                     
@@ -209,6 +210,7 @@ struct SignUpView: View {
                         Text("Sign Up")
                             .underline()
                     })
+                    .padding(.bottom)
                 }
                 
                 
