@@ -50,5 +50,6 @@ struct DoggyStyleApp: App {
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
         .modelContainer(sharedModelContainer)
+        .modelContainer(for: UserData.self)
     }
 }

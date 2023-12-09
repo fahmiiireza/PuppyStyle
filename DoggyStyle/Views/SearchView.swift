@@ -66,24 +66,24 @@ struct SearchView: View {
                 })
                 .padding(.horizontal)
             }
-            .sheet(isPresented: $backroundLogic.profileSheetPresented, content: {
+            .fullScreenCover(isPresented: $backroundLogic.profileSheetPresented, content: {
                 
-                //Later handle if User is signed in
+                //handle if User is signed in
                 if (user != nil) {
-                    
+                    //if user is Signed in:
                     OwnAccountView(user: $user)
                     
                 } else {
-                    
+                    //if user not signed in:
                     SignUpView()
                     
                 }
-                //if user not signed in:
+                
                 
 
                 
                 
-                //if user is Signed in:
+                
                 
             })
             .toolbar(content: {

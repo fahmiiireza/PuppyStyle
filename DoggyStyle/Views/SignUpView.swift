@@ -37,7 +37,6 @@ struct SignUpView: View {
     private func signInWithGoogle() {
         Task {
             if await viewModel.signInWithGoogle() {
-                viewModel.createUser(email: mail.lowercased(), fromGoogle: true)
                 dismiss()
             }
         }
@@ -108,7 +107,7 @@ struct SignUpView: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
+                                    .foregroundStyle(Color.white)
                                     .frame(height: 50)
                                     .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
                                 
@@ -117,10 +116,10 @@ struct SignUpView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .padding(.vertical, 2)
-                                        .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
+                                        .foregroundStyle(Color.black)
                                     Text("Continue with E-Mail")
                                         .font(.headline)
-                                        .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
+                                        .foregroundStyle(Color.black)
                                     Spacer()
                                 }
                                 .padding(10)
@@ -130,9 +129,11 @@ struct SignUpView: View {
 
                         
                         if chosenEmail{
+                            
                             Text("Type in your E-Mail")
                                 .font(.caption)
                                 .padding(.top)
+                            
                             TextField("E-Mail", text: $mail)
                                 .focused($focusField, equals: .mail)
                                 .keyboardType(.emailAddress)
@@ -165,6 +166,7 @@ struct SignUpView: View {
                                                         }
                                                         
                                                         print("user not found")
+                                                        
                                                     } else {
                                                         withAnimation {
                                                             accountExists = true
@@ -280,7 +282,7 @@ struct SignUpView: View {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
                                         .frame(height: 50)
-                                        .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
+                                        .foregroundStyle(Color.white)
                                         .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
                                     
                                     HStack{
@@ -289,7 +291,7 @@ struct SignUpView: View {
                                             .aspectRatio(contentMode: .fit)
                                         Text("Continue with Google")
                                             .font(.headline)
-                                            .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
+                                            .foregroundStyle(Color.black)
                                         Spacer()
                                     }
                                     .padding(10)
@@ -370,6 +372,9 @@ struct SignUpView: View {
                 }
             })
             .padding(.top)
+        }
+        .onTapGesture{
+            hideKeyboard()
         }
         
     }
