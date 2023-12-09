@@ -191,10 +191,19 @@ struct SignUpView: View {
                                     withAnimation {
                                         focusField = .confirmedPassword
                                     }
-                                            
+                                    
+                                    Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
+                                        if let err = error {
+                                            print(err.localizedDescription)
+                                        } else {
+                                            print(authResult ?? "test")
+                                            print("Signed In")
+                                            dismiss.callAsFunction()
+                                        }
+                                    }
+                                    
                                         //check if correct and sign in
-                                        print("Signed In")
-                                        dismiss.callAsFunction()
+                                        
                                     
                                 }
                             
@@ -227,7 +236,7 @@ struct SignUpView: View {
                                 Button("Log in"){
                                     Auth.auth().signIn(withEmail: mail.lowercased(), password: password) { authResult, error in
                                         if let err = error {
-                                            print(err)
+                                            print(err.localizedDescription)
                                         } else {
                                             print(authResult ?? "test")
                                             dismiss()

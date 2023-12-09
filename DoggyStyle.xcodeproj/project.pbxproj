@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
 		4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */; };
 		4DB0AA552B2131F900E08AAE /* OwnDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */; };
 		4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA502B2131F900E08AAE /* MainView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
 		4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
 		4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnDogView.swift; sourceTree = "<group>"; };
 		4DB0AA502B2131F900E08AAE /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
 				4DB0AA662B22669F00E08AAE /* SignUpView.swift */,
+				4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */,
 				4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,
+				4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */,
 				4DB0AA572B2131F900E08AAE /* DogCardView.swift in Sources */,
 				4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */,
 				4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */,
