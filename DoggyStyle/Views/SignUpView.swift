@@ -328,6 +328,17 @@ struct SignUpView: View {
                                     print(authResult ?? "test")
                                 }
                             }
+                            //set the user data with only email whn first signing up
+                            db.collection("user").document(mail).setData([
+                              "email": mail,
+                            ]) { err in
+                              if let err = err {
+                                print("Error writing document: \(err)")
+                              } else {
+                                print("Document successfully written!")
+                              }
+                            }
+                            
                         } else {
                             Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
                                 if let err = error {

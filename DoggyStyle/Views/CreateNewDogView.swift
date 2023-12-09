@@ -6,6 +6,7 @@
 //
 //
 import SwiftUI
+import FirebaseAuth
 /*struct ImagePicker: View {
     @Binding var selectedImage: Image?
     @State private var isImagePickerPresented: Bool = false
@@ -27,6 +28,9 @@ import SwiftUI
  */
 
 struct CreateNewDogView: View {
+    @State private var handle: AuthStateDidChangeListenerHandle?
+    @State private var user: User?
+
     @Environment(\.dismiss) private var dismiss
 
     @State private var name: String = ""
@@ -48,6 +52,17 @@ struct CreateNewDogView: View {
     
     var body: some View {
         NavigationStack {
+            VStack {
+                if let user = user {
+                    Text("User ID: \(user.uid)")
+                    Text("Email: \(user.email ?? "N/A")")
+                    Text("phone: \(user.phoneNumber ?? "N/A")")
+                    AsyncImage(url: user.photoURL)
+                    
+                } else {
+                    Text("User not signed in")
+                }
+            }
             Form {
                 Section(header: Text("General Information")) {
                     TextField("Name", text: $name)
@@ -98,8 +113,23 @@ struct CreateNewDogView: View {
             }
             .navigationTitle("Create New Dog")
             .navigationBarTitleDisplayMode(.inline)
-        }}
+        }
+        .task {
+            print(handle ?? "tset")
+            handle = Auth.auth().addStateDidChangeListener { auth, user in
+                if let user = user {
+                    // User is signed in
+                    self.user = user
+
+                    print("User is signed in: \(user.email ?? "email")")
+                } else {
+                    // User is signed out
+                    print("User is signed out")
+                }            }
+            print(handle!)
+        }
     }
+}
 
 
 #Preview {
