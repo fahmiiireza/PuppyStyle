@@ -37,6 +37,7 @@ struct SignUpView: View {
     private func signInWithGoogle() {
         Task {
             if await viewModel.signInWithGoogle() {
+                viewModel.createUser(email: mail.lowercased(), fromGoogle: true)
                 dismiss()
             }
         }
@@ -151,9 +152,13 @@ struct SignUpView: View {
                                         db.collection("user").whereField("email", isEqualTo: mail.lowercased())
                                             .getDocuments() { (querySnapshot, err) in
                                                 if let err = err {
+                                                    
                                                     print("Error getting documents: \(err)")
+                                                    
                                                 } else {
+                                                    
                                                     print(querySnapshot!.documents)
+                                                    
                                                     if querySnapshot!.documents.isEmpty {
                                                         withAnimation {
                                                             accountExists = false
@@ -171,6 +176,7 @@ struct SignUpView: View {
                                                     }
                                                 }
                                             }
+                                        
                                     }
                                 }
                             
@@ -241,7 +247,7 @@ struct SignUpView: View {
                                             dismiss()
                                         }
                                     }
-                                    viewModel.createUser(email: mail, fromGoogle: false)
+                                    viewModel.createUser(email: mail.lowercased(), fromGoogle: false)
 
                                 }
                                 .alert(errorText, isPresented: $errorSigningUp) {
