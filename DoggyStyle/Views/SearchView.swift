@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SearchView: View {
     
+    @State private var handle: AuthStateDidChangeListenerHandle?
+    @State private var user: User?
     @Bindable var backroundLogic: BackgroundLogic
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -66,9 +69,19 @@ struct SearchView: View {
             .sheet(isPresented: $backroundLogic.profileSheetPresented, content: {
                 
                 //Later handle if User is signed in
-                
+                if (user != nil) {
+                    
+                    OwnAccountView(user: $user)
+                    
+                } else {
+                    
+                    SignUpView()
+                    
+                }
                 //if user not signed in:
-                SignUpView()
+                
+
+                
                 
                 //if user is Signed in:
                 
@@ -83,6 +96,21 @@ struct SearchView: View {
             })
             
             
+        }
+        .task {
+            print(handle ?? "tset")
+            handle = Auth.auth().addStateDidChangeListener { auth, user in
+                if let user = user {
+                    // User is signed in
+                    self.user = user
+
+                    print("User is signed in: \(user.email ?? "email")")
+                } else {
+                    // User is signed out
+                    print("User is signed out")
+                    self.user = nil
+                }            }
+            print(handle!)
         }
         
     }

@@ -184,10 +184,19 @@ struct SignUpView: View {
                                     withAnimation {
                                         focusField = .confirmedPassword
                                     }
-                                            
+                                    
+                                    Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
+                                        if let err = error {
+                                            print(err.localizedDescription)
+                                        } else {
+                                            print(authResult ?? "test")
+                                            print("Signed In")
+                                            dismiss.callAsFunction()
+                                        }
+                                    }
+                                    
                                         //check if correct and sign in
-                                        print("Signed In")
-                                        dismiss.callAsFunction()
+                                        
                                     
                                 }
                             
@@ -209,6 +218,15 @@ struct SignUpView: View {
                                                 dismiss()
                                             }
                                         }
+                                        db.collection("user").document(mail).setData([
+                                          "email": mail,
+                                        ]) { err in
+                                          if let err = err {
+                                            print("Error writing document: \(err)")
+                                          } else {
+                                            print("Document successfully written!")
+                                          }
+                                        }
                                         print("Signed Up")
                                         dismiss.callAsFunction()
                                     }
@@ -218,7 +236,7 @@ struct SignUpView: View {
                                 Button("Log in"){
                                     Auth.auth().signIn(withEmail: mail.lowercased(), password: password) { authResult, error in
                                         if let err = error {
-                                            print(err)
+                                            print(err.localizedDescription)
                                         } else {
                                             print(authResult ?? "test")
                                             dismiss()
@@ -237,6 +255,15 @@ struct SignUpView: View {
                                             print(authResult ?? "test")
                                             dismiss()
                                         }
+                                    }
+                                    db.collection("user").document(mail).setData([
+                                      "email": mail,
+                                    ]) { err in
+                                      if let err = err {
+                                        print("Error writing document: \(err)")
+                                      } else {
+                                        print("Document successfully written!")
+                                      }
                                     }
                                 }
                                 .alert(errorText, isPresented: $errorSigningUp) {

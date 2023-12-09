@@ -40,7 +40,10 @@ struct DoggyStyleApp: App {
     
     @State private var backgroundLogic = BackgroundLogic()
     
+    
     var body: some Scene {
+        
+        
         WindowGroup {
             MainView()
         }

@@ -5,27 +5,10 @@
 //  Created by Felix Parey on 06/12/23.
 //
 //
+
 import SwiftUI
 import FirebaseAuth
-/*struct ImagePicker: View {
-    @Binding var selectedImage: Image?
-    @State private var isImagePickerPresented: Bool = false
 
-    var body: some View {
-        VStack {
-            Button(action: {
-                // Simulate image picking (replace with your actual image picker)
-                selectedImage = Image(systemName: "photo")
-            }) {
-                Image(systemName: "photo.on.rectangle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-            }
-        }
-    }
-}
- */
 
 struct CreateNewDogView: View {
     @State private var handle: AuthStateDidChangeListenerHandle?
