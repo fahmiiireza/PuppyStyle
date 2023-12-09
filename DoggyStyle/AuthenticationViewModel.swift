@@ -200,16 +200,6 @@ extension AuthenticationViewModel {
             // Sign in with Firebase using Google credentials
             let result = try await Auth.auth().signIn(with: credential)
             let firebaseUser = result.user
-            //set the user data with only email whn first signing up
-            db.collection("user").document(firebaseUser.email!).setData([
-              "email": firebaseUser.email!,
-            ]) { err in
-              if let err = err {
-                print("Error writing document: \(err)")
-              } else {
-                print("Document successfully written!")
-              }
-            }
             
             print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
             return true
@@ -218,6 +208,21 @@ extension AuthenticationViewModel {
             print(error.localizedDescription)
             self.errorMessage = error.localizedDescription
             return false
+        }
+    }
+    
+    func createUser(email:String!,fromGoogle: Bool) {
+        print("call")
+        //set the user data with only email whn first signing up
+        db.collection("user").document(email).setData([
+          "email": email!,
+          "withGoogle": fromGoogle
+        ]) { err in
+          if let err = err {
+            print("Error writing document: \(err)")
+          } else {
+            print("Document successfully written!")
+          }
         }
     }
 }

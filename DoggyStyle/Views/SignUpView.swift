@@ -41,6 +41,7 @@ struct SignUpView: View {
             }
         }
     }
+
     
     var body: some View {
         
@@ -209,6 +210,8 @@ struct SignUpView: View {
                                                 dismiss()
                                             }
                                         }
+                                        viewModel.createUser(email: mail, fromGoogle: false)
+
                                         print("Signed Up")
                                         dismiss.callAsFunction()
                                     }
@@ -238,6 +241,8 @@ struct SignUpView: View {
                                             dismiss()
                                         }
                                     }
+                                    viewModel.createUser(email: mail, fromGoogle: false)
+
                                 }
                                 .alert(errorText, isPresented: $errorSigningUp) {
                                     Button("Choose different E-Mail", role: .cancel){
@@ -329,16 +334,7 @@ struct SignUpView: View {
                                 }
                             }
                             //set the user data with only email whn first signing up
-                            db.collection("user").document(mail).setData([
-                              "email": mail,
-                            ]) { err in
-                              if let err = err {
-                                print("Error writing document: \(err)")
-                              } else {
-                                print("Document successfully written!")
-                              }
-                            }
-                            
+                             viewModel.createUser(email: mail, fromGoogle: false)
                         } else {
                             Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
                                 if let err = error {
