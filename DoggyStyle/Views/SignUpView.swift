@@ -30,6 +30,8 @@ struct SignUpView: View {
     @State private var password = ""
     @State private var confirmedPassword = ""
     @State private var signingUp = true
+    @State private var errorSigningUp = false
+    @State private var errorText = ""
     
     // Perform Google Sign-In when the corresponding button is tapped
     private func signInWithGoogle() {
@@ -113,7 +115,7 @@ struct SignUpView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .padding(.vertical, 2)
-                                        .foregroundStyle(.black)
+                                        .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                                     Text("Continue with E-Mail")
                                         .font(.headline)
                                         .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
@@ -126,7 +128,7 @@ struct SignUpView: View {
 
                         
                         if chosenEmail{
-                            Text("E-Mail")
+                            Text("Type in your E-Mail")
                                 .font(.caption)
                                 .padding(.top)
                             TextField("E-Mail", text: $mail)
@@ -136,15 +138,16 @@ struct SignUpView: View {
                                 .padding(10)
                                 .background(.gray.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
-                                .textContentType(.emailAddress)
+                                .textContentType(.username)
                                 .onSubmit() {
                                     focusField = .password
                                 }
                                 
                                 .onChange(of: focusField, initial: false) {
                                     if focusField != .mail{
-                                        db.collection("user").whereField("email", isEqualTo: mail)
+                                        db.collection("user").whereField("email", isEqualTo: mail.lowercased())
                                             .getDocuments() { (querySnapshot, err) in
                                                 if let err = err {
                                                     print("Error getting documents: \(err)")
@@ -176,7 +179,7 @@ struct SignUpView: View {
                                 .padding(10)
                                 .background(.gray.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .textContentType(.password)
+                                .textContentType(accountExists ? .password : .newPassword)
                                 .onSubmit() {
                                     withAnimation {
                                         focusField = .confirmedPassword
@@ -198,21 +201,49 @@ struct SignUpView: View {
                                     .textContentType(.password)
                                     .onSubmit() {
                                         //check if correct and sign up
+                                        Auth.auth().createUser(withEmail: mail.lowercased(), password: password) { authResult, error in
+                                            if let err = error {
+                                                print(err.localizedDescription)
+                                            } else {
+                                                print(authResult ?? "test")
+                                                dismiss()
+                                            }
+                                        }
                                         print("Signed Up")
                                         dismiss.callAsFunction()
                                     }
                             }
+                            
                             if accountExists && !password.isEmpty{
                                 Button("Log in"){
-                                    
+                                    Auth.auth().signIn(withEmail: mail.lowercased(), password: password) { authResult, error in
+                                        if let err = error {
+                                            print(err)
+                                        } else {
+                                            print(authResult ?? "test")
+                                            dismiss()
+                                        }
+                                    }
                                 }
-                                
                                 
                             }else if !accountExists && !password.isEmpty && password == confirmedPassword{
                                 Button("Sign up using E-mail"){
-                                    
+                                    Auth.auth().createUser(withEmail: mail.lowercased(), password: password) { authResult, error in
+                                        if let err = error {
+                                            errorSigningUp = true
+                                            print(err.localizedDescription)
+                                            errorText = err.localizedDescription
+                                        } else {
+                                            print(authResult ?? "test")
+                                            dismiss()
+                                        }
+                                    }
                                 }
-                                
+                                .alert(errorText, isPresented: $errorSigningUp) {
+                                    Button("Choose different E-Mail", role: .cancel){
+                                        
+                                    }
+                                }
                             }
                         }
                         
@@ -225,7 +256,6 @@ struct SignUpView: View {
                         }
                         
                         //Sign in with Google Button
-                        if signingUp {
                             Button(action: signInWithGoogle , label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
@@ -246,28 +276,7 @@ struct SignUpView: View {
                                     .frame(height: 50)
                                 }
                             })
-                        }else{
-                            Button(action: signInWithGoogle, label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
-                                        .frame(height: 50)
-                                        .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
-                                    
-                                    HStack{
-                                        Image("Google")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                        Text("Sign In with Google")
-                                            .font(.headline)
-                                            .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
-                                        Spacer()
-                                    }
-                                    .padding(10)
-                                    .frame(height: 50)
-                                }
-                            })
-                        }
+                        
                         
                         
                         
