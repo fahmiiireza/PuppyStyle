@@ -67,7 +67,7 @@ struct DogCardView: View {
                 
             }
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .padding(.bottom)
+            
             
             
         
