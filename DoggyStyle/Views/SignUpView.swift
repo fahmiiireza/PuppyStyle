@@ -11,7 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 enum FocusedField {
-    case mail, password, confirmedPassword
+    case mail, password, confirmedPassword, searchfield
 }
 
 

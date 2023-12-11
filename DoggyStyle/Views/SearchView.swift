@@ -13,8 +13,11 @@ struct SearchView: View {
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
     @State private var dogData : [DogApi] = []
+    @FocusState private var focused: FocusedField?
     @Bindable var backroundLogic: BackgroundLogic
+    @State private var isSearching = false
     @State private var searchText = ""
+    @Namespace private var searchAnimation
     
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -28,7 +31,7 @@ struct SearchView: View {
                         Text("Search")
                             .font(.largeTitle)
                             .bold()
-                            
+                        
                         Spacer()
                         
                         Button(action: {
@@ -41,17 +44,56 @@ struct SearchView: View {
                                 .frame(height: 40)
                         })
                         
-                            
+                        
                     }
                     .padding([.horizontal, .top])
                     
                     ///SearchBar
                     
-                    TextField(text: $searchText) {
+                    if isSearching{
+                        HStack(spacing: 0){
+                            TextField(text: $searchText) {
+                                
+                            }
+                            .autocorrectionDisabled()
+                            .focused($focused, equals: .searchfield)
+                            .matchedGeometryEffect(id: "SearchBar", in: searchAnimation)
+                            .padding(10)
+                            .background(.ultraThickMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(.horizontal)
+                            .overlay(alignment: .leading) {
+                                if searchText.isEmpty{
+                                    Label(
+                                        title: { Text("Search breeds") },
+                                        icon: { Image(systemName: "magnifyingglass") }
+                                    )
+                                    .foregroundStyle(.secondary)
+                                    .padding(.horizontal, 25)
+                                    .allowsHitTesting(false)
+                                }
+                            }
+                            Button(action: {
+                                withAnimation(.spring) {
+                                    isSearching = false
+                                }
+                                searchText = ""
+                                hideKeyboard()
+                            }, label: {
+                                Text("Cancel")
+                                    .font(.callout)
+                            })
+                            .padding(.trailing)
+                        }
                         
-                    }
+                    }else{
+                        TextField(text: $searchText) {
+                            
+                        }
+                        .autocorrectionDisabled()
+                        .matchedGeometryEffect(id: "SearchBar", in: searchAnimation)
                         .padding(10)
-                        .background(.regularMaterial)
+                        .background(.ultraThickMaterial)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding(.horizontal)
                         .overlay(alignment: .leading) {
@@ -65,7 +107,17 @@ struct SearchView: View {
                                 .allowsHitTesting(false)
                             }
                         }
-                        
+                        .onTapGesture {
+                            withAnimation(.smooth) {
+                                isSearching = true
+                            }
+                            focused = .searchfield
+                            
+                        }
+                    }
+                    
+                    
+                    
                 }
                 
                 LazyVGrid(columns: layout, content: {
@@ -102,7 +154,7 @@ struct SearchView: View {
                 }
                 
                 
-
+                
                 
                 
                 
@@ -125,7 +177,7 @@ struct SearchView: View {
                 if let user = user {
                     // User is signed in
                     self.user = user
-
+                    
                     print("User is signed in: \(user.email ?? "email")")
                 } else {
                     // User is signed out
@@ -145,29 +197,29 @@ struct SearchView: View {
         guard let apiKey = getAPIKey() else {
             return
         }
-            let parameters = [
-                "page": 0,
-                "limit": 5
-            ] as [String : Any]
+//        let parameters = [
+//            "page": 0,
+//            "limit": 5
+//        ] as [String : Any]
         let headers = ["x-api-key": apiKey]
-            var urlComponents = URLComponents(string: "https://api.thedogapi.com/v1/breeds?limit=100&page=0")!
-
-
-            var request = URLRequest(url: (urlComponents.url)!)
-            request.httpMethod = "GET"
-
-            for (key, value) in headers {
-                request.setValue(value, forHTTPHeaderField: key)
-            }
+        let urlComponents = URLComponents(string: "https://api.thedogapi.com/v1/breeds?limit=100&page=0")!
         
-            do {
-                let (data,_) = try await URLSession.shared.data(for: request)
-                
-                let dogs = try JSONDecoder().decode([DogApi].self, from: data)
-                dogData = dogs
-            } catch {
-                print(error)
-            }
+        
+        var request = URLRequest(url: (urlComponents.url)!)
+        request.httpMethod = "GET"
+        
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        
+        do {
+            let (data,_) = try await URLSession.shared.data(for: request)
+            
+            let dogs = try JSONDecoder().decode([DogApi].self, from: data)
+            dogData = dogs
+        } catch {
+            print(error)
+        }
     }
     
     func getAPIKey() -> String? {
