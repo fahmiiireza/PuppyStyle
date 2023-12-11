@@ -6,24 +6,35 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MyDogsView: View {
     
     @Bindable var backgroundLogic: BackgroundLogic
     @Environment(DummyDogData.self) private var dummyDogData
+    @Query private var dogs: [Dog]
     
     var body: some View {
         NavigationStack {
             ScrollView{
-                NavigationLink {
-                    OwnDogView(backgroundLogic: backgroundLogic, dog: Dog(name: "Nalu"))
-                } label: {
-                    DogCardView()
+                
+                if !dogs.isEmpty{
+                    ForEach(dogs){ dog in
+                        NavigationLink {
+                            OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
+                        } label: {
+                            DogCardView(dog: dog)
+                                
+                        }
+                    }
+                }else{
+                    Text("No Dogs yet")
                 }
 
             }
+            .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
-                CreateNewDogView(dummyDoggy: dummyDogData)
+                CreateNewDogView(dummyDoggy: dummyDogData, dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
@@ -41,5 +52,5 @@ struct MyDogsView: View {
 
 #Preview {
     MyDogsView(backgroundLogic: BackgroundLogic())
-        .environment(BackgroundLogic())
+        .environment(DummyDogData())
 }

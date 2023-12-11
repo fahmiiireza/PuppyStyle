@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OwnDogView: View {
     
+    @Environment(\.modelContext) private var modelContext
     @Environment(DummyDogData.self) private var dummyDogData
     @Bindable var backgroundLogic: BackgroundLogic
     var dog : Dog
@@ -19,13 +20,13 @@ struct OwnDogView: View {
             ScrollView {
                 LazyVStack(spacing: 0){
                     TabView {
-                        if dummyDogData.images.isEmpty{
+                        if (dog.imageData.isEmpty){
                             Text("NO IMAGES")
                                 .bold()
                         }else{
-                            ForEach(dummyDogData.images, id: \.self){ image in
+                            ForEach(dog.imageData, id: \.self){ image in
                                 
-                                Image(uiImage: image)
+                                Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                 
@@ -62,7 +63,7 @@ struct OwnDogView: View {
                         Text("Breed")
                             .font(.headline)
                         NavigationLink(dummyDogData.breed){
-                            CreateNewDogView(dummyDoggy: dummyDogData)
+                            CreateNewDogView(dummyDoggy: dummyDogData, dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                         }
                         Text("Age")
                             .font(.headline)
@@ -126,7 +127,7 @@ struct OwnDogView: View {
         }
 }
 
-#Preview {
-    OwnDogView(backgroundLogic: BackgroundLogic(), dog: Dog(name: "Nalu"))
-        .environment(DummyDogData())
-}
+//#Preview {
+//    OwnDogView(backgroundLogic: BackgroundLogic(), dog: Dog(name: "Nalu"))
+//        .environment(DummyDogData())
+//}

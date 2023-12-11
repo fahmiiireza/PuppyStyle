@@ -28,6 +28,7 @@ struct DoggyStyleApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
+            Dog.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         
@@ -51,6 +52,6 @@ struct DoggyStyleApp: App {
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
         .modelContainer(sharedModelContainer)
-        .modelContainer(for: UserData.self)
+//       .modelContainer(for: Dog.self)
     }
 }
