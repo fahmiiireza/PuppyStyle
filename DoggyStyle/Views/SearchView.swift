@@ -12,61 +12,78 @@ struct SearchView: View {
     
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
-    func getAPIKey() -> String? {
-        return Bundle.main.object(forInfoDictionaryKey: "NINJA_API_KEY") as? String
-    }
     @State private var dogData : [DogApi] = []
-
     @Bindable var backroundLogic: BackgroundLogic
+    @State private var searchText = ""
+    
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
         NavigationStack{
             ScrollView{
-                HStack(alignment: .bottom) {
-                    
-                    Text("Search")
-                        .font(.largeTitle)
-                        .bold()
+                VStack{
+                    HStack(alignment: .bottom) {
                         
-                    Spacer()
+                        Text("Search")
+                            .font(.largeTitle)
+                            .bold()
+                            
+                        Spacer()
+                        
+                        Button(action: {
+                            backroundLogic.profileSheetPresented = true
+                        }, label: {
+                            Image("Appicon")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .frame(height: 40)
+                        })
+                        
+                            
+                    }
+                    .padding([.horizontal, .top])
                     
-                    Button(action: {
-                        backroundLogic.profileSheetPresented = true
-                    }, label: {
-                        Image("Appicon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                            .frame(height: 40)
-                    })
+                    ///SearchBar
                     
+                    TextField(text: $searchText) {
+                        
+                    }
+                        .padding(10)
+                        .background(.regularMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                        .overlay(alignment: .leading) {
+                            if searchText.isEmpty{
+                                Label(
+                                    title: { Text("Search breeds") },
+                                    icon: { Image(systemName: "magnifyingglass") }
+                                )
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, 25)
+                                .allowsHitTesting(false)
+                            }
+                        }
                         
                 }
-                .padding([.horizontal, .top])
-                
-                
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(height: 100)
-                    .padding(.horizontal)
-                    .foregroundStyle(.accent)
-                    .overlay(alignment: .center) {
-                        Text("Search on map")
-                            .font(.title2)
-                            .bold()
-                            .foregroundStyle(.white)
-                    }
                 
                 LazyVGrid(columns: layout, content: {
                     
-                    ForEach(dogData){ dog in
-                        Text("dog.name\(dog.name)") //THIS IS
-
-//                        AsyncImage(url: dog.image.url)
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(height: 100)
-                            .foregroundStyle(.gray)
+                    ForEach(dogData.filter({"\($0)".contains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
+                        
+                        //                        AsyncImage(url: dog.image.url)
+                        ZStack{
+                            
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(height: 100)
+                                .foregroundStyle(.gray)
+                            Text(dog.name)
+                                .foregroundStyle(.white)
+                        }
+                        .onAppear{
+                            print(dog.name)
+                        }
                     }
                 })
                 .padding(.horizontal)
@@ -116,7 +133,9 @@ struct SearchView: View {
                     self.user = nil
                 }            }
             print(handle!)
+            
             await callApi()
+            
         }
         
     }
@@ -151,6 +170,9 @@ struct SearchView: View {
             }
     }
     
+    func getAPIKey() -> String? {
+        return Bundle.main.object(forInfoDictionaryKey: "NINJA_API_KEY") as? String
+    }
 }
 
 #Preview {

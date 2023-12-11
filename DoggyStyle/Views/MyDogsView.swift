@@ -31,6 +31,7 @@ struct MyDogsView: View {
                                             try? modelContext.delete(dog)
                                         }                                    }
                                 }
+                                .padding(.bottom)
                         }
                         
                     }
