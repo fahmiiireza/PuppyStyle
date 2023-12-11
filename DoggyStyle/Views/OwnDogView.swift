@@ -14,7 +14,7 @@ struct OwnDogView: View {
     var dog : Dog
     
     var body: some View {
-        
+       
         NavigationStack{
             ScrollView {
                 LazyVStack(spacing: 0){
@@ -64,12 +64,58 @@ struct OwnDogView: View {
                         NavigationLink(dummyDogData.breed){
                             CreateNewDogView(dummyDoggy: dummyDogData)
                         }
+                        Text("Age")
+                            .font(.headline)
+                        Text(dummyDogData.age)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        Text("Gender")
+                            .font(.headline)
+                        Text(dummyDogData.gender)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        Text("Weith & size & lenth")
+                            .font(.headline)
+                        Text("\(dummyDogData.weight), \(dummyDogData.size) + \(dummyDogData.lenth)")
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        
                     }
                     .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.thickMaterial))
 
+                    HStack{
+                        Image(systemName: "stethoscope")
+                        Text("Medical Information")
+                    }
+                    .font(.title2)
+                    .bold()
                     
-                }
+                    
+                    VStack(alignment: .leading){
+                        Text("Allergies")
+                            .font(.headline)
+                        Text(dummyDogData.allergies)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        Text("Last Vet Visit")
+                            .font(.headline)
+                        Text(dummyDogData.lastvetvisit)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        Text("Vaccinations")
+                            .font(.headline)
+                        Text(dummyDogData.vaccination)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
+                        
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background( RoundedRectangle(cornerRadius: 10)
+                        .foregroundStyle(.thickMaterial))
+                    }
                 .padding()
                 
             }
