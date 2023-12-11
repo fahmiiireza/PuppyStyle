@@ -12,6 +12,11 @@ struct SearchView: View {
     
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
+    func getAPIKey() -> String? {
+        return Bundle.main.object(forInfoDictionaryKey: "NINJA_API_KEY") as? String
+    }
+    @State private var dogData : [DogApi] = []
+
     @Bindable var backroundLogic: BackgroundLogic
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -55,14 +60,14 @@ struct SearchView: View {
                 
                 LazyVGrid(columns: layout, content: {
                     
-                    ForEach(0..<100){ _ in
+                    ForEach(dogData){ dog in
+                        Text("dog.name\(dog.name)") //THIS IS
+
+//                        AsyncImage(url: dog.image.url)
                         RoundedRectangle(cornerRadius: 20)
                             .frame(height: 100)
                             .foregroundStyle(.gray)
                     }
-                    
-                    
-                        
                 })
                 .padding(.horizontal)
             }
@@ -111,11 +116,44 @@ struct SearchView: View {
                     self.user = nil
                 }            }
             print(handle!)
+            await callApi()
         }
         
     }
+    
+    private func callApi() async {
+        
+        guard let apiKey = getAPIKey() else {
+            return
+        }
+            let parameters = [
+                "page": 0,
+                "limit": 5
+            ] as [String : Any]
+        let headers = ["x-api-key": apiKey]
+            var urlComponents = URLComponents(string: "https://api.thedogapi.com/v1/breeds?limit=100&page=0")!
+
+
+            var request = URLRequest(url: (urlComponents.url)!)
+            request.httpMethod = "GET"
+
+            for (key, value) in headers {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+        
+            do {
+                let (data,_) = try await URLSession.shared.data(for: request)
+                
+                let dogs = try JSONDecoder().decode([DogApi].self, from: data)
+                dogData = dogs
+            } catch {
+                print(error)
+            }
+    }
+    
 }
 
 #Preview {
     SearchView(backroundLogic: BackgroundLogic())
 }
+

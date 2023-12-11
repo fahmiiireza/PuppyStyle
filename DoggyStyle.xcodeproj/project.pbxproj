@@ -36,6 +36,8 @@
 		585614BA2B23019900BF076A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 585614B92B23019900BF076A /* GoogleSignIn */; };
 		585614BC2B23019900BF076A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 585614BB2B23019900BF076A /* GoogleSignInSwift */; };
 		585614BE2B23022700BF076A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585614BD2B23022700BF076A /* RootViewController.swift */; };
+		58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC22B274D6C00846CF6 /* DogApi.swift */; };
+		58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC42B274EBD00846CF6 /* DogImage.swift */; };
 		B899D4542B21FEBF00AD2A14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B899D4532B21FEBF00AD2A14 /* GoogleService-Info.plist */; };
 		B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		5838B3F42B1F7C3400E43B91 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		585614B42B2300FF00BF076A /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		585614BD2B23022700BF076A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		58E2ADC22B274D6C00846CF6 /* DogApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogApi.swift; sourceTree = "<group>"; };
+		58E2ADC42B274EBD00846CF6 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
 		B899D4532B21FEBF00AD2A14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDogsFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +141,7 @@
 				585614BD2B23022700BF076A /* RootViewController.swift */,
 				B899D4532B21FEBF00AD2A14 /* GoogleService-Info.plist */,
 				4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */,
+				58E2ADC12B274D5A00846CF6 /* Model */,
 				4DB0AA5C2B213B4800E08AAE /* Views */,
 				5838B3EF2B1F7C3300E43B91 /* Item.swift */,
 				5838B3F12B1F7C3400E43B91 /* Assets.xcassets */,
@@ -153,6 +158,15 @@
 				5838B3F42B1F7C3400E43B91 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		58E2ADC12B274D5A00846CF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				58E2ADC22B274D6C00846CF6 /* DogApi.swift */,
+				58E2ADC42B274EBD00846CF6 /* DogImage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,8 +266,10 @@
 				4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,
 				4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */,
+				58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */,
 				4DB0AA572B2131F900E08AAE /* DogCardView.swift in Sources */,
 				4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */,
+				58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */,
 				4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */,
 				4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */,
 				5838B3F02B1F7C3300E43B91 /* Item.swift in Sources */,
@@ -395,7 +411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 27J9MHRH2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -413,7 +429,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyleee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -434,7 +450,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 27J9MHRH2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -452,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyleee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
