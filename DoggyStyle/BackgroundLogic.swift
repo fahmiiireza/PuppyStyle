@@ -15,3 +15,22 @@ class BackgroundLogic{
     var profileSheetPresented = false
     
 }
+
+@Observable
+class DummyDogData{
+    var images: [UIImage] = []
+    var name: String = "Test"
+    var gender: String = "Male"
+    var breed: String = "Golden Retriever"
+    var age: String = "12"
+    var weight: String = "34.56"
+    var size: String = "23.45"
+    var allergies: String = "none"
+    var vaccination: String = "none"
+    var chronicdeseases: String = "none"
+    var lastvetvisit: String = "none"
+    var lenth: String = "wtf"
+    var energylevel: String = "G+"
+    var friendliness: String = "not friendly"
+    var travelinglevel: String = "what even is this?"
+}

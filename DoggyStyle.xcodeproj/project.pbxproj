@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
+		4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */; };
+		4D68AF122B26771600BAAEAD /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 4D68AF112B26771600BAAEAD /* CropViewController */; };
+		4D68AF142B26771600BAAEAD /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 4D68AF132B26771600BAAEAD /* TOCropViewController */; };
 		4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */; };
 		4DB0AA552B2131F900E08AAE /* OwnDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */; };
 		4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA502B2131F900E08AAE /* MainView.swift */; };
@@ -39,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
+		4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperView.swift; sourceTree = "<group>"; };
 		4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
 		4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnDogView.swift; sourceTree = "<group>"; };
 		4DB0AA502B2131F900E08AAE /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -69,11 +73,13 @@
 				585614BC2B23019900BF076A /* GoogleSignInSwift in Frameworks */,
 				581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */,
 				585614BA2B23019900BF076A /* GoogleSignIn in Frameworks */,
+				4D68AF122B26771600BAAEAD /* CropViewController in Frameworks */,
 				581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */,
 				581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				581A4C042B1F824C004B7140 /* FirebaseAppCheck in Frameworks */,
 				581A4C022B1F824C004B7140 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				585614B72B23012900BF076A /* FirebaseAuth in Frameworks */,
+				4D68AF142B26771600BAAEAD /* TOCropViewController in Frameworks */,
 				581A4C072B1F8516004B7140 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +97,7 @@
 				4DB0AA502B2131F900E08AAE /* MainView.swift */,
 				4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */,
 				4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */,
+				4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
 				4DB0AA662B22669F00E08AAE /* SignUpView.swift */,
 				4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */,
@@ -174,6 +181,8 @@
 				585614B62B23012900BF076A /* FirebaseAuth */,
 				585614B92B23019900BF076A /* GoogleSignIn */,
 				585614BB2B23019900BF076A /* GoogleSignInSwift */,
+				4D68AF112B26771600BAAEAD /* CropViewController */,
+				4D68AF132B26771600BAAEAD /* TOCropViewController */,
 			);
 			productName = DoggyStyle;
 			productReference = 5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */;
@@ -206,6 +215,7 @@
 			packageReferences = (
 				581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				585614B82B23019900BF076A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 5838B3E92B1F7C3300E43B91 /* Products */;
 			projectDirPath = "";
@@ -245,6 +255,7 @@
 				4DB0AA572B2131F900E08AAE /* DogCardView.swift in Sources */,
 				4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */,
 				4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */,
+				4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */,
 				5838B3F02B1F7C3300E43B91 /* Item.swift in Sources */,
 				585614BE2B23022700BF076A /* RootViewController.swift in Sources */,
 				4DB0AA552B2131F900E08AAE /* OwnDogView.swift in Sources */,
@@ -390,6 +401,7 @@
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +440,7 @@
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,6 +488,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.1;
+			};
+		};
 		581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -494,6 +515,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4D68AF112B26771600BAAEAD /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		4D68AF132B26771600BAAEAD /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
 		581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

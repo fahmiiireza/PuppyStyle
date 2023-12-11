@@ -9,106 +9,78 @@ import SwiftUI
 
 struct OwnDogView: View {
     
+    @Environment(DummyDogData.self) private var dummyDogData
     @Bindable var backgroundLogic: BackgroundLogic
     var dog : Dog
     
     var body: some View {
-            ScrollView{
-                GeometryReader{ geometry in
-                    
-                    ZStack(alignment: .bottom){
-                        if geometry.frame(in: .global).minY <= 0{
-                            
-                            Image("PlaceholderDog")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width, height: getHeaderHeight(for: geometry))
-                                .clipped()
-                                .offset(y: getHeaderOffset(for: geometry))
-                                .overlay(alignment: .bottomLeading) {
-                                    Text(dog.name)
-                                        .foregroundStyle(.white)
-                                        .font(.largeTitle)
-                                        .bold()
-                                        .shadow(color: .black, radius: 10)
-                                        .padding()
-                                        
-                                }
-                            
-                            
+        
+        NavigationStack{
+            ScrollView {
+                LazyVStack(spacing: 0){
+                    TabView {
+                        if dummyDogData.images.isEmpty{
+                            Text("NO IMAGES")
+                                .bold()
                         }else{
-                            
-                            Image("PlaceholderDog")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width, height: getHeaderHeight(for: geometry))
-                                .clipped()
-                                .offset(y: getHeaderOffset(for: geometry))
+                            ForEach(dummyDogData.images, id: \.self){ image in
                                 
-                            
-                            
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                
+                            }
                         }
                     }
-                    
-                }.frame(height: 500)
-                
-                VStack{
-                    ForEach(1..<100){ i in
-                        Text("Hello \(i)")
+                    .overlay(alignment: .bottomLeading, content: {
+                        Text(dummyDogData.name)
+                            .foregroundStyle(.white)
+                            .font(.largeTitle)
+                            .bold()
+                            .shadow(radius: 10)
+                            .padding(.horizontal)
+                            
+                    })
+                    .containerRelativeFrame(.vertical){ size, _  in
+                        size * 0.45
                     }
+                    .clipped()
+                    .tabViewStyle(.page)
+                    
                 }
+                
+                LazyVStack(alignment: .leading){
+                    HStack{
+                        Image(systemName: "pawprint")
+                        Text("General Information")
+                    }
+                    .font(.title2)
+                    .bold()
+                    
+                    
+                    VStack(alignment: .leading){
+                        Text("Breed")
+                            .font(.headline)
+                        NavigationLink(dummyDogData.breed){
+                            CreateNewDogView(dummyDoggy: dummyDogData)
+                        }
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundStyle(.thickMaterial))
+
+                    
+                }
+                .padding()
                 
             }
-            .navigationBarBackButtonHidden(true)
-            .toolbar(content: {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        
-                    } label: {
-                        ZStack{
-                            Circle()
-                                .foregroundStyle(.ultraThickMaterial)
-                                .frame(width: 25)
-                            Image(systemName: "plus")
-                                .font(.caption)
-                                .bold()
-                        }
-                    }
-
-                }
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        //Still some error on ipad sometimes
-                        backgroundLogic.path.removeLast()
-                    } label: {
-                        ZStack{
-                            Circle()
-                                .foregroundStyle(.ultraThickMaterial)
-                                .frame(width: 25)
-                            Image(systemName: "chevron.backward")
-                                .font(.caption)
-                                .bold()
-                        }
-                    }
-
-                }
-                
-        })
-        
-       // .ignoresSafeArea()
-    }
-    
-    private func getHeaderHeight(for geometry: GeometryProxy) -> CGFloat {
-            let offset = geometry.frame(in: .global).minY
-            return offset <= 0 ? 500 : 500 + abs(offset)
+            .ignoresSafeArea()
         }
-
-        private func getHeaderOffset(for geometry: GeometryProxy) -> CGFloat {
-            let offset = geometry.frame(in: .global).minY
-            return offset <= 0 ? 0 : -offset
+        
+        
         }
 }
 
 #Preview {
     OwnDogView(backgroundLogic: BackgroundLogic(), dog: Dog(name: "Nalu"))
+        .environment(DummyDogData())
 }

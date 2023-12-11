@@ -39,7 +39,7 @@ struct DoggyStyleApp: App {
     }()
     
     @State private var backgroundLogic = BackgroundLogic()
-    
+    @State private var dummyDogData = DummyDogData()
     
     var body: some Scene {
         
@@ -47,6 +47,7 @@ struct DoggyStyleApp: App {
         WindowGroup {
             MainView()
         }
+        .environment(dummyDogData)
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
         .modelContainer(sharedModelContainer)

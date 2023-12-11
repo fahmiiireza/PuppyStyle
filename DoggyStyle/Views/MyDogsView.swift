@@ -10,21 +10,20 @@ import SwiftUI
 struct MyDogsView: View {
     
     @Bindable var backgroundLogic: BackgroundLogic
+    @Environment(DummyDogData.self) private var dummyDogData
     
     var body: some View {
-        NavigationStack(path: $backgroundLogic.path) {
+        NavigationStack {
             ScrollView{
-                Button(action: {
-                    backgroundLogic.path.append(Dog(name: "Pupsi"))
-                }, label: {
+                NavigationLink {
+                    OwnDogView(backgroundLogic: backgroundLogic, dog: Dog(name: "Nalu"))
+                } label: {
                     DogCardView()
-                })
+                }
+
             }
-            .navigationDestination(for: Dog.self, destination: { dog in
-                OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
-            })
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
-                CreateNewDogView()
+                CreateNewDogView(dummyDoggy: dummyDogData)
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {

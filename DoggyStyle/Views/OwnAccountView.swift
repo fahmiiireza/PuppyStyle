@@ -49,6 +49,12 @@ struct OwnAccountView: View {
                 }
                 List{
                     Text("hello")
+                    NavigationLink {
+                        ImageCropperView()
+                    } label: {
+                        Text("Image")
+                    }
+
                 }
                 
             }
