@@ -50,7 +50,7 @@ struct OwnAccountView: View {
                 List{
                     Text("hello")
                     NavigationLink {
-                        ImageCropperView()
+                        Text("Nothing here")
                     } label: {
                         Text("Image")
                     }

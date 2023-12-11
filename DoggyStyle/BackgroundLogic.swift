@@ -17,6 +17,20 @@ class BackgroundLogic{
 }
 
 @Observable
+class imageConversion{
+    
+    var images: [UIImage] = []
+    var urlStrings: [String] = []
+    
+    func uploadImages(images: [UIImage]) async {
+        ForEach(images, id: \.self){ image in
+            
+        }
+    }
+    
+}
+
+@Observable
 class DummyDogData{
     var images: [UIImage] = []
     var name: String = "Test"

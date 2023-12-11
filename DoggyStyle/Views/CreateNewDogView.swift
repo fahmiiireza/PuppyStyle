@@ -14,67 +14,48 @@ struct CreateNewDogView: View {
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
     
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(DummyDogData.self) private var dummyDog
     @Bindable var dummyDoggy: DummyDogData
+    @State var dog: Dog
     
     var body: some View {
         NavigationStack {
-//                if dummyDog.images.isEmpty{
-//                    Divider()
-//                    ImageCropperView()
-//                        .containerRelativeFrame(.vertical){ size, _ in
-//                            size * 0.2
-//                        }
-//                    
-//                }else{
-//                    TabView{
-//                        ForEach(dummyDog.images, id: \.self){ image in
-//                            Image(uiImage: image)
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                        }
-//                    }
-//                    .containerRelativeFrame(.vertical){ size, _ in
-//                        size * 0.2
-//                    }
-//                    .clipped()
-//                    .tabViewStyle(.page)
-//                }
                 List {
                     Section {
-                        if dummyDog.images.isEmpty{
-                            ImageCropperView()
+                        if dog.imageData.isEmpty{
+                            ImageCropperView(dog: dog)
                         }else{
-                            Text("Images uploaded: \(dummyDog.images.count)")
+                            Text("Images uploaded: \(dog.imageData.count)")
                         }
                     }
                     Section(header: Text("General Information")) {
-                        TextField("Name", text: $dummyDoggy.name)
-                        TextField("Gender", text: $dummyDoggy.gender)
-                        TextField("Breed", text: $dummyDoggy.breed)
-                        TextField("Age", text: $dummyDoggy.age)
+                        TextField("Name", text: $dog.name)
+                        TextField("Gender", text: $dog.gender)
+                        TextField("Breed", text: $dog.breed)
+                        TextField("Age", text: $dog.age)
                             .keyboardType(.decimalPad)
-                        TextField("Weight", text: $dummyDoggy.weight)
+                        TextField("Weight", text: $dog.weight)
                             .keyboardType(.numberPad)
-                        TextField("Size", text: $dummyDoggy.size)
+                        TextField("Size", text: $dog.size)
                             .keyboardType(.numberPad)
-                        TextField("Lenth", text: $dummyDoggy.lenth)
+                        TextField("Lenth", text: $dog.lenth)
                             .keyboardType(.numberPad)
                     }
                     
                     
                     Section(header: Text("Medical Information")) {
-                        TextField("Allergies", text: $dummyDoggy.allergies )
-                        TextField("Vaccination", text: $dummyDoggy.vaccination )
-                        TextField("Chronic deseases", text: $dummyDoggy.chronicdeseases )
-                        TextField("Last vet visit", text: $dummyDoggy.lastvetvisit)
+                        TextField("Allergies", text: $dog.allergies )
+                        TextField("Vaccination", text: $dog.vaccination )
+                        TextField("Chronic deseases", text: $dog.chronicdeseases )
+                        TextField("Last vet visit", text: $dog.lastvetvisit)
                             .datePickerStyle(GraphicalDatePickerStyle())
                     }
                     Section(header: Text("Сharacter")) {
-                        TextField("Energy level", text: $dummyDoggy.energylevel)
-                        TextField("Friendliness", text: $dummyDoggy.friendliness)
-                        TextField("Traveling level", text: $dummyDoggy.travelinglevel)
+                        TextField("Energy level", text: $dog.energylevel)
+                        TextField("Friendliness", text: $dog.friendliness)
+                        TextField("Traveling level", text: $dog.travelinglevel)
                     }
                 }
                 .toolbar {
@@ -86,6 +67,7 @@ struct CreateNewDogView: View {
                     
                     ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
+                            modelContext.insert(dog)
                             // Handle the creation of the new dog with the entered information
                             //                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
                             // Add logic to handle the new dog data!!
@@ -117,7 +99,7 @@ struct CreateNewDogView: View {
 }
 
 
-#Preview {
-    CreateNewDogView(dummyDoggy: DummyDogData())
-        .environment(DummyDogData())
-}
+//#Preview {
+//    CreateNewDogView(dummyDoggy: DummyDogData())
+//        .environment(DummyDogData())
+//}
