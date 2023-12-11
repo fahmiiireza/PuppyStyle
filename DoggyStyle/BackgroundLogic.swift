@@ -13,6 +13,8 @@ class BackgroundLogic{
     var path = NavigationPath()
     var addDogSheetPresented = false
     var profileSheetPresented = false
+    var imageDataArray: [Data] = []
+    var imageStorage: [UIImage] = []
     
 }
 

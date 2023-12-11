@@ -16,7 +16,7 @@ struct CreateNewDogView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Environment(DummyDogData.self) private var dummyDog
+    @Environment(BackgroundLogic.self) private var backgroundLogic
     @Bindable var dummyDoggy: DummyDogData
     @State var dog: Dog
     
@@ -24,12 +24,13 @@ struct CreateNewDogView: View {
         NavigationStack {
                 List {
                     Section {
-                        if dog.imageData.isEmpty{
+                        if backgroundLogic.imageDataArray.isEmpty{
                             ImageCropperView(dog: dog)
                         }else{
-                            Text("Images uploaded: \(dog.imageData.count)")
+                            Text("Images uploaded: \(backgroundLogic.imageDataArray.count)")
                         }
                     }
+                    
                     Section(header: Text("General Information")) {
                         TextField("Name", text: $dog.name)
                         TextField("Gender", text: $dog.gender)
@@ -40,7 +41,7 @@ struct CreateNewDogView: View {
                             .keyboardType(.numberPad)
                         TextField("Size", text: $dog.size)
                             .keyboardType(.numberPad)
-                        TextField("Lenth", text: $dog.lenth)
+                        TextField("Lenth", text: $dog.length)
                             .keyboardType(.numberPad)
                     }
                     
@@ -67,33 +68,15 @@ struct CreateNewDogView: View {
                     
                     ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
+                            dog.imageData = backgroundLogic.imageDataArray
                             modelContext.insert(dog)
-                            // Handle the creation of the new dog with the entered information
-                            //                        _ = Dog(name: name, breed: breed, age: age, weight: weight, size: size)
-                            // Add logic to handle the new dog data!!
-                            
-                            // Dismiss the sheet after handling the data
-                            dismiss.callAsFunction()
+                            backgroundLogic.imageDataArray = []
+                            dismiss()
                         }
                     }
                 }
                 .navigationTitle("Create New Dog")
                 .navigationBarTitleDisplayMode(.inline)
-            
-            .task {
-                print(handle ?? "tset")
-                handle = Auth.auth().addStateDidChangeListener { auth, user in
-                    if let user = user {
-                        // User is signed in
-                        self.user = user
-                        
-                        print("User is signed in: \(user.email ?? "email")")
-                    } else {
-                        // User is signed out
-                        print("User is signed out")
-                    }            }
-                print(handle!)
-            }
         }
     }
 }

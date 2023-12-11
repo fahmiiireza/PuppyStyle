@@ -13,6 +13,7 @@ struct ImageCropperView: View {
     @Environment(DummyDogData.self) private var dummyDog
     @State private var profilePicture: [UIImage] = []
     @State private var photosPickerItem: [PhotosPickerItem] = []
+    @Environment(BackgroundLogic.self) private var backgroundLogic
     @State var dog: Dog
     
     var body: some View {
@@ -26,13 +27,11 @@ struct ImageCropperView: View {
                     
                      for item in photosPickerItem{
                          if let data = try? await item.loadTransferable(type: Data.self){
-                             
-                             dog.imageData.append(data)
-                            if let image = UIImage(data: data){
-                                dummyDog.images.append(image)
-                            }
+                             backgroundLogic.imageDataArray.append(data)
                         }
                      }
+                    
+                    
                 }
             }
     }

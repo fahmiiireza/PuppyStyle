@@ -32,7 +32,7 @@ class Dog{
     var vaccination: String = "none"
     var chronicdeseases: String = "none"
     var lastvetvisit: String = "none"
-    var lenth: String = "wtf"
+    var length: String = "wtf"
     var energylevel: String = "G+"
     var friendliness: String = "not friendly"
     var travelinglevel: String = "what even is this?"
@@ -49,7 +49,7 @@ class Dog{
         self.vaccination = vaccination
         self.chronicdeseases = chronicdeseases
         self.lastvetvisit = lastvetvisit
-        self.lenth = lenth
+        self.length = lenth
         self.energylevel = energylevel
         self.friendliness = friendliness
         self.travelinglevel = travelinglevel

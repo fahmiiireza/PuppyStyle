@@ -10,12 +10,13 @@ import SwiftData
 
 struct MyDogsView: View {
     
+    @Environment(\.modelContext) private var modelContext
     @Bindable var backgroundLogic: BackgroundLogic
     @Environment(DummyDogData.self) private var dummyDogData
     @Query private var dogs: [Dog]
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $backgroundLogic.path) {
             ScrollView{
                 
                 if !dogs.isEmpty{
@@ -24,8 +25,14 @@ struct MyDogsView: View {
                             OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
                         } label: {
                             DogCardView(dog: dog)
-                                
+                                .contextMenu{
+                                    Button("Remove Dog", role: .destructive){
+                                        withAnimation(.linear){
+                                            try? modelContext.delete(dog)
+                                        }                                    }
+                                }
                         }
+                        
                     }
                 }else{
                     Text("No Dogs yet")

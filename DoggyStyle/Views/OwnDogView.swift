@@ -11,6 +11,7 @@ struct OwnDogView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Environment(DummyDogData.self) private var dummyDogData
+    @Environment(\.dismiss) private var dismiss
     @Bindable var backgroundLogic: BackgroundLogic
     var dog : Dog
     
@@ -29,12 +30,16 @@ struct OwnDogView: View {
                                 Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                
                             }
                         }
                     }
+                    .containerRelativeFrame(.vertical){ size, _  in
+                        size * 0.45
+                    }
+                    .clipped()
+                    .tabViewStyle(.page(indexDisplayMode: .automatic))
                     .overlay(alignment: .bottomLeading, content: {
-                        Text(dummyDogData.name)
+                        Text(dog.name)
                             .foregroundStyle(.white)
                             .font(.largeTitle)
                             .bold()
@@ -42,11 +47,6 @@ struct OwnDogView: View {
                             .padding(.horizontal)
                             
                     })
-                    .containerRelativeFrame(.vertical){ size, _  in
-                        size * 0.45
-                    }
-                    .clipped()
-                    .tabViewStyle(.page)
                     
                 }
                 
@@ -67,17 +67,17 @@ struct OwnDogView: View {
                         }
                         Text("Age")
                             .font(.headline)
-                        Text(dummyDogData.age)
+                        Text(dog.age)
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         Text("Gender")
                             .font(.headline)
-                        Text(dummyDogData.gender)
+                        Text(dog.gender)
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         Text("Weith & size & lenth")
                             .font(.headline)
-                        Text("\(dummyDogData.weight), \(dummyDogData.size) + \(dummyDogData.lenth)")
+                        Text("\(dog.weight), \(dog.size) + \(dog.length)")
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         
@@ -97,17 +97,17 @@ struct OwnDogView: View {
                     VStack(alignment: .leading){
                         Text("Allergies")
                             .font(.headline)
-                        Text(dummyDogData.allergies)
+                        Text(dog.allergies)
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         Text("Last Vet Visit")
                             .font(.headline)
-                        Text(dummyDogData.lastvetvisit)
+                        Text(dog.lastvetvisit)
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         Text("Vaccinations")
                             .font(.headline)
-                        Text(dummyDogData.vaccination)
+                        Text(dog.vaccination)
                             .foregroundStyle(.secondary)
                             .font(.callout)
                         
@@ -118,14 +118,17 @@ struct OwnDogView: View {
                         .foregroundStyle(.thickMaterial))
                     }
                 .padding()
-                
+                Button("Remove this Dog"){
+                    try? modelContext.delete(dog)
+                    dismiss()
+                }
             }
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: .top)
+            .toolbarColorScheme(.dark, for: .navigationBar)
         }
-        
-        
-        }
+    }
 }
+
 
 //#Preview {
 //    OwnDogView(backgroundLogic: BackgroundLogic(), dog: Dog(name: "Nalu"))
