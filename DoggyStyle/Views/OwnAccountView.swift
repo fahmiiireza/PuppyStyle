@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import PhotosUI
+import FirebaseFirestore
 
 struct OwnAccountView: View {
     
@@ -17,7 +18,7 @@ struct OwnAccountView: View {
     
     @State private var signOutAlertPresented = false
     @State private var cancelAlertPresented = false
-    @State private var currentUser: UserData?
+    @StateObject private var userDataViewModel = UserDataViewModel()
     @State private var profilePicture: UIImage?
     @State private var photosPickerItem: PhotosPickerItem?
     @Binding var user: User?
@@ -39,10 +40,10 @@ struct OwnAccountView: View {
                                 
                         }
                         VStack(alignment: .leading, spacing: 0){
-                            Text("Susanne Herbig")
+                            Text(userDataViewModel.currentUser?.firstName ?? "")
                                 .font(.title2)
                                 .bold()
-                            Text("📍\(currentUser?.location ?? "No Location Found")")
+                            Text("📍\(userDataViewModel.currentUser?.location ?? "No Location Found")")
                         }
                         Spacer()
                     }
@@ -111,6 +112,9 @@ struct OwnAccountView: View {
                 
             }
         }
+        .onAppear {
+             userDataViewModel.fetchUserData(forUser: user)
+         }
         .alert("Sign Out?", isPresented: $signOutAlertPresented) {
             Button("Cancel", role: .cancel) {
                 

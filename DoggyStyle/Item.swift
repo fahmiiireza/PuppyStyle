@@ -56,22 +56,22 @@ class Dog{
     }
 }
 
-@Model
-class UserData{
-    
-    var firstName: String?
-    var LastName: String?
-    var location: String?
-    var email: String?
-    var telNumber: String?
-    var withGoogle: Bool?
-    
-    init(firstName: String? = nil, LastName: String? = nil, location: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
-        self.firstName = firstName
-        self.LastName = LastName
-        self.location = location
-        self.email = email
-        self.telNumber = telNumber
-        self.withGoogle = withGoogle
-    }
-}
+//@Model
+//class UserData{
+//    
+//    var firstName: String?
+//    var LastName: String?
+//    var location: String?
+//    var email: String?
+//    var telNumber: String?
+//    var withGoogle: Bool?
+//    
+//    init(firstName: String? = nil, LastName: String? = nil, location: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
+//        self.firstName = firstName
+//        self.LastName = LastName
+//        self.location = location
+//        self.email = email
+//        self.telNumber = telNumber
+//        self.withGoogle = withGoogle
+//    }
+//}
