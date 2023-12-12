@@ -124,7 +124,6 @@ struct OwnDogView: View {
                 }
             }
             .ignoresSafeArea(edges: .top)
-            .toolbarColorScheme(.dark, for: .navigationBar)
         }
     }
 }

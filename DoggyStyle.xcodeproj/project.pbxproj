@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */; };
 		4D3F044C2B27CCD800E4F73A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */; };
+		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
 		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
 		4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */; };
 		4D68AF122B26771600BAAEAD /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 4D68AF112B26771600BAAEAD /* CropViewController */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataViewModel.swift; sourceTree = "<group>"; };
 		4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchingListView.swift; sourceTree = "<group>"; };
 		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
 		4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperView.swift; sourceTree = "<group>"; };
 		4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */,
 				B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */,
 				4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */,
+				4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */,
 				4DB0AA512B2131F900E08AAE /* DogCardView.swift */,
 				4DB0AA502B2131F900E08AAE /* MainView.swift */,
 				4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */,
@@ -262,6 +265,7 @@
 				294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */,
 				4DB0AA5B2B2137CC00E08AAE /* SearchView.swift in Sources */,
 				5838B3EE2B1F7C3300E43B91 /* ContentView.swift in Sources */,
+				4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */,
 				4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */,
 				4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,

@@ -23,7 +23,7 @@ struct SearchView: View {
     
     var body: some View {
         
-        NavigationStack{
+        NavigationStack(path: $backroundLogic.path){
             ScrollView{
                 VStack{
                     HStack(alignment: .bottom) {
@@ -37,11 +37,11 @@ struct SearchView: View {
                         Button(action: {
                             backroundLogic.profileSheetPresented = true
                         }, label: {
-                            Image("Appicon")
+                            Image(.placeholderProfile)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(Circle())
-                                .frame(height: 40)
+                                .frame(height: 35)
                         })
                         
                         
@@ -124,22 +124,29 @@ struct SearchView: View {
                     
                     ForEach(dogData.filter({"\($0)".contains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
                         
-                        //                        AsyncImage(url: dog.image.url)
-                        ZStack{
-                            
-                            RoundedRectangle(cornerRadius: 20)
-                                .frame(height: 100)
-                                .foregroundStyle(.gray)
-                            Text(dog.name)
-                                .foregroundStyle(.white)
+                        //   AsyncImage(url: dog.image.url)
+                        
+                        NavigationLink(value: dog) {
+                            ZStack{
+                                
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(height: 100)
+                                    .foregroundStyle(.gray)
+                                Text(dog.name)
+                                    .foregroundStyle(.white)
+                            }
+                            .onAppear{
+                                print(dog.name)
+                            }
                         }
-                        .onAppear{
-                            print(dog.name)
-                        }
+                       
                     }
                 })
                 .padding(.horizontal)
             }
+            .navigationDestination(for: DogApi.self, destination: { dog in
+                BreedSearchingListView(dog: dog)
+            })
             .fullScreenCover(isPresented: $backroundLogic.profileSheetPresented, content: {
                 
                 //handle if User is signed in
@@ -152,13 +159,6 @@ struct SearchView: View {
                     SignUpView()
                     
                 }
-                
-                
-                
-                
-                
-                
-                
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
@@ -171,6 +171,7 @@ struct SearchView: View {
             
             
         }
+        
         .task {
             print(handle ?? "tset")
             handle = Auth.auth().addStateDidChangeListener { auth, user in

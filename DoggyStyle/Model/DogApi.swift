@@ -6,13 +6,13 @@
 //
 import SwiftUI
 
-struct DogApi: Codable, Identifiable {
-    struct Size: Codable {
+struct DogApi: Hashable, Codable, Identifiable{
+    struct Size: Codable, Hashable {
         let imperial: String
         let metric: String
     }
 
-    struct Height: Codable {
+    struct Height: Codable, Hashable {
         let imperial: String
         let metric: String
     }

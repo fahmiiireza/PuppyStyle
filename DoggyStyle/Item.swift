@@ -18,7 +18,7 @@ final class Item {
 }
 
 @Model
-class Dog{
+class Dog: Hashable{
     
     var imageData: [Data] = []
     var imageURLs: [String] = []
