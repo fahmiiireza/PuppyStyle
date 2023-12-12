@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */; };
-		4D3F044C2B27CCD800E4F73A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */; };
 		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
 		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
 		4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */; };
@@ -40,12 +39,12 @@
 		585614BE2B23022700BF076A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585614BD2B23022700BF076A /* RootViewController.swift */; };
 		58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC22B274D6C00846CF6 /* DogApi.swift */; };
 		58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC42B274EBD00846CF6 /* DogImage.swift */; };
+		58F1E1FF2B28A4C4005B95CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58F1E1FE2B28A4C4005B95CD /* GoogleService-Info.plist */; };
 		B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataViewModel.swift; sourceTree = "<group>"; };
-		4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchingListView.swift; sourceTree = "<group>"; };
 		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
 		4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperView.swift; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		585614BD2B23022700BF076A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		58E2ADC22B274D6C00846CF6 /* DogApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogApi.swift; sourceTree = "<group>"; };
 		58E2ADC42B274EBD00846CF6 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
+		58F1E1FE2B28A4C4005B95CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDogsFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,9 +139,9 @@
 		5838B3EA2B1F7C3300E43B91 /* DoggyStyle */ = {
 			isa = PBXGroup;
 			children = (
-				4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */,
 				5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */,
 				585614B42B2300FF00BF076A /* AuthenticationViewModel.swift */,
+				58F1E1FE2B28A4C4005B95CD /* GoogleService-Info.plist */,
 				294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */,
 				585614BD2B23022700BF076A /* RootViewController.swift */,
 				4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */,
@@ -250,7 +250,7 @@
 			files = (
 				5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */,
 				5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */,
-				4D3F044C2B27CCD800E4F73A /* GoogleService-Info.plist in Resources */,
+				58F1E1FF2B28A4C4005B95CD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
