@@ -26,7 +26,7 @@ struct SearchView: View {
         NavigationStack(path: $backroundLogic.path){
             ScrollView{
                 VStack{
-                    HStack(alignment: .bottom) {
+                    HStack() {
                         
                         Text("Search")
                             .font(.largeTitle)
@@ -52,12 +52,17 @@ struct SearchView: View {
                     
                     if isSearching{
                         HStack(spacing: 0){
-                            TextField(text: $searchText) {
-                                
+                            HStack{
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundStyle(.secondary)
+                                TextField(text: $searchText) {
+                                    
+                                }
+                                .autocorrectionDisabled()
+                                .focused($focused, equals: .searchfield)
+                                .matchedGeometryEffect(id: "SearchBar", in: searchAnimation)
                             }
-                            .autocorrectionDisabled()
-                            .focused($focused, equals: .searchfield)
-                            .matchedGeometryEffect(id: "SearchBar", in: searchAnimation)
+                            
                             .padding(10)
                             .background(.ultraThickMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -66,7 +71,7 @@ struct SearchView: View {
                                 if searchText.isEmpty{
                                     Label(
                                         title: { Text("Search breeds") },
-                                        icon: { Image(systemName: "magnifyingglass") }
+                                        icon: { Image(systemName: "magnifyingglass").opacity(0.0) }
                                     )
                                     .foregroundStyle(.secondary)
                                     .padding(.horizontal, 25)
@@ -120,20 +125,32 @@ struct SearchView: View {
                     
                 }
                 
-                LazyVGrid(columns: layout, content: {
+                LazyVGrid(columns: layout, spacing: 10, content: {
                     
                     ForEach(dogData.filter({"\($0)".contains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
                         
                         //   AsyncImage(url: dog.image.url)
                         
                         NavigationLink(value: dog) {
-                            ZStack{
+                            ZStack(alignment: .bottomLeading){
                                 
-                                RoundedRectangle(cornerRadius: 20)
-                                    .frame(height: 100)
-                                    .foregroundStyle(.gray)
+                                Image("\(dog.name)")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .containerRelativeFrame(.horizontal){size, _ in
+                                        size * 0.45
+                                    }
+                                    .frame(height: 120)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    
+                                    
                                 Text(dog.name)
+                                    .font(.title3)
+                                    .bold()
                                     .foregroundStyle(.white)
+                                    .shadow(color: .black, radius: 10)
+                                    .padding(7)
+                                    .multilineTextAlignment(.leading)
                             }
                             .onAppear{
                                 print(dog.name)
