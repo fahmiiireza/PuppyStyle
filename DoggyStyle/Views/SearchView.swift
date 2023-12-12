@@ -33,6 +33,30 @@ struct SearchView: View {
                         
                         Text("Search")
                             .font(.largeTitle)
+
+                    Spacer()
+                    Button(action: {
+                        backroundLogic.profileSheetPresented = true
+                    }, label: {
+                        Image("Appicon")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                            .frame(height: 40)
+                    })
+                    
+                        
+                }
+                .padding([.horizontal, .top])
+                
+                
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(height: 100)
+                    .padding(.horizontal)
+                    .foregroundStyle(.accent)
+                    .overlay(alignment: .center) {
+                        Text("Search on map")
+                            .font(.title2)
                             .bold()
                         
                         Spacer()
@@ -192,8 +216,6 @@ struct SearchView: View {
                 }
                 
             })
-            
-            
         }
         
         .task {

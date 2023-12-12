@@ -40,6 +40,9 @@
 		585614BE2B23022700BF076A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585614BD2B23022700BF076A /* RootViewController.swift */; };
 		58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC22B274D6C00846CF6 /* DogApi.swift */; };
 		58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC42B274EBD00846CF6 /* DogImage.swift */; };
+
+		58F1E1FD2B28A2EC005B95CD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1E1FC2B28A2EC005B95CD /* MapView.swift */; };
+		B899D4542B21FEBF00AD2A14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B899D4532B21FEBF00AD2A14 /* GoogleService-Info.plist */; };
 		B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,9 @@
 		585614BD2B23022700BF076A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		58E2ADC22B274D6C00846CF6 /* DogApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogApi.swift; sourceTree = "<group>"; };
 		58E2ADC42B274EBD00846CF6 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
+
+		58F1E1FC2B28A2EC005B95CD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		B899D4532B21FEBF00AD2A14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDogsFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */,
+				58F1E1FC2B28A2EC005B95CD /* MapView.swift */,
 				B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */,
 				4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */,
 				4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */,
@@ -278,6 +285,7 @@
 				4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */,
 				5838B3F02B1F7C3300E43B91 /* Item.swift in Sources */,
 				585614BE2B23022700BF076A /* RootViewController.swift in Sources */,
+				58F1E1FD2B28A2EC005B95CD /* MapView.swift in Sources */,
 				4DB0AA552B2131F900E08AAE /* OwnDogView.swift in Sources */,
 				4DB0AA582B2131F900E08AAE /* BackgroundLogic.swift in Sources */,
 				5838B3EC2B1F7C3300E43B91 /* DoggyStyleApp.swift in Sources */,
