@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(BackgroundLogic.self) private var backgroundLogic
+    @Query private var dogs: [Dog]
     
     var body: some View {
         if horizontalSizeClass == .compact {
             ///IPHONE SECTION
             TabView{
                 MyDogsView(backgroundLogic: backgroundLogic)
-                    .tabItem { Label("My Dogs", systemImage: "dog.fill") }
+                    .tabItem { Label(dogs.count > 1 ? "My Dogs" : "My Dog", systemImage: "dog.fill") }
                 SearchView(backroundLogic: backgroundLogic)
                     .tabItem { Label("Search", systemImage: "magnifyingglass") }
             }

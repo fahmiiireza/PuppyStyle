@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct SearchView: View {
     
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
     @State private var dogData : [DogApi] = []
@@ -19,9 +20,11 @@ struct SearchView: View {
     @State private var searchText = ""
     @Namespace private var searchAnimation
     
-    let layout = [GridItem(.flexible()), GridItem(.flexible())]
+    
     
     var body: some View {
+        
+        let layout = horizontalSizeClass == .compact ? [GridItem(.flexible()), GridItem(.flexible())] : [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
         
         NavigationStack(path: $backroundLogic.path){
             ScrollView{
@@ -125,7 +128,7 @@ struct SearchView: View {
                     
                 }
                 
-                LazyVGrid(columns: layout, spacing: 10, content: {
+                LazyVGrid(columns: layout, content: {
                     
                     ForEach(dogData.filter({"\($0)".contains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
                         
@@ -138,10 +141,14 @@ struct SearchView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .containerRelativeFrame(.horizontal){size, _ in
-                                        size * 0.45
+                                        horizontalSizeClass == .compact ? size * 0.45 : size * 0.235
                                     }
-                                    .frame(height: 120)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .containerRelativeFrame(.vertical){size, _ in
+                                        horizontalSizeClass == .compact ? size * 0.2 : size * 0.25
+                                    }
+                                    
+                                    
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                                     
                                     
                                 Text(dog.name)

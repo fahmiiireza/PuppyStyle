@@ -53,7 +53,7 @@ struct MyDogsView: View {
                     })
                 }
             })
-            .navigationTitle("My Dogs")
+            .navigationTitle(Text(dogs.count > 1 ? "My Dogs" : "My Dog"))
         }
     }
 }
