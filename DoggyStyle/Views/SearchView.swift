@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct SearchView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var handle: AuthStateDidChangeListenerHandle?
     @State private var user: User?
@@ -134,7 +135,7 @@ struct SearchView: View {
                         
                         //   AsyncImage(url: dog.image.url)
                         
-                        NavigationLink(value: dog) {
+                        Button(action: {backroundLogic.tinderPresented = true}, label: {
                             ZStack(alignment: .bottomLeading){
                                 
                                 Image("\(dog.name)")
@@ -162,7 +163,8 @@ struct SearchView: View {
                             .onAppear{
                                 print(dog.name)
                             }
-                        }
+                                       
+                        })
                        
                     }
                 })
@@ -170,6 +172,9 @@ struct SearchView: View {
             }
             .navigationDestination(for: DogApi.self, destination: { dog in
                 BreedSearchingListView(dog: dog)
+            })
+            .fullScreenCover(isPresented: $backroundLogic.tinderPresented, content: {
+                TinderView()
             })
             .fullScreenCover(isPresented: $backroundLogic.profileSheetPresented, content: {
                 

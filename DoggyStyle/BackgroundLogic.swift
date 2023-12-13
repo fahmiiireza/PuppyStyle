@@ -10,25 +10,13 @@ import SwiftUI
 @Observable
 class BackgroundLogic{
     
+    var backgroundImage = Image(.placeholderDog)
     var path = NavigationPath()
     var addDogSheetPresented = false
     var profileSheetPresented = false
+    var tinderPresented = false
     var imageDataArray: [Data] = []
     var imageStorage: [UIImage] = []
-    
-}
-
-@Observable
-class imageConversion{
-    
-    var images: [UIImage] = []
-    var urlStrings: [String] = []
-    
-    func uploadImages(images: [UIImage]) async {
-        ForEach(images, id: \.self){ image in
-            
-        }
-    }
     
 }
 

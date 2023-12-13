@@ -20,7 +20,7 @@ final class Item {
 @Model
 class Dog: Hashable{
     
-    var imageData: [Data] = []
+    @Attribute(.externalStorage) var imageData: [Data] = []
     var imageURLs: [String] = []
     var name: String = "Test"
     var gender: String = "Male"

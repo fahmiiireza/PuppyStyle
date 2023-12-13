@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */; };
+		4D372DF82B2A13DF00AD2CA0 /* TinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */; };
+		4D372DFA2B2A441700AD2CA0 /* TinderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */; };
 		4D3F044C2B27CCD800E4F73A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */; };
 		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
 		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataViewModel.swift; sourceTree = "<group>"; };
+		4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderView.swift; sourceTree = "<group>"; };
+		4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCardView.swift; sourceTree = "<group>"; };
 		4D3F044B2B27CCD800E4F73A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchingListView.swift; sourceTree = "<group>"; };
 		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */,
 				4DB0AA512B2131F900E08AAE /* DogCardView.swift */,
 				4DB0AA502B2131F900E08AAE /* MainView.swift */,
+				4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */,
+				4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */,
 				4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */,
 				4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */,
 				4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */,
@@ -267,11 +273,13 @@
 				5838B3EE2B1F7C3300E43B91 /* ContentView.swift in Sources */,
 				4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */,
 				4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */,
+				4D372DF82B2A13DF00AD2CA0 /* TinderView.swift in Sources */,
 				4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,
 				4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */,
 				58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */,
 				4DB0AA572B2131F900E08AAE /* DogCardView.swift in Sources */,
+				4D372DFA2B2A441700AD2CA0 /* TinderCardView.swift in Sources */,
 				4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */,
 				58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */,
 				4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */,
@@ -419,7 +427,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
+				INFOPLIST_KEY_CFBundleDisplayName = "Puppy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -458,7 +466,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
+				INFOPLIST_KEY_CFBundleDisplayName = "Puppy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

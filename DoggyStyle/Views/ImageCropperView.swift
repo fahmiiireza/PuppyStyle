@@ -27,6 +27,7 @@ struct ImageCropperView: View {
                     
                      for item in photosPickerItem{
                          if let data = try? await item.loadTransferable(type: Data.self){
+                             
                              backgroundLogic.imageDataArray.append(data)
                         }
                      }

@@ -20,10 +20,11 @@ struct DogCardView: View {
                     Image(uiImage: UIImage(data: dog.imageData.first!)!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 200)
+                        .containerRelativeFrame(.vertical) { size, _ in
+                            size * 0.4
+                        }
                     
                 }else{
-                    
                     Image(.placeholderDog)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
