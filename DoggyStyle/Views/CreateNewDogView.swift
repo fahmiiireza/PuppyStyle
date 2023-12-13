@@ -11,13 +11,10 @@ import FirebaseAuth
 
 
 struct CreateNewDogView: View {
-    @State private var handle: AuthStateDidChangeListenerHandle?
-    @State private var user: User?
     
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(BackgroundLogic.self) private var backgroundLogic
-    @Bindable var dummyDoggy: DummyDogData
     @State var dog: Dog
     
     var body: some View {
@@ -33,16 +30,23 @@ struct CreateNewDogView: View {
                     
                     Section(header: Text("General Information")) {
                         TextField("Name", text: $dog.name)
-                        TextField("Gender", text: $dog.gender)
+                        Picker("Gender", selection: $dog.gender) {
+                            Text("Male").tag("Male")
+                            Text("Female").tag("Female")
+                        }
+                            
                         TextField("Breed", text: $dog.breed)
+                            .onTapGesture {
+                                print(dog.gender)
+                            }
                         TextField("Age", text: $dog.age)
-                            .keyboardType(.decimalPad)
+                            .keyboardType(.numberPad)
                         TextField("Weight", text: $dog.weight)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                         TextField("Size", text: $dog.size)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                         TextField("Lenth", text: $dog.length)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     
                     
@@ -78,11 +82,14 @@ struct CreateNewDogView: View {
                 .navigationTitle("Create New Dog")
                 .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear{
+            dog.gender = "male"
+        }
     }
 }
 
 
-//#Preview {
-//    CreateNewDogView(dummyDoggy: DummyDogData())
-//        .environment(DummyDogData())
-//}
+#Preview {
+    CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+        .environment(BackgroundLogic())
+}

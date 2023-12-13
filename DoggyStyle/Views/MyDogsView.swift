@@ -42,7 +42,7 @@ struct MyDogsView: View {
             }
             .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
-                CreateNewDogView(dummyDoggy: dummyDogData, dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {

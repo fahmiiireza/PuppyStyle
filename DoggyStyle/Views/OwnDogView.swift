@@ -13,25 +13,30 @@ struct OwnDogView: View {
     @Environment(DummyDogData.self) private var dummyDogData
     @Environment(\.dismiss) private var dismiss
     @Bindable var backgroundLogic: BackgroundLogic
+    
     var dog : Dog
     
+    
+    
     var body: some View {
+        
        
         NavigationStack{
             ScrollView {
                 LazyVStack(spacing: 0){
                     TabView {
-                        if (dog.imageData.isEmpty){
-                            Text("NO IMAGES")
-                                .bold()
-                        }else{
-                            ForEach(dog.imageData, id: \.self){ image in
-                                
-                                Image(uiImage: UIImage(data: image)!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                            if (dog.imageData.isEmpty){
+                                Text("NO IMAGES")
+                                    .bold()
+                            }else{
+                                ForEach(dog.imageData, id: \.self){ image in
+                                    
+                                    Image(uiImage: UIImage(data: image)!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                    
+                                }
                             }
-                        }
                     }
                     .containerRelativeFrame(.vertical){ size, _  in
                         size * 0.45
@@ -63,7 +68,7 @@ struct OwnDogView: View {
                         Text("Breed")
                             .font(.headline)
                         NavigationLink(dummyDogData.breed){
-                            CreateNewDogView(dummyDoggy: dummyDogData, dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                            CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                         }
                         Text("Age")
                             .font(.headline)
