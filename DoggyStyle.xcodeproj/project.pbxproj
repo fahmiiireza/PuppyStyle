@@ -101,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */,
-				B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */,
 				4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */,
 				4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */,
 				4DB0AA512B2131F900E08AAE /* DogCardView.swift */,
@@ -151,6 +150,7 @@
 				294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */,
 				585614BD2B23022700BF076A /* RootViewController.swift */,
 				4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */,
+				B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */,
 				58E2ADC12B274D5A00846CF6 /* Model */,
 				4DB0AA5C2B213B4800E08AAE /* Views */,
 				5838B3EF2B1F7C3300E43B91 /* Item.swift */,
