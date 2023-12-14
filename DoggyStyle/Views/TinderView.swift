@@ -33,7 +33,7 @@ struct TinderView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .blur(radius: 10)
+                .blur(radius: 15)
                 .ignoresSafeArea()
                 .scaleEffect(2)
             
