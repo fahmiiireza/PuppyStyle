@@ -47,7 +47,7 @@ struct DoggyStyleApp: App {
         
         
         WindowGroup {
-            MainView()
+            MainView(position: .userLocation(fallback: .automatic))
         }
         .environment(dummyDogData)
         .environment(backgroundLogic)

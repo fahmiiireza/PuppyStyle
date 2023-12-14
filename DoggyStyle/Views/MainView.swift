@@ -7,17 +7,19 @@
 
 import SwiftUI
 import SwiftData
-
+import MapKit
 struct MainView: View {
     
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(BackgroundLogic.self) private var backgroundLogic
     @Query private var dogs: [Dog]
-    
+    @State var position: MapCameraPosition
+
     var body: some View {
         if horizontalSizeClass == .compact {
             ///IPHONE SECTION
             TabView{
+                MapView()
                 MyDogsView(backgroundLogic: backgroundLogic)
                     .tabItem { Label(dogs.count > 1 ? "My Dogs" : "My Dog", systemImage: "dog.fill") }
                 SearchView(backroundLogic: backgroundLogic)
@@ -48,10 +50,10 @@ struct MainView: View {
     }
 }
 
-#Preview {
-    MainView()
-        .environment(BackgroundLogic())
-}
+//#Preview {
+//    MainView()
+//        .environment(BackgroundLogic())
+//}
 
 #if os(iOS)
 extension View {

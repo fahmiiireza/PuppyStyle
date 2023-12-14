@@ -40,6 +40,8 @@
 		58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC22B274D6C00846CF6 /* DogApi.swift */; };
 		58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC42B274EBD00846CF6 /* DogImage.swift */; };
 		58F1E1FF2B28A4C4005B95CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58F1E1FE2B28A4C4005B95CD /* GoogleService-Info.plist */; };
+		58F1E2012B28A5B9005B95CD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1E2002B28A5B9005B95CD /* MapView.swift */; };
+		58F1E2032B28AC6E005B95CD /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F1E2022B28AC6E005B95CD /* Coordinates.swift */; };
 		B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		58E2ADC22B274D6C00846CF6 /* DogApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogApi.swift; sourceTree = "<group>"; };
 		58E2ADC42B274EBD00846CF6 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
 		58F1E1FE2B28A4C4005B95CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		58F1E2002B28A5B9005B95CD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		58F1E2022B28AC6E005B95CD /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDogsFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */,
+				58F1E2002B28A5B9005B95CD /* MapView.swift */,
 				B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */,
 				4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */,
 				4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */,
@@ -168,6 +173,7 @@
 			children = (
 				58E2ADC22B274D6C00846CF6 /* DogApi.swift */,
 				58E2ADC42B274EBD00846CF6 /* DogImage.swift */,
+				58F1E2022B28AC6E005B95CD /* Coordinates.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +274,8 @@
 				4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */,
 				4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */,
 				4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */,
+				58F1E2032B28AC6E005B95CD /* Coordinates.swift in Sources */,
+				58F1E2012B28A5B9005B95CD /* MapView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,
 				4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */,
 				58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */,
@@ -415,12 +423,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 27J9MHRH2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "I WANT TO STALK YOU!";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -433,7 +442,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = "fahmi-ios-devs.DoggyStyle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -454,12 +463,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 27J9MHRH2K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Doggy Style";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "I WANT TO STALK YOU!";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To upload an image, please provide access to your photos Library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -472,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = "fahmi-ios-devs.DoggyStyle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
