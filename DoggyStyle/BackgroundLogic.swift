@@ -10,11 +10,13 @@ import SwiftUI
 @Observable
 class BackgroundLogic{
     
+    
     var backgroundImage = Image(.placeholderDog)
     var path = NavigationPath()
     var addDogSheetPresented = false
     var profileSheetPresented = false
     var tinderPresented = false
+    var mapPresented = false
     var imageDataArray: [Data] = []
     var imageStorage: [UIImage] = []
     
