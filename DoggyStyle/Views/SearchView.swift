@@ -16,7 +16,7 @@ struct SearchView: View {
     @State private var user: User?
     @State private var dogData : [DogApi] = []
     @FocusState private var focused: FocusedField?
-    @Bindable var backroundLogic: BackgroundLogic
+    @Bindable var backgroundLogic: BackgroundLogic
     @State private var isSearching = false
     @State private var searchText = ""
     @Namespace private var searchAnimation
@@ -27,7 +27,7 @@ struct SearchView: View {
         
         let layout = horizontalSizeClass == .compact ? [GridItem(.flexible()), GridItem(.flexible())] : [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
         
-        NavigationStack(path: $backroundLogic.path){
+        NavigationStack(path: $backgroundLogic.path){
             ScrollView{
                 VStack{
                     HStack() {
@@ -39,7 +39,7 @@ struct SearchView: View {
                         Spacer()
                         
                         Button(action: {
-                            backroundLogic.profileSheetPresented = true
+                            backgroundLogic.profileSheetPresented = true
                         }, label: {
                             Image(.placeholderProfile)
                                 .resizable()
@@ -128,14 +128,56 @@ struct SearchView: View {
                     
                     
                 }
-                
+                HStack{
+                    Button(action: {
+                        backgroundLogic.tinderPresented = true
+                    }, label: {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(.green.gradient)
+                            .containerRelativeFrame(.vertical){size, _ in
+                                horizontalSizeClass == .compact ? size * 0.2 : size * 0.25
+                            }
+                            .containerRelativeFrame(.horizontal){size, _ in
+                                horizontalSizeClass == .compact ? size * 0.45 : size * 0.235
+                            }
+                            .overlay{
+                                Image(systemName: "shuffle")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .shadow(radius: 10)
+                            }
+                            .padding(.leading)
+                    })
+                    Button(action: {
+                        backgroundLogic.mapPresented = true
+                    }, label: {
+                        Image(.maps)
+                            .resizable()
+                            .containerRelativeFrame(.vertical){size, _ in
+                                horizontalSizeClass == .compact ? size * 0.2 : size * 0.25
+                            }
+                            .containerRelativeFrame(.horizontal){size, _ in
+                                horizontalSizeClass == .compact ? size * 0.45 : size * 0.235
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay{
+                                Image(systemName: "map")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .shadow(radius: 10)
+                            }
+                            .padding(.trailing)
+                    })
+                }
                 LazyVGrid(columns: layout, content: {
                     
-                    ForEach(dogData.filter({"\($0)".contains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
+                    ForEach(dogData.filter({"\($0)".localizedCaseInsensitiveContains(searchText.replacingOccurrences(of: "_", with: " ")) || searchText.isEmpty})){ dog in
                         
                         //   AsyncImage(url: dog.image.url)
                         
-                        Button(action: {backroundLogic.tinderPresented = true}, label: {
+                        Button(action: {backgroundLogic.tinderPresented = true}, label: {
                             ZStack(alignment: .bottomLeading){
                                 
                                 Image("\(dog.name)")
@@ -173,10 +215,22 @@ struct SearchView: View {
             .navigationDestination(for: DogApi.self, destination: { dog in
                 BreedSearchingListView(dog: dog)
             })
-            .fullScreenCover(isPresented: $backroundLogic.tinderPresented, content: {
+            
+            .fullScreenCover(isPresented: $backgroundLogic.mapPresented, content: {
+                Text("MapView")
+                    .overlay {
+                        Button {
+                            backgroundLogic.mapPresented = false
+                        } label: {
+                            Text("Dismiss")
+                        }
+
+                    }
+            })
+            .fullScreenCover(isPresented: $backgroundLogic.tinderPresented, content: {
                 TinderView()
             })
-            .fullScreenCover(isPresented: $backroundLogic.profileSheetPresented, content: {
+            .fullScreenCover(isPresented: $backgroundLogic.profileSheetPresented, content: {
                 
                 //handle if User is signed in
                 if (user != nil) {
@@ -258,6 +312,6 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(backroundLogic: BackgroundLogic())
+    SearchView(backgroundLogic: BackgroundLogic())
 }
 

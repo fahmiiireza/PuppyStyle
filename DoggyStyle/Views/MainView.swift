@@ -20,7 +20,7 @@ struct MainView: View {
             TabView{
                 MyDogsView(backgroundLogic: backgroundLogic)
                     .tabItem { Label(dogs.count > 1 ? "My Dogs" : "My Dog", systemImage: "dog.fill") }
-                SearchView(backroundLogic: backgroundLogic)
+                SearchView(backgroundLogic: backgroundLogic)
                     .tabItem { Label("Search", systemImage: "magnifyingglass") }
             }
         }else{
@@ -34,7 +34,7 @@ struct MainView: View {
                             Label("My Dogs", systemImage: "dog")
                         }
                         NavigationLink {
-                            SearchView(backroundLogic: backgroundLogic)
+                            SearchView(backgroundLogic: backgroundLogic)
                         } label: {
                             Label("Search", systemImage: "magnifyingglass")
                         }
