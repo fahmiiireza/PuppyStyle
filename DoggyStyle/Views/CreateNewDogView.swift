@@ -36,9 +36,6 @@ struct CreateNewDogView: View {
                         }
                             
                         TextField("Breed", text: $dog.breed)
-                            .onTapGesture {
-                                print(dog.gender)
-                            }
                         TextField("Age", text: $dog.age)
                             .keyboardType(.numberPad)
                         TextField("Weight", text: $dog.weight)

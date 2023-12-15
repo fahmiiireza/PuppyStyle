@@ -158,7 +158,6 @@ struct SignUpView: View {
                                                     
                                                 } else {
                                                     
-                                                    print(querySnapshot!.documents)
                                                     
                                                     if querySnapshot!.documents.isEmpty {
                                                         withAnimation {
@@ -173,7 +172,7 @@ struct SignUpView: View {
                                                         }
                                                         
                                                         for document in querySnapshot!.documents {
-                                                            print("\(document.documentID) => \(document.data())")
+                                                          
                                                         }
                                                     }
                                                 }
@@ -198,7 +197,6 @@ struct SignUpView: View {
                                         if let err = error {
                                             print(err.localizedDescription)
                                         } else {
-                                            print(authResult ?? "test")
                                             print("Signed In")
                                             dismiss.callAsFunction()
                                         }

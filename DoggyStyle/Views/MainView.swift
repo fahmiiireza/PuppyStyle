@@ -10,18 +10,40 @@ import SwiftData
 
 struct MainView: View {
     
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(BackgroundLogic.self) private var backgroundLogic
     @Query private var dogs: [Dog]
+    @State private var selection = "Dogs"
     
     var body: some View {
         if horizontalSizeClass == .compact {
             ///IPHONE SECTION
-            TabView{
+            TabView(selection: $selection){
                 MyDogsView(backgroundLogic: backgroundLogic)
+                    .tag("Dogs")
                     .tabItem { Label(dogs.count > 1 ? "My Dogs" : "My Dog", systemImage: "dog.fill") }
-                SearchView(backgroundLogic: backgroundLogic)
-                    .tabItem { Label("Search", systemImage: "magnifyingglass") }
+                
+                if networkMonitor.isConnected {
+                    SearchView(backgroundLogic: backgroundLogic)
+                        .tabItem { Label("Search", systemImage: "magnifyingglass") }
+                        .tag("Search")
+                }else{
+                    NoNetworkView()
+                        .tag("FYF")
+                        .tabItem { Label("Search", systemImage: "magnifyingglass") }
+                }
+                
+                
+            }
+            .onChange(of: networkMonitor.isConnected) { oldValue, newValue in
+                if selection == "Search"{
+                    selection = "FYF"
+                }else if selection == "FYF"{
+                    selection = "Search"
+                }else{
+                    selection = "Dogs"
+                }
             }
         }else{
             ///IPAD SECTION

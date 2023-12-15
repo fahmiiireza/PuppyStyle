@@ -212,7 +212,6 @@ extension AuthenticationViewModel {
     }
     
     func createUser(email:String!,fromGoogle: Bool) {
-        print("call")
         //set the user data with only email whn first signing up
         db.collection("user").document(email).setData([
           "email": email!,

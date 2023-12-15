@@ -21,7 +21,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct DoggyStyleApp: App {
     @StateObject private var authenticationViewModel = AuthenticationViewModel()
-    
+    @StateObject var networkMonitor = NetworkMonitor()
+
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
@@ -52,6 +53,7 @@ struct DoggyStyleApp: App {
         .environment(dummyDogData)
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
+        .environmentObject(networkMonitor)
         .modelContainer(sharedModelContainer)
 //       .modelContainer(for: Dog.self)
     }
