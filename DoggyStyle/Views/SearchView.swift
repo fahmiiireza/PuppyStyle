@@ -202,9 +202,6 @@ struct SearchView: View {
                                     .padding(7)
                                     .multilineTextAlignment(.leading)
                             }
-                            .onAppear{
-                                print(dog.name)
-                            }
                                        
                         })
                        
