@@ -10,13 +10,15 @@ import SwiftData
 import FirebaseCore
 
 // Needed for Firebase
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        return true
-    }
-}
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//    func application(
+//        _ application: UIApplication,
+//        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+//    ) -> Bool {
+//
+//        return true
+//    }
+//}
 
 @main
 struct DoggyStyleApp: App {
@@ -24,7 +26,7 @@ struct DoggyStyleApp: App {
     @StateObject var networkMonitor = NetworkMonitor()
 
     // register app delegate for Firebase setup
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -45,7 +47,6 @@ struct DoggyStyleApp: App {
     @State private var dummyDogData = DummyDogData()
     
     var body: some Scene {
-        
         
         WindowGroup {
             MainView()

@@ -65,6 +65,7 @@ struct DogCardView: View {
                     .foregroundStyle(.white)
                     .shadow(radius: 10)
                     .padding(5)
+                    .multilineTextAlignment(.leading)
                 
             }
             .clipShape(RoundedRectangle(cornerRadius: 20))

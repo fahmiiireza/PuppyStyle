@@ -11,7 +11,7 @@ import SwiftUI
 class BackgroundLogic{
     
     
-    var backgroundImage = Image(.placeholderDog)
+    var backgroundImage = Image(uiImage: .placeholderProfile)
     var path = NavigationPath()
     var addDogSheetPresented = false
     var profileSheetPresented = false
@@ -19,6 +19,7 @@ class BackgroundLogic{
     var mapPresented = false
     var imageDataArray: [Data] = []
     var imageStorage: [UIImage] = []
+    var scrollPosition: Dog? = nil
     
 }
 

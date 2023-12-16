@@ -29,6 +29,7 @@ struct CreateNewDogView: View {
                     }
                     
                     Section(header: Text("General Information")) {
+                        TextField("Image URLS", text: $dog.imageURLs.first!)
                         TextField("Name", text: $dog.name)
                         Picker("Gender", selection: $dog.gender) {
                             Text("Male").tag("Male")
