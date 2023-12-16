@@ -10,7 +10,6 @@ import SwiftUI
 struct OwnDogView: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Environment(DummyDogData.self) private var dummyDogData
     @Environment(\.dismiss) private var dismiss
     @Bindable var backgroundLogic: BackgroundLogic
     
@@ -67,7 +66,7 @@ struct OwnDogView: View {
                     VStack(alignment: .leading){
                         Text("Breed")
                             .font(.headline)
-                        NavigationLink(dummyDogData.breed){
+                        NavigationLink("Breed"){
                             CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                         }
                         Text("Age")

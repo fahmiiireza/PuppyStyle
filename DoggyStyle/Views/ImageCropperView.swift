@@ -10,7 +10,6 @@ import PhotosUI
 
 struct ImageCropperView: View {
     
-    @Environment(DummyDogData.self) private var dummyDog
     @State private var profilePicture: [UIImage] = []
     @State private var photosPickerItem: [PhotosPickerItem] = []
     @Environment(BackgroundLogic.self) private var backgroundLogic
@@ -40,5 +39,4 @@ struct ImageCropperView: View {
 
 #Preview {
     ImageCropperView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
-        .environment(DummyDogData())
 }

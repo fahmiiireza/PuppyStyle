@@ -27,9 +27,10 @@ struct TinderCardView: View {
                             size * 0.8
                         })
                         .clipShape(RoundedRectangle(cornerRadius: 20))
+                
                 // Displays the loaded image.
             } else if phase.error != nil {
-                Color.red // Indicates an error.
+                EmptyView() // Indicates an error.
             } else {
                 EmptyView() // Acts as a placeholder.
             }

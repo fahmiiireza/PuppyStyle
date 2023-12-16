@@ -11,10 +11,9 @@
 		4D372DF82B2A13DF00AD2CA0 /* TinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */; };
 		4D372DFA2B2A441700AD2CA0 /* TinderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */; };
 		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
+		4D52DD112B2DE7FB0018322F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D52DD102B2DE7FB0018322F /* GoogleService-Info.plist */; };
 		4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */; };
 		4D68AF0F2B2674BD00BAAEAD /* ImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */; };
-		4D68AF122B26771600BAAEAD /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 4D68AF112B26771600BAAEAD /* CropViewController */; };
-		4D68AF142B26771600BAAEAD /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 4D68AF132B26771600BAAEAD /* TOCropViewController */; };
 		4DB0AA542B2131F900E08AAE /* MyDogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */; };
 		4DB0AA552B2131F900E08AAE /* OwnDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */; };
 		4DB0AA562B2131F900E08AAE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA502B2131F900E08AAE /* MainView.swift */; };
@@ -41,7 +40,6 @@
 		585614BE2B23022700BF076A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585614BD2B23022700BF076A /* RootViewController.swift */; };
 		58E2ADC32B274D6C00846CF6 /* DogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC22B274D6C00846CF6 /* DogApi.swift */; };
 		58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2ADC42B274EBD00846CF6 /* DogImage.swift */; };
-		58FD5E262B2C981B0026B6F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58FD5E252B2C981B0026B6F3 /* GoogleService-Info.plist */; };
 		58FD5E282B2C98DB0026B6F3 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FD5E272B2C98DB0026B6F3 /* NetworkMonitor.swift */; };
 		58FD5E2A2B2CA1C40026B6F3 /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FD5E292B2CA1C40026B6F3 /* NoNetworkView.swift */; };
 		B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */; };
@@ -52,6 +50,7 @@
 		4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderView.swift; sourceTree = "<group>"; };
 		4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCardView.swift; sourceTree = "<group>"; };
 		4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchingListView.swift; sourceTree = "<group>"; };
+		4D52DD102B2DE7FB0018322F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAccountView.swift; sourceTree = "<group>"; };
 		4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperView.swift; sourceTree = "<group>"; };
 		4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDogsView.swift; sourceTree = "<group>"; };
@@ -73,7 +72,6 @@
 		585614BD2B23022700BF076A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		58E2ADC22B274D6C00846CF6 /* DogApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogApi.swift; sourceTree = "<group>"; };
 		58E2ADC42B274EBD00846CF6 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
-		58FD5E252B2C981B0026B6F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		58FD5E272B2C98DB0026B6F3 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		58FD5E292B2CA1C40026B6F3 /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 		B899D4552B2205A000AD2A14 /* CreateDogsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDogsFile.swift; sourceTree = "<group>"; };
@@ -87,13 +85,11 @@
 				585614BC2B23019900BF076A /* GoogleSignInSwift in Frameworks */,
 				581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */,
 				585614BA2B23019900BF076A /* GoogleSignIn in Frameworks */,
-				4D68AF122B26771600BAAEAD /* CropViewController in Frameworks */,
 				581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */,
 				581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				581A4C042B1F824C004B7140 /* FirebaseAppCheck in Frameworks */,
 				581A4C022B1F824C004B7140 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				585614B72B23012900BF076A /* FirebaseAuth in Frameworks */,
-				4D68AF142B26771600BAAEAD /* TOCropViewController in Frameworks */,
 				581A4C072B1F8516004B7140 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +145,7 @@
 		5838B3EA2B1F7C3300E43B91 /* DoggyStyle */ = {
 			isa = PBXGroup;
 			children = (
-				58FD5E252B2C981B0026B6F3 /* GoogleService-Info.plist */,
+				4D52DD102B2DE7FB0018322F /* GoogleService-Info.plist */,
 				5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */,
 				585614B42B2300FF00BF076A /* AuthenticationViewModel.swift */,
 				294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */,
@@ -210,8 +206,6 @@
 				585614B62B23012900BF076A /* FirebaseAuth */,
 				585614B92B23019900BF076A /* GoogleSignIn */,
 				585614BB2B23019900BF076A /* GoogleSignInSwift */,
-				4D68AF112B26771600BAAEAD /* CropViewController */,
-				4D68AF132B26771600BAAEAD /* TOCropViewController */,
 			);
 			productName = DoggyStyle;
 			productReference = 5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */;
@@ -262,7 +256,7 @@
 			files = (
 				5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */,
 				5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */,
-				58FD5E262B2C981B0026B6F3 /* GoogleService-Info.plist in Resources */,
+				4D52DD112B2DE7FB0018322F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +425,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = 27J9MHRH2K;
+				DEVELOPMENT_TEAM = QA9FXHQ3QW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -449,7 +443,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fahmi-ios-devs.DoggyStyle";
+				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -470,7 +464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = 27J9MHRH2K;
+				DEVELOPMENT_TEAM = QA9FXHQ3QW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -488,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fahmi-ios-devs.DoggyStyle";
+				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -551,16 +545,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4D68AF112B26771600BAAEAD /* CropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = CropViewController;
-		};
-		4D68AF132B26771600BAAEAD /* TOCropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4D68AF102B26771600BAAEAD /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = TOCropViewController;
-		};
 		581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

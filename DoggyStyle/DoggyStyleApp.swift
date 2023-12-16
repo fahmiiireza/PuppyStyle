@@ -22,6 +22,10 @@ import FirebaseCore
 
 @main
 struct DoggyStyleApp: App {
+    
+    init(){
+        FirebaseApp.configure()
+    }
     @StateObject private var authenticationViewModel = AuthenticationViewModel()
     @StateObject var networkMonitor = NetworkMonitor()
 
@@ -44,14 +48,12 @@ struct DoggyStyleApp: App {
     }()
     
     @State private var backgroundLogic = BackgroundLogic()
-    @State private var dummyDogData = DummyDogData()
     
     var body: some Scene {
         
         WindowGroup {
             MainView()
         }
-        .environment(dummyDogData)
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
         .environmentObject(networkMonitor)

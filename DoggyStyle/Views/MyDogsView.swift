@@ -12,7 +12,6 @@ struct MyDogsView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Bindable var backgroundLogic: BackgroundLogic
-    @Environment(DummyDogData.self) private var dummyDogData
     @Query private var dogs: [Dog]
     
     var body: some View {
@@ -60,5 +59,4 @@ struct MyDogsView: View {
 
 #Preview {
     MyDogsView(backgroundLogic: BackgroundLogic())
-        .environment(DummyDogData())
 }
