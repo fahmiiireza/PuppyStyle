@@ -9,70 +9,103 @@ import UIKit
 import SwiftUI
 import SwiftData
 
+
 struct TinderView: View {
     
+    var breeds = ["Golden Retriever", "Border Collie", "Boxer"]
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @Environment(BackgroundLogic.self) private var backgroundLogic
+    @Environment(\.displayScale) private var displayScale
+    
+    @State private var scroPos: Int? = nil
     @Query private var dogs: [Dog]
-    @State private var backgroundColor = UIColor(.clear)
+    @State private var bgImage = Image(.placeholderProfile)
+    @State private var scrollPosition: Dog? = nil
+    
+//    @MainActor func render(dog: Dog){
+//        let renderer = ImageRenderer(content: TinderCardView(dog: dog))
+//        print("image set")
+//        let uiImage = renderer.cont
+//        bgImage = Image(uiImage: uiImage ?? .placeholderDog)
+//            print("image set")
+//        }
+    
     
     var body: some View {
         
         ZStack{
             GeometryReader{ geometry in
                 
-            //                Image(.affenpinscher) // Replace with your actual image
-            //                    .resizable()
-            //                    .aspectRatio(contentMode: .fill)
-            //                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            //                    .overlay(VisualEffectBlur(blurStyle: .systemThinMaterialDark)) // You can change the blur style
-            
-                backgroundLogic.backgroundImage
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .blur(radius: 15)
-                .ignoresSafeArea()
-                .scaleEffect(2)
-            
-            ScrollView(.horizontal) {
-                LazyHStack{
-                    ForEach(dogs){ dog in
-                        TinderCardView(dog: dog)
-                            .scrollTransition { content, phase in
-                                content.offset(y: phase.isIdentity ? 0.0 : 20)
-                                    .opacity(phase.isIdentity ? 1 : 0.8)
-                                
+                //                Image(.affenpinscher) // Replace with your actual image
+                //                    .resizable()
+                //                    .aspectRatio(contentMode: .fill)
+                //                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                //                    .overlay(VisualEffectBlur(blurStyle: .systemThinMaterialDark)) // You can change the blur style
+                
+                TinderCardView(dog: (scrollPosition ?? dogs.first) ?? Dog(imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .blur(radius: 15)
+                    .ignoresSafeArea()
+                    .scaleEffect(2)
+                ScrollViewReader{ proxy in
+                ScrollView(.horizontal) {
+                    LazyHStack{
+                        ForEach(dogs, id: \.self){ dog in
+                            VStack(alignment: .leading, spacing: 0){
+                                    Text(dog.name)
+                                        .font(.title)
+                                    .bold()
+                                    .padding(.horizontal, 5)
+                            TinderCardView(dog: dog)
+                                    .shadow(radius: 10)
+                                Text(breeds.joined(separator: " ‧ "))
+                                    .foregroundStyle(.white.opacity(0.8))
+                                    .font(.headline)
+                                    .padding(5)
+                                }
+                            .onChange(of: scrollPosition) {
+                                print(scrollPosition?.name)
+                               // render(dog: dog)
                             }
-                        
-                            .containerRelativeFrame(.horizontal, count: 1, spacing: 5)
-                        
-                    }
-                }
-                .scrollTargetLayout()
-                
-            }
-                
-            //.contentMargins(16, for: .scrollContent)
-            .scrollTargetBehavior(.viewAligned)
-            .scrollIndicators(.hidden)
-            .overlay {
-                VStack{
-                    HStack{
-                        Spacer()
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                                .padding()
+                            .onAppear{
+                               // render(dog: dog)
+                            }
+                                .scrollTransition { content, phase in
+                                    content.offset(y: phase.isIdentity ? 0.0 : 20)
+                                        .opacity(phase.isIdentity ? 1 : 0.8)
+                                    
+                                }
+                            
+                                .containerRelativeFrame(.horizontal, count: 1, spacing: 5)
+                            
                         }
-                        
-                        
                     }
-                    Spacer()
+                    .scrollTargetLayout()
+                   
                 }
+                
+                
+                //.contentMargins(16, for: .scrollContent)
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
+                .overlay {
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Button {
+                                dismiss()
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .padding()
+                            }
+                            
+                            
+                        }
+                        Spacer()
+                    }
+                }
+                .scrollPosition(id: $scrollPosition)
             }
         }
     }
@@ -81,7 +114,6 @@ struct TinderView: View {
 
 #Preview {
     TinderView()
-        .environment(BackgroundLogic())
 }
 
 
