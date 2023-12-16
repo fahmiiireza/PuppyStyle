@@ -20,14 +20,15 @@ struct TinderView: View {
     @Query private var dogs: [Dog]
     @State private var bgImage = Image(.placeholderProfile)
     @State private var scrollPosition: Dog? = nil
+    @State private var isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
     
-//    @MainActor func render(dog: Dog){
-//        let renderer = ImageRenderer(content: TinderCardView(dog: dog))
-//        print("image set")
-//        let uiImage = renderer.cont
-//        bgImage = Image(uiImage: uiImage ?? .placeholderDog)
-//            print("image set")
-//        }
+    //    @MainActor func render(dog: Dog){
+    //        let renderer = ImageRenderer(content: TinderCardView(dog: dog))
+    //        print("image set")
+    //        let uiImage = renderer.cont
+    //        bgImage = Image(uiImage: uiImage ?? .placeholderDog)
+    //            print("image set")
+    //        }
     
     
     var body: some View {
@@ -47,61 +48,97 @@ struct TinderView: View {
                     .ignoresSafeArea()
                     .scaleEffect(2)
                 ScrollViewReader{ proxy in
-                ScrollView(.horizontal) {
-                    LazyHStack{
-                        ForEach(dogs, id: \.self){ dog in
-                            VStack(alignment: .leading, spacing: 0){
+                    ScrollView(.horizontal) {
+                        LazyHStack{
+                            ForEach(dogs, id: \.self){ dog in
+                                VStack(alignment: .leading, spacing: 0){
                                     Text(dog.name)
-                                    .foregroundStyle(.white)
-                                    .font(.title)
-                                    .bold()
-                                    .padding(.horizontal, 5)
-                            TinderCardView(dog: dog)
-                                    .shadow(radius: 5)
-                                Text(breeds.joined(separator: " ‧ "))
-                                    .foregroundStyle(.white.opacity(0.8))
-                                    .font(.headline)
-                                    .padding(5)
+                                        .foregroundStyle(.white)
+                                        .font(.title)
+                                        .bold()
+                                        .padding(.horizontal, 5)
+                                    TinderCardView(dog: dog)
+                                        .shadow(radius: 5)
+                                    Text(breeds.joined(separator: " ‧ "))
+                                        .foregroundStyle(.white.opacity(0.8))
+                                        .font(.headline)
+                                        .padding(5)
                                 }
                                 .scrollTransition { content, phase in
                                     content.offset(y: phase.isIdentity ? 0.0 : 20)
                                         .opacity(phase.isIdentity ? 1 : 0.8)
                                     
                                 }
-                            
+                                
                                 .containerRelativeFrame(.horizontal, count: 1, spacing: 5)
-                            
-                        }
-                    }
-                    .scrollTargetLayout()
-                   
-                }
-                
-                
-                //.contentMargins(16, for: .scrollContent)
-                .scrollTargetBehavior(.viewAligned)
-                .scrollIndicators(.hidden)
-                .overlay {
-                    VStack{
-                        HStack{
-                            Spacer()
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .padding()
+                                
                             }
                         }
-                        Spacer()
+                        .scrollTargetLayout()
+                        
                     }
+                    
+                    
+                    //.contentMargins(16, for: .scrollContent)
+                    .scrollTargetBehavior(.viewAligned)
+                    .scrollIndicators(.hidden)
+                    .overlay {
+                        VStack{
+                            HStack{
+                                Spacer()
+                                Button {
+                                    dismiss()
+                                } label: {
+                                    Image(systemName: "xmark")
+                                        .padding()
+                                }
+                            }
+                            Spacer()
+                            if isVoiceOverEnabled {
+                                Button {
+                                    // The code you want to execute when you click the "Next Element"
+                                }
+                            label: {
+                                Text("Next Element")
+                                    .padding()
+                                    .background(Color.green)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                            .accessibilityRepresentation {
+                                Text("Next Element")
+                            }
+                            .accessibility(label: Text("Next element"))
+                            .accessibilityHint("Tap to navigate to the next element")
+                                Button {
+                                    // The code you want to execute when you click the "Previous Element"
+                                }
+                            label: {
+                                Text("Previous Element")
+                                    .padding()
+                                    .background(Color.green)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                            .accessibilityRepresentation {
+                                Text("Previous Element")
+                            }
+                                .accessibility(label: Text("Previous element"))
+                            .accessibilityHint("Tap to navigate to the Previous element")
+                            }
+                        }
+                    }
+                    .scrollPosition(id: $scrollPosition)
                 }
-                .scrollPosition(id: $scrollPosition)
             }
         }
-    }
+        .onReceive(NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)) { _ in
+            // Update the isVoiceOverEnabled state when the VoiceOver state changes
+            isVoiceOverEnabled = UIAccessibility.isVoiceOverRunning
+            
         }
+    }
 }
-
 #Preview {
     TinderView()
 }

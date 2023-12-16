@@ -51,7 +51,8 @@ struct OwnDogView: View {
                             .padding(.horizontal)
                             
                     })
-                    
+                    .accessibilityElement(children: .combine)
+                    .accessibility(label: Text("Photo of my dog"))
                 }
                 
                 LazyVStack(alignment: .leading){
