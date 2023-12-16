@@ -54,23 +54,17 @@ struct TinderView: View {
                         ForEach(dogs, id: \.self){ dog in
                             VStack(alignment: .leading, spacing: 0){
                                     Text(dog.name)
-                                        .font(.title)
+                                    .foregroundStyle(.white)
+                                    .font(.title)
                                     .bold()
                                     .padding(.horizontal, 5)
                             TinderCardView(dog: dog)
-                                    .shadow(radius: 10)
+                                    .shadow(radius: 5)
                                 Text(breeds.joined(separator: " ‧ "))
                                     .foregroundStyle(.white.opacity(0.8))
                                     .font(.headline)
                                     .padding(5)
                                 }
-                            .onChange(of: scrollPosition) {
-                                print(scrollPosition?.name)
-                               // render(dog: dog)
-                            }
-                            .onAppear{
-                               // render(dog: dog)
-                            }
                                 .scrollTransition { content, phase in
                                     content.offset(y: phase.isIdentity ? 0.0 : 20)
                                         .opacity(phase.isIdentity ? 1 : 0.8)
@@ -99,8 +93,6 @@ struct TinderView: View {
                                 Image(systemName: "xmark")
                                     .padding()
                             }
-                            
-                            
                         }
                         Spacer()
                     }

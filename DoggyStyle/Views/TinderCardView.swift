@@ -15,7 +15,7 @@ struct TinderCardView: View {
     
     var body: some View {
         
-        AsyncImage(url: urls.randomElement()) { phase in
+        AsyncImage(url: URL(string: dog.imageURLs.first ?? "https://wiki.dave.eu/images/4/47/Placeholder.png")) { phase in
             if let image = phase.image {
                 image
                     .resizable()
