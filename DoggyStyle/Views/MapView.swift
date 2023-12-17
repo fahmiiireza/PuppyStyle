@@ -10,11 +10,12 @@ import MapKit
 import Firebase
 
 struct MapView: View {
+    @State private var dogViewPresented = false
     @StateObject private var viewModel = MapViewModel()
     @State private var user = UserDataViewModel()
     @State var users : [Usert]
     @State private var position: MapCameraPosition = .automatic
-    @Bindable var backgroundLogic: BackgroundLogic
+    @Environment(\.dismiss) private var dismiss
 
     private let db = Firestore.firestore()
     
@@ -25,12 +26,17 @@ struct MapView: View {
                     if user.location!.city == "Napoli" { //We suppose to change it to user location
                         Annotation("Test", coordinate: CLLocationCoordinate2D(latitude: user.location!.latitude, longitude: user.location!.longitude)) {
                             
-                            ZStack {
+                            Button {
+                                dogViewPresented = true
+                            } label: {
                                 Image(systemName: "dog.fill")
                                     .resizable()
                                     .frame(width: 40,height: 40)
-                                .padding(5)
+                                    .padding(5)
                             }
+
+                                
+                            
                             
                         }
                         .annotationTitles(.hidden)
@@ -44,13 +50,34 @@ struct MapView: View {
             }
                 
         }
-        .safeAreaInset(edge: .bottom, content: {
-                Button {
-                    backgroundLogic.mapPresented = false
-                } label: {
-                    Text("Dismiss")
-                }
+        .fullScreenCover(isPresented: $dogViewPresented, content: {
+            //Replace with actual View
+            Text("StrangerDogView")
+                .overlay(alignment: .topTrailing, content: {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .padding(5)
+                            .background(.regularMaterial)
+                            .clipShape(Circle())
+                            .padding(10)
+                    }
+                })
+                
         })
+        .overlay(alignment: .topTrailing, content: {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .padding(5)
+                    .background(.regularMaterial)
+                    .clipShape(Circle())
+                    .padding(10)
+            }
+        })
+        
         .task {
             await viewModel.checkIfLocationServiceIsEnabled()
 //            fetchUserSameCity()

@@ -217,7 +217,7 @@ struct SearchView: View {
                 MapView(users: [
                     Usert(id: "1", firstName: "Test", LastName: "Test", location: Location(city: "Napoli", longitude: 14.30614, latitude: 40.83661), email: "test@gmail.com", telNumber: "090808", withGoogle: false),
                     Usert(id: "2", firstName: "Test", LastName: "Test", location: Location(city: "Napoli", longitude: 14.317074635769162, latitude: 40.839569091796875), email: "test2@gmail.com", telNumber: "090808", withGoogle: false)
-                ],backgroundLogic: BackgroundLogic())
+                ])
 //                    .overlay {
 //                        Button {
 //                            backgroundLogic.mapPresented = false
