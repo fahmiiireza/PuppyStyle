@@ -46,6 +46,7 @@ struct SearchView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .clipShape(Circle())
                                 .frame(height: 35)
+                                .accessibilityLabel("Manage Profile")
                         })
                         
                         
@@ -80,6 +81,7 @@ struct SearchView: View {
                                     .foregroundStyle(.secondary)
                                     .padding(.horizontal, 25)
                                     .allowsHitTesting(false)
+                                    .accessibilityHidden(true)
                                 }
                             }
                             Button(action: {
@@ -99,6 +101,7 @@ struct SearchView: View {
                         TextField(text: $searchText) {
                             
                         }
+                        .accessibilityLabel("Search by Breeds")
                         .autocorrectionDisabled()
                         .matchedGeometryEffect(id: "SearchBar", in: searchAnimation)
                         .padding(10)
@@ -114,6 +117,8 @@ struct SearchView: View {
                                 .foregroundStyle(.secondary)
                                 .padding(.horizontal, 25)
                                 .allowsHitTesting(false)
+                                .accessibilityHidden(true)
+                                
                             }
                         }
                         .onTapGesture {
@@ -149,6 +154,7 @@ struct SearchView: View {
                             }
                             .padding(.leading)
                     })
+                    .accessibilityLabel("Explore Dogs from all Breeds")
                     Button(action: {
                         backgroundLogic.mapPresented = true
                     }, label: {
@@ -171,6 +177,7 @@ struct SearchView: View {
                             }
                             .padding(.trailing)
                     })
+                    .accessibilityLabel("Search Dogs on the Map")
                 }
                 LazyVGrid(columns: layout, content: {
                     
@@ -235,8 +242,14 @@ struct SearchView: View {
                 
                 //handle if User is signed in
                 if (user != nil) {
-                    //if user is Signed in:
-                    OwnAccountView(user: $user)
+                    
+                    if backgroundLogic.userJustSignedUp{
+                        CreateAccountView()
+                    }else{
+                        //if user is Signed in:
+                        OwnAccountView(user: $user)
+                    }
+                    
                     
                 } else {
                     //if user not signed in:

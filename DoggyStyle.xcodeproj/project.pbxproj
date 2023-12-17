@@ -115,14 +115,14 @@
 				4DB0AA502B2131F900E08AAE /* MainView.swift */,
 				4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */,
 				4D52DD142B2E3F840018322F /* CreateAccountView.swift */,
+				4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */,
+				4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */,
 				4D52DD122B2E3A7F0018322F /* StrangerDogView.swift */,
 				4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */,
 				4DB0AA4E2B2131F900E08AAE /* MyDogsView.swift */,
 				4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */,
-				4D68AF0E2B2674BD00BAAEAD /* ImageCropperView.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
 				4DB0AA662B22669F00E08AAE /* SignUpView.swift */,
-				4D68AF0A2B24EECE00BAAEAD /* OwnAccountView.swift */,
 				58FD5E292B2CA1C40026B6F3 /* NoNetworkView.swift */,
 			);
 			path = Views;

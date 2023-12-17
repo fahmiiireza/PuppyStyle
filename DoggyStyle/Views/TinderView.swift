@@ -61,20 +61,26 @@ struct TinderView: View {
                                         .font(.title)
                                         .bold()
                                         .padding(.horizontal, 5)
+                                        .accessibilitySortPriority(10)
                                     
                                     Button {
                                         selectedDog = dog
                                         dogViewPresented = true
                                     } label: {
                                         TinderCardView(dog: dog)
+                                            
+                                            .accessibilitySortPriority(9)
                                     }
+                                    .accessibilityLabel("Details about this Dog")
 
                                 
                                     Text(breeds.joined(separator: " ‧ "))
                                         .foregroundStyle(.white.opacity(0.8))
                                         .font(.headline)
                                         .padding(5)
+                                        .accessibilitySortPriority(8)
                                     }
+                                    .accessibilityElement(children: .contain)
                                     .scrollTransition { content, phase in
                                         content.offset(y: phase.isIdentity ? 0.0 : 20)
                                             .opacity(phase.isIdentity ? 1 : 0.8)

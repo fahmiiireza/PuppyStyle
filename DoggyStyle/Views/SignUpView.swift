@@ -17,12 +17,14 @@ enum FocusedField {
 
 struct SignUpView: View {
     let db = Firestore.firestore()
-
+    
     // Inject the AuthenticationViewModel as an environment object
+    @Environment(BackgroundLogic.self) private var backgroundLogic
     @EnvironmentObject var viewModel: AuthenticationViewModel
     @FocusState private var focusField: FocusedField?
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
+    @State private var passwordTooShort = false
     @State private var showButton = false
     @State private var accountExists = true
     @State private var chosenEmail = false
@@ -41,38 +43,12 @@ struct SignUpView: View {
             }
         }
     }
-
+    
     
     var body: some View {
         
         NavigationStack {
             VStack {
-                
-//                HStack {
-//                    
-//                    Button(action: {
-//                        signingUp = true
-//                    }, label: {
-//                        Text("Sign Up")
-//                            .foregroundStyle(signingUp ? Color.primary : Color.gray)
-//                            .font(.title)
-//                            .bold()
-//                    })
-//                    
-//                    Text("|")
-//                        .font(.title)
-//                        .bold()
-//                    
-//                    Button(action: {
-//                        signingUp = false
-//                    }, label: {
-//                        Text("Log In")
-//                            .foregroundStyle(signingUp ? Color.gray : Color.primary)
-//                            .font(.title)
-//                            .bold()
-//                    })
-//                    
-//                }
                 
                 Image("Appicon")
                     .resizable()
@@ -81,6 +57,7 @@ struct SignUpView: View {
                         size * 0.2
                     }
                     .clipShape(Circle())
+                    .accessibilityHidden(true)
                 
                 Text("Sign up or Log in")
                     .font(.largeTitle)
@@ -91,14 +68,6 @@ struct SignUpView: View {
                 
                 HStack{
                     VStack(alignment: .leading){
-                        
-//                        if signingUp{
-//                            Text("Sign up with E-Mail")
-//                                .font(.headline)
-//                        }else{
-//                            Text("Log in with E-Mail")
-//                                .font(.headline)
-//                        }
                         Button {
                             withAnimation {
                                 chosenEmail.toggle()
@@ -126,13 +95,14 @@ struct SignUpView: View {
                                 .frame(height: 50)
                             }
                         }
-
+                        
                         
                         if chosenEmail{
                             
-                            Text("Type in your E-Mail")
+                            Text("Sign in to your account or Create a new one")
                                 .font(.caption)
                                 .padding(.top)
+                                .accessibilityHidden(true)
                             
                             TextField("E-Mail", text: $mail)
                                 .focused($focusField, equals: .mail)
@@ -147,7 +117,7 @@ struct SignUpView: View {
                                 .onSubmit() {
                                     focusField = .password
                                 }
-                                
+                            
                                 .onChange(of: focusField, initial: false) {
                                     if focusField != .mail{
                                         db.collection("user").whereField("email", isEqualTo: mail.lowercased())
@@ -172,7 +142,7 @@ struct SignUpView: View {
                                                         }
                                                         
                                                         for document in querySnapshot!.documents {
-                                                          
+                                                            
                                                         }
                                                     }
                                                 }
@@ -180,7 +150,10 @@ struct SignUpView: View {
                                         
                                     }
                                 }
-                            
+//                            Text(accountExists ? "Create a Password (min. 6 characters)" : "Type in your Password")
+//                                .accessibilityHidden(true)
+//                                .font(.caption)
+//                                .padding(.top)
                             SecureField("Password", text: $password)
                                 .focused($focusField, equals: .password)
                                 .textFieldStyle(.plain)
@@ -202,8 +175,8 @@ struct SignUpView: View {
                                         }
                                     }
                                     
-                                        //check if correct and sign in
-                                        
+                                    //check if correct and sign in
+                                    
                                     
                                 }
                             
@@ -226,14 +199,14 @@ struct SignUpView: View {
                                             }
                                         }
                                         viewModel.createUser(email: mail, fromGoogle: false)
-
+                                        
                                         print("Signed Up")
                                         dismiss.callAsFunction()
                                     }
                             }
                             
                             if accountExists && !password.isEmpty{
-                                Button("Log in"){
+                                Button{
                                     Auth.auth().signIn(withEmail: mail.lowercased(), password: password) { authResult, error in
                                         if let err = error {
                                             print(err.localizedDescription)
@@ -242,28 +215,71 @@ struct SignUpView: View {
                                             dismiss()
                                         }
                                     }
+                                }label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundStyle(Color.white)
+                                            .frame(height: 50)
+                                            .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
+                                        
+                                        Text("Log In")
+                                            .font(.headline)
+                                            .foregroundStyle(Color.black)
+                                            .padding(10)
+                                            .frame(height: 50)
+                                    }
                                 }
                                 
                             }else if !accountExists && !password.isEmpty && password == confirmedPassword{
-                                Button("Sign up using E-mail"){
-                                    Auth.auth().createUser(withEmail: mail.lowercased(), password: password) { authResult, error in
-                                        if let err = error {
-                                            errorSigningUp = true
-                                            print(err.localizedDescription)
-                                            errorText = err.localizedDescription
-                                        } else {
-                                            print(authResult ?? "test")
-                                            dismiss()
+                                Button{
+                                    if password.count > 5 && !mail.isEmpty{
+                                        Auth.auth().createUser(withEmail: mail.lowercased(), password: password) { authResult, error in
+                                            if let err = error {
+                                                errorSigningUp = true
+                                                print(err.localizedDescription)
+                                                errorText = err.localizedDescription
+                                            } else {
+                                                print(authResult ?? "test")
+                                                
+                                                
+                                            }
                                         }
+                                        viewModel.createUser(email: mail.lowercased(), fromGoogle: false)
+                                        withAnimation {
+                                            backgroundLogic.userJustSignedUp = true
+                                        }
+                                        
+                                    }else{
+                                        passwordTooShort = true
                                     }
-                                    viewModel.createUser(email: mail.lowercased(), fromGoogle: false)
-
+                                    
+                                }label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundStyle(Color.white)
+                                            .frame(height: 50)
+                                            .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
+                                        
+                                        Text("Create new account")
+                                            .font(.headline)
+                                            .foregroundStyle(Color.black)
+                                            .padding(10)
+                                            .frame(height: 50)
+                                    }
                                 }
                                 .alert(errorText, isPresented: $errorSigningUp) {
                                     Button("Choose different E-Mail", role: .cancel){
                                         
                                     }
                                 }
+                                .alert("Password too short", isPresented: $passwordTooShort) {
+                                    Button("Choose a different Password", role: .cancel) {
+                                        
+                                    }
+                                } message: {
+                                    Text("Your password must contain at least 6 Characters")
+                                }
+                                
                             }
                         }
                         
@@ -276,26 +292,26 @@ struct SignUpView: View {
                         }
                         
                         //Sign in with Google Button
-                            Button(action: signInWithGoogle , label: {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .frame(height: 50)
-                                        .foregroundStyle(Color.white)
-                                        .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
-                                    
-                                    HStack{
-                                        Image("Google")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                        Text("Continue with Google")
-                                            .font(.headline)
-                                            .foregroundStyle(Color.black)
-                                        Spacer()
-                                    }
-                                    .padding(10)
+                        Button(action: signInWithGoogle , label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
                                     .frame(height: 50)
+                                    .foregroundStyle(Color.white)
+                                    .shadow(color: colorScheme == .dark ? Color.clear : Color.gray.opacity(0.4), radius: 5)
+                                
+                                HStack{
+                                    Image("Google")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                    Text("Continue with Google")
+                                        .font(.headline)
+                                        .foregroundStyle(Color.black)
+                                    Spacer()
                                 }
-                            })
+                                .padding(10)
+                                .frame(height: 50)
+                            }
+                        })
                         
                         
                         
@@ -306,27 +322,27 @@ struct SignUpView: View {
                 }
                 //Spacer()
                 
-//                if signingUp{
-//                    Text("Already have an account?")
-//                    
-//                    Button(action: {
-//                        signingUp = false
-//                    }, label: {
-//                        Text("Sign In")
-//                            .underline()
-//                    })
-//                    .padding(.bottom)
-//                }else{
-//                    Text("Don't have an account yet?")
-//                    
-//                    Button(action: {
-//                        signingUp = true
-//                    }, label: {
-//                        Text("Sign Up")
-//                            .underline()
-//                    })
-//                    .padding(.bottom)
-//                }
+                //                if signingUp{
+                //                    Text("Already have an account?")
+                //
+                //                    Button(action: {
+                //                        signingUp = false
+                //                    }, label: {
+                //                        Text("Sign In")
+                //                            .underline()
+                //                    })
+                //                    .padding(.bottom)
+                //                }else{
+                //                    Text("Don't have an account yet?")
+                //
+                //                    Button(action: {
+                //                        signingUp = true
+                //                    }, label: {
+                //                        Text("Sign Up")
+                //                            .underline()
+                //                    })
+                //                    .padding(.bottom)
+                //                }
                 
                 
                 
@@ -337,36 +353,6 @@ struct SignUpView: View {
                     Button("Cancel") {
                         dismiss.callAsFunction()
                     }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        if signingUp {
-                            Auth.auth().createUser(withEmail: mail, password: password) { authResult, error in
-                                if let err = error {
-                                    print(err.localizedDescription)
-                                } else {
-                                    print(authResult ?? "test")
-                                }
-                            }
-                            //set the user data with only email whn first signing up
-                             viewModel.createUser(email: mail, fromGoogle: false)
-                        } else {
-                            Auth.auth().signIn(withEmail: mail, password: password) { authResult, error in
-                                if let err = error {
-                                    print(err)
-                                } else {
-                                    print(authResult ?? "test")
-                                }
-                            }
-                            
-                        }
-                        dismiss.callAsFunction()
-                    }label: {
-                        Text(signingUp ? "Sign Up" : "Sign In")
-                            .bold()
-                            
-                    }
-                    .disabled(mail.isEmpty || password.isEmpty || confirmedPassword.isEmpty)
                 }
             })
             .padding(.top)
