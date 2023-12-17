@@ -65,7 +65,7 @@ struct StrangerDogView: View {
                             Text(userDataViewModel.currentUser?.firstName ?? "")
                                 .font(.title2)
                                 .bold()
-                            Text("📍\(userDataViewModel.currentUser?.location ?? "No Location Found")")
+//                            Text("📍\(userDataViewModel.currentUser?.location ?? "No Location Found")")
                         }
                         Spacer()
                     }
