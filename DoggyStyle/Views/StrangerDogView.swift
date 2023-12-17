@@ -52,7 +52,6 @@ struct StrangerDogView: View {
                         
                     })
                     HStack(){
-                        PhotosPicker(selection: $photosPickerItem, matching: .images) {
                             Image(uiImage: profilePicture ?? .placeholderDog)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -60,7 +59,7 @@ struct StrangerDogView: View {
                                 .clipShape(Circle())
                             
                             
-                        }
+                        
                         VStack(alignment: .leading, spacing: 0){
                             Text(userDataViewModel.currentUser?.firstName ?? "")
                                 .font(.title2)
@@ -69,6 +68,7 @@ struct StrangerDogView: View {
                         }
                         Spacer()
                     }
+                    .padding()
                 }
                 
                 VStack(alignment: .leading){
