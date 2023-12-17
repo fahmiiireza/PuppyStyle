@@ -154,6 +154,7 @@ struct SearchView: View {
                     }, label: {
                         Image(.maps)
                             .resizable()
+                            .aspectRatio(contentMode: .fill)
                             .containerRelativeFrame(.vertical){size, _ in
                                 horizontalSizeClass == .compact ? size * 0.2 : size * 0.25
                             }

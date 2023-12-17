@@ -50,7 +50,7 @@ struct TinderView: View {
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .blur(radius: 50)
                         .ignoresSafeArea()
-                        .scaleEffect(2)
+                        .scaleEffect(2.5)
                     ScrollViewReader{ proxy in
                     ScrollView(.horizontal) {
                         LazyHStack{
@@ -86,6 +86,9 @@ struct TinderView: View {
                             }
                         }
                         .scrollTargetLayout()
+                        .onAppear{
+                            selectedDog = dogs[0] 
+                        }
                        
                     }
                     
@@ -99,6 +102,7 @@ struct TinderView: View {
                                 dismiss()
                             } label: {
                                 Image(systemName: "xmark")
+                                    .font(.callout)
                                     .padding(5)
                                     .background(.regularMaterial)
                                     .clipShape(Circle())
@@ -109,12 +113,13 @@ struct TinderView: View {
                     }
                     .scrollPosition(id: $scrollPosition)
                     .fullScreenCover(isPresented: $dogViewPresented, content: {
-                        StrangerDogView(user: $user, dog: selectedDog ?? Dog(imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                        StrangerDogView(user: $user, dog: selectedDog ?? Dog(imageNames: ["String"], name: "Not Found", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                     })
                     }
                 }
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
