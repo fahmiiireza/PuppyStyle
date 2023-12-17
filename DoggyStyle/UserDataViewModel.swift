@@ -10,21 +10,35 @@ import FirebaseFirestore
 import SwiftData
 import FirebaseAuth
 
+struct Location: Hashable {
+    let city: String
+    let longitude: Double
+    let latitude: Double
+}
+struct Usert: Hashable {
+    var id: String?
+    var firstName: String?
+    var LastName: String?
+    var location: Location?
+    var email: String?
+    var telNumber: String?
+    var withGoogle: Bool?
+}
 @Model
 class UserData {
     var id: String?
     var firstName: String?
     var LastName: String?
-    var location: String?
+//    var location: Location
     var email: String?
     var telNumber: String?
     var withGoogle: Bool?
     
-    init(id: String? = nil, firstName: String? = nil, LastName: String? = nil, location: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
+    init(id: String? = nil, firstName: String? = nil, LastName: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
         self.id = id
         self.firstName = firstName
         self.LastName = LastName
-        self.location = location
+//        self.location = location
         self.email = email
         self.telNumber = telNumber
         self.withGoogle = withGoogle
@@ -53,7 +67,7 @@ class UserDataViewModel: ObservableObject {
                     id: userID,
                     firstName: document["firstName"] as? String,
                     LastName: document["LastName"] as? String,
-                    location: document["location"] as? String,
+//                    location: document["location"] as? Location,
                     email: document["email"] as? String,
                     telNumber: document["telNumber"] as? String,
                     withGoogle: document["withGoogle"] as? Bool
