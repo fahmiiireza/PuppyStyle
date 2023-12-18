@@ -8,7 +8,7 @@
 
 import SwiftUI
 import FirebaseAuth
-
+import FirebaseFirestore
 
 struct CreateNewDogView: View {
     
@@ -16,6 +16,38 @@ struct CreateNewDogView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(BackgroundLogic.self) private var backgroundLogic
     @State var dog: Dog
+    
+    func saveDogToFirestore(dog: Dog) {
+        let db = Firestore.firestore()
+        let dogData: [String: Any] = [
+            "name": dog.name,
+            "gender": dog.gender,
+            "breed": dog.breed,
+            "age": dog.age,
+            "weight": dog.weight,
+            "size": dog.size,
+            "length": dog.length,
+            "allergies": dog.allergies,
+            "vaccination": dog.vaccination,
+            "chronicdeseases": dog.chronicdeseases,
+            "lastvetvisit": dog.lastvetvisit,
+            "energylevel": dog.energylevel,
+            "friendliness": dog.friendliness,
+            "travelinglevel": dog.travelinglevel,
+            "imageURLs": dog.imageURLs, // Assuming these are URLs of uploaded images
+            "user_id": Auth.auth().currentUser?.uid ?? "" // Set the user ID
+        ]
+
+        // Handle image uploading if necessary, then get URLs to store in Firestore
+
+        db.collection("dog").addDocument(data: dogData) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added with ID: \(dogData)")
+            }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -70,6 +102,7 @@ struct CreateNewDogView: View {
                     
                     ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
+                            saveDogToFirestore(dog: dog)
                             dog.imageData = backgroundLogic.imageDataArray
                             modelContext.insert(dog)
                             backgroundLogic.imageDataArray = []
@@ -88,6 +121,6 @@ struct CreateNewDogView: View {
 
 
 #Preview {
-    CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+    CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
         .environment(BackgroundLogic())
 }

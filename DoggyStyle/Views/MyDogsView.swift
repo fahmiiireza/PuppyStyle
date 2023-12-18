@@ -15,6 +15,17 @@ struct MyDogsView: View {
     @Bindable var backgroundLogic: BackgroundLogic
     @StateObject private var dogsViewModel = DogsViewModel()
     
+    func deleteDogFromFirestore(documentId: String) {
+        let db = Firestore.firestore()
+        db.collection("dog").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Dog removed")
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack(path: $backgroundLogic.path) {
             ScrollView{
@@ -28,8 +39,9 @@ struct MyDogsView: View {
                                 .contextMenu{
                                     Button("Remove Dog", role: .destructive){
                                         withAnimation(.linear){
-                                            try? modelContext.delete(dog)
-                                        }                                    }
+                                            if let documentId = dog.documentId {
+                                                   deleteDogFromFirestore(documentId: documentId)
+                                               }                                        }                                    }
                                 }
                                 .padding(.bottom)
                         }
@@ -43,7 +55,7 @@ struct MyDogsView: View {
             }.onAppear(perform: dogsViewModel.fetchDogs)
             .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
-                CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {

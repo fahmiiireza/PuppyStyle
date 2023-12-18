@@ -22,6 +22,7 @@ final class Item {
 @Model
 class Dog: Hashable{
     
+    var documentId: String? // Firestore document ID
     @Attribute(.externalStorage) var imageData: [Data] = []
     var imageURLs: [String] = []
     var name: String = "Test"
@@ -39,7 +40,8 @@ class Dog: Hashable{
     var friendliness: String = "not friendly"
     var travelinglevel: String = "what even is this?"
     
-    init(imageNames: [String], name: String, gender: String, breed: String, age: String, weight: String, size: String, allergies: String, vaccination: String, chronicdeseases: String, lastvetvisit: String, lenth: String, energylevel: String, friendliness: String, travelinglevel: String) {
+    init(documentId: String,imageNames: [String], name: String, gender: String, breed: String, age: String, weight: String, size: String, allergies: String, vaccination: String, chronicdeseases: String, lastvetvisit: String, lenth: String, energylevel: String, friendliness: String, travelinglevel: String) {
+        self.documentId = documentId
         self.imageURLs = imageNames
         self.name = name
         self.gender = gender
@@ -81,6 +83,7 @@ class DogsViewModel: ObservableObject {
                     let data = document.data()
 
                     let dog = Dog(
+                        documentId: data["documentId"] as? String ?? "",
                         imageNames: data["imageURLs"] as? [String] ?? [],
                         name: data["name"] as? String ?? "",
                         gender: data["gender"] as? String ?? "",
@@ -97,6 +100,7 @@ class DogsViewModel: ObservableObject {
                         friendliness: data["friendliness"] as? String ?? "",
                         travelinglevel: data["travelinglevel"] as? String ?? ""
                     )
+                    dog.documentId = document.documentID
                     fetchedDogs.append(dog)
                 }
                 DispatchQueue.main.async {

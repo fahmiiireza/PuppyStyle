@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct OwnDogView: View {
     
@@ -15,7 +16,16 @@ struct OwnDogView: View {
     
     var dog : Dog
     
-    
+    func deleteDogFromFirestore(documentId: String) {
+        let db = Firestore.firestore()
+        db.collection("dog").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Dog removed")
+            }
+        }
+    }
     
     var body: some View {
         
@@ -67,7 +77,7 @@ struct OwnDogView: View {
                         Text("Breed")
                             .font(.headline)
                         NavigationLink("Breed"){
-                            CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                            CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                         }
                         Text("Age")
                             .font(.headline)
@@ -123,7 +133,9 @@ struct OwnDogView: View {
                     }
                 .padding()
                 Button("Remove this Dog"){
-                    try? modelContext.delete(dog)
+                    if let documentId = dog.documentId {
+                           deleteDogFromFirestore(documentId: documentId)
+                       }
                     dismiss()
                 }
             }

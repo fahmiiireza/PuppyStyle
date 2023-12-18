@@ -46,7 +46,7 @@ struct TinderView: View {
                     //                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     //                    .overlay(VisualEffectBlur(blurStyle: .systemThinMaterialDark)) // You can change the blur style
                     
-                    TinderCardView( dog: (scrollPosition ?? dogs.first) ?? Dog(imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                    TinderCardView( dog: (scrollPosition ?? dogs.first) ?? Dog(documentId: "", imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .blur(radius: 50)
                         .ignoresSafeArea()
@@ -119,7 +119,7 @@ struct TinderView: View {
                     }
                     .scrollPosition(id: $scrollPosition)
                     .fullScreenCover(isPresented: $dogViewPresented, content: {
-                        StrangerDogView(user: $user, dog: selectedDog ?? Dog(imageNames: ["String"], name: "Not Found", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                        StrangerDogView(user: $user, dog: selectedDog ?? Dog(documentId: "", imageNames: ["String"], name: "Not Found", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
                     })
                     }
                 }
