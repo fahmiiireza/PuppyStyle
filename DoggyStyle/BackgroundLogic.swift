@@ -20,7 +20,7 @@ class BackgroundLogic{
     var imageDataArray: [Data] = []
     var imageStorage: [UIImage] = []
     var scrollPosition: Dog? = nil
-    var userJustSignedUp = false
+    var userJustSignedUp = true
     
 }
 
