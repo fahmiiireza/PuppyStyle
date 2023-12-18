@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */; };
+		297F22502B2FD69700CD54ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 297F224F2B2FD69700CD54ED /* GoogleService-Info.plist */; };
+		297F22522B2FD72700CD54ED /* TinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F22512B2FD72700CD54ED /* TinderViewModel.swift */; };
 		4D372DF82B2A13DF00AD2CA0 /* TinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */; };
 		4D372DFA2B2A441700AD2CA0 /* TinderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */; };
 		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
@@ -23,7 +25,6 @@
 		4DB0AA592B2131F900E08AAE /* CreateNewDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA532B2131F900E08AAE /* CreateNewDogView.swift */; };
 		4DB0AA5B2B2137CC00E08AAE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */; };
 		4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA662B22669F00E08AAE /* SignUpView.swift */; };
-		5803B63D2B2F4DB10088EEF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5803B63C2B2F4DB10088EEF4 /* GoogleService-Info.plist */; };
 		581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */; };
 		581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFD2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion */; };
 		581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFF2B1F824C004B7140 /* FirebaseAnalyticsSwift */; };
@@ -51,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataViewModel.swift; sourceTree = "<group>"; };
+		297F224F2B2FD69700CD54ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		297F22512B2FD72700CD54ED /* TinderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderViewModel.swift; sourceTree = "<group>"; };
 		4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderView.swift; sourceTree = "<group>"; };
 		4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinderCardView.swift; sourceTree = "<group>"; };
 		4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSearchingListView.swift; sourceTree = "<group>"; };
@@ -67,7 +70,6 @@
 		4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4DB0AA632B2264E700E08AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB0AA662B22669F00E08AAE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		5803B63C2B2F4DB10088EEF4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoggyStyle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoggyStyleApp.swift; sourceTree = "<group>"; };
 		5838B3ED2B1F7C3300E43B91 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 			children = (
 				5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */,
 				585614B42B2300FF00BF076A /* AuthenticationViewModel.swift */,
-				5803B63C2B2F4DB10088EEF4 /* GoogleService-Info.plist */,
+				297F224F2B2FD69700CD54ED /* GoogleService-Info.plist */,
 				294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */,
 				585614BD2B23022700BF076A /* RootViewController.swift */,
 				4DB0AA522B2131F900E08AAE /* BackgroundLogic.swift */,
@@ -177,6 +179,7 @@
 				5838B3F12B1F7C3400E43B91 /* Assets.xcassets */,
 				4DB0AA632B2264E700E08AAE /* Info.plist */,
 				5838B3F32B1F7C3400E43B91 /* Preview Content */,
+				297F22512B2FD72700CD54ED /* TinderViewModel.swift */,
 			);
 			path = DoggyStyle;
 			sourceTree = "<group>";
@@ -273,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5838B3F52B1F7C3400E43B91 /* Preview Assets.xcassets in Resources */,
-				5803B63D2B2F4DB10088EEF4 /* GoogleService-Info.plist in Resources */,
+				297F22502B2FD69700CD54ED /* GoogleService-Info.plist in Resources */,
 				5838B3F22B1F7C3400E43B91 /* Assets.xcassets in Resources */,
 				585E85A72B2B4E8800AB17BB /* (null) in Resources */,
 			);
@@ -288,6 +291,7 @@
 			files = (
 				585614B52B2300FF00BF076A /* AuthenticationViewModel.swift in Sources */,
 				294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */,
+				297F22522B2FD72700CD54ED /* TinderViewModel.swift in Sources */,
 				4DB0AA5B2B2137CC00E08AAE /* SearchView.swift in Sources */,
 				5838B3EE2B1F7C3300E43B91 /* ContentView.swift in Sources */,
 				4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */,

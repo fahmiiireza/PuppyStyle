@@ -20,7 +20,7 @@ final class Item {
 }
 
 @Model
-class Dog: Hashable{
+class Dog: Hashable {
     
     var documentId: String? // Firestore document ID
     @Attribute(.externalStorage) var imageData: [Data] = []

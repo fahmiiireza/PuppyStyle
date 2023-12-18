@@ -19,7 +19,7 @@ struct TinderView: View {
     
     @State private var user: User?
     @State private var scroPos: Int? = nil
-    @Query private var dogs: [Dog]
+    @StateObject private var tinderViewModel = TinderViewModel()
     @State private var bgImage = Image(.placeholderProfile)
     @State private var scrollPosition: Dog? = nil
     @State private var dogViewPresented = false
@@ -39,22 +39,25 @@ struct TinderView: View {
         NavigationStack{
             ZStack{
                 GeometryReader{ geometry in
-                    
                     //                Image(.affenpinscher) // Replace with your actual image
                     //                    .resizable()
                     //                    .aspectRatio(contentMode: .fill)
                     //                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     //                    .overlay(VisualEffectBlur(blurStyle: .systemThinMaterialDark)) // You can change the blur style
                     
-                    TinderCardView( dog: (scrollPosition ?? dogs.first) ?? Dog(documentId: "", imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                    TinderCardView( dog: (scrollPosition ?? tinderViewModel.dogs.first) ?? Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                        .onAppear {
+                            tinderViewModel.fetchOtherUsersDogs()
+                        }
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .blur(radius: 50)
                         .ignoresSafeArea()
                         .scaleEffect(2.5)
+
                     ScrollViewReader{ proxy in
                     ScrollView(.horizontal) {
                         LazyHStack{
-                            ForEach(dogs, id: \.self){ dog in
+                            ForEach(tinderViewModel.dogs, id: \.self){ dog in
                                 VStack(alignment: .leading, spacing: 0){
                                         Text(dog.name)
                                         .foregroundStyle(.white)
@@ -93,8 +96,9 @@ struct TinderView: View {
                         }
                         .scrollTargetLayout()
                         .onAppear{
-                            selectedDog = dogs[0] 
-                        }
+                            if !tinderViewModel.dogs.isEmpty {
+                                selectedDog = tinderViewModel.dogs[0]
+                            }                        }
                        
                     }
                     
