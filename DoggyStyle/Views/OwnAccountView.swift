@@ -55,9 +55,9 @@ struct OwnAccountView: View {
         }
     }
 
-    func updateUserProfilePictureUrl(_ url: String, forUser userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateUserProfilePictureUrl(_ url: String, forEmail: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
-        db.collection("user").document(userId).updateData(["profilePictureUrl": url]) { error in
+        db.collection("user").document(forEmail).updateData(["profilePictureUrl": url]) { error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -148,28 +148,16 @@ struct OwnAccountView: View {
         } message: {
             Text("If you cancel your changes will be discarded.")
         }
-//        .onChange(of: photosPickerItem) { _, _ in
-//            Task{
-//                if let photosPickerItem,
-//                   let data = try? await photosPickerItem.loadTransferable(type: Data.self){
-//                    if let image = UIImage(data: data){
-//                        profilePicture = image
-//                    }
-//                }
-//            }
-//        }
-//        
         .onChange(of: photosPickerItem) { _, _ in
             Task {
                 if let photosPickerItem = photosPickerItem,
                    let data = try? await photosPickerItem.loadTransferable(type: Data.self),
                    let image = UIImage(data: data),
-                   let userId = Auth.auth().currentUser?.uid {
-
-                    uploadProfileImage(image, forUser: userId) { result in
+                   let email = Auth.auth().currentUser?.email {
+                    uploadProfileImage(image, forUser: email) { result in
                         switch result {
                         case .success(let url):
-                            updateUserProfilePictureUrl(url, forUser: userId) { result in
+                            updateUserProfilePictureUrl(url, forEmail: email) { result in
                                 switch result {
                                 case .success():
                                     print("Profile picture updated successfully")
@@ -184,6 +172,7 @@ struct OwnAccountView: View {
                 }
             }
         }
+
 
         
         
