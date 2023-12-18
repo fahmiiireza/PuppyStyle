@@ -14,6 +14,8 @@ struct MyDogsView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var backgroundLogic: BackgroundLogic
     @StateObject private var dogsViewModel = DogsViewModel()
+    @State private var justLaunched = true
+    @State private var dummyVar = 0
     
     func deleteDogFromFirestore(documentId: String) {
         let db = Firestore.firestore()
@@ -52,7 +54,17 @@ struct MyDogsView: View {
                 }
 
 
-            }.onAppear(perform: dogsViewModel.fetchDogs)
+            }
+            .refreshable {
+                dogsViewModel.fetchDogs()
+            }
+            .onAppear{
+                if justLaunched{
+                    dogsViewModel.fetchDogs()
+                    justLaunched = false
+                }
+            }
+            
             .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
                 CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))

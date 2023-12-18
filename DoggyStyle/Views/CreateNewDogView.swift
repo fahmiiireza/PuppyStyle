@@ -18,6 +18,8 @@ struct CreateNewDogView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(BackgroundLogic.self) private var backgroundLogic
     @State var dog: Dog
+    @State private var createDisabled = true
+    
     
     func uploadImages(_ imageDataArray: [Data], completion: @escaping ([String]) -> Void) {
         let storageRef = Storage.storage().reference()
@@ -90,74 +92,85 @@ struct CreateNewDogView: View {
     
     var body: some View {
         NavigationStack {
-                List {
-                    Section {
-                        if backgroundLogic.imageDataArray.isEmpty{
-                            ImageCropperView(dog: dog)
-                        }else{
-                            Text("Images uploaded: \(backgroundLogic.imageDataArray.count)")
-                        }
-                    }
-                    
-                    Section(header: Text("General Information")) {
-                        TextField("Image URLS", text: $dog.imageURLs.first!)
-                        TextField("Name", text: $dog.name)
-                        Picker("Gender", selection: $dog.gender) {
-                            Text("Male").tag("Male")
-                            Text("Female").tag("Female")
-                        }
-                            
-                        TextField("Breed", text: $dog.breed)
-                        TextField("Age", text: $dog.age)
-                            .keyboardType(.numberPad)
-                        TextField("Weight", text: $dog.weight)
-                            .keyboardType(.decimalPad)
-                        TextField("Size", text: $dog.size)
-                            .keyboardType(.decimalPad)
-                        TextField("Lenth", text: $dog.length)
-                            .keyboardType(.decimalPad)
-                    }
-                    
-                    
-                    Section(header: Text("Medical Information")) {
-                        TextField("Allergies", text: $dog.allergies )
-                        TextField("Vaccination", text: $dog.vaccination )
-                        TextField("Chronic deseases", text: $dog.chronicdeseases )
-                        TextField("Last vet visit", text: $dog.lastvetvisit)
-                            .datePickerStyle(GraphicalDatePickerStyle())
-                    }
-                    Section(header: Text("Сharacter")) {
-                        TextField("Energy level", text: $dog.energylevel)
-                        TextField("Friendliness", text: $dog.friendliness)
-                        TextField("Traveling level", text: $dog.travelinglevel)
+            List {
+                Section {
+                    if backgroundLogic.imageDataArray.isEmpty{
+                        ImageCropperView(dog: dog)
+                    }else{
+                        Text("Images uploaded: \(backgroundLogic.imageDataArray.count)")
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss.callAsFunction()
-                        }
+                
+                Section(header: Text("General Information")) {
+                   // TextField("Image URLS", text: $dog.imageURLs.first!)
+                    TextField("Name", text: $dog.name)
+                    Picker("Gender", selection: $dog.gender) {
+                        Text("Male").tag("Male")
+                        Text("Female").tag("Female")
                     }
                     
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Done") {
-//                            saveDogToFirestore(dog: dog)
-//                            dog.imageData = backgroundLogic.imageDataArray
-//                            modelContext.insert(dog)
-//                            backgroundLogic.imageDataArray = []
-//                            dismiss()
-                            uploadImages(backgroundLogic.imageDataArray) { uploadedUrls in
-                                      var updatedDog = dog
-                                      updatedDog.imageURLs = uploadedUrls
-                                      saveDogToFirestore(dog: updatedDog)
-                                      backgroundLogic.imageDataArray.removeAll()
-                                      dismiss()
-                                  }
+                    TextField("Breed", text: $dog.breed)
+                    TextField("Age", text: $dog.age)
+                        .keyboardType(.numberPad)
+                    TextField("Weight", text: $dog.weight)
+                        .keyboardType(.decimalPad)
+                    TextField("Size", text: $dog.size)
+                        .keyboardType(.decimalPad)
+                    TextField("Lenth", text: $dog.length)
+                        .keyboardType(.decimalPad)
+                }
+                
+                
+                Section(header: Text("Medical Information")) {
+                    TextField("Allergies", text: $dog.allergies )
+                    TextField("Vaccination", text: $dog.vaccination )
+                    TextField("Chronic deseases", text: $dog.chronicdeseases )
+                    TextField("Last vet visit", text: $dog.lastvetvisit)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                Section(header: Text("Сharacter")) {
+                    TextField("Energy level", text: $dog.energylevel)
+                    TextField("Friendliness", text: $dog.friendliness)
+                    TextField("Traveling level", text: $dog.travelinglevel)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss.callAsFunction()
+                    }
+                    
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        //                            saveDogToFirestore(dog: dog)
+                        //                            dog.imageData = backgroundLogic.imageDataArray
+                        //                            modelContext.insert(dog)
+                        //                            backgroundLogic.imageDataArray = []
+                        //                            dismiss()
+                        uploadImages(backgroundLogic.imageDataArray) { uploadedUrls in
+                            var updatedDog = dog
+                            updatedDog.imageURLs = uploadedUrls
+                            saveDogToFirestore(dog: updatedDog)
+                            backgroundLogic.imageDataArray.removeAll()
+                            dismiss()
                         }
                     }
+                    .disabled(dog.allergies.isEmpty || dog.gender.isEmpty || dog.name.isEmpty || dog.lastvetvisit.isEmpty || dog.vaccination.isEmpty || dog.age.isEmpty || dog.length.isEmpty || dog.size.isEmpty || dog.weight.isEmpty || dog.breed.isEmpty)
+//                    .onChange(of: dog) {
+//                        if dog.allergies.isEmpty || dog.gender.isEmpty || dog.name.isEmpty || dog.lastvetvisit.isEmpty || dog.vaccination.isEmpty || dog.age.isEmpty || dog.length.isEmpty || dog.size.isEmpty || dog.weight.isEmpty || dog.breed.isEmpty {
+//                            
+//                            createDisabled = true
+//                        }else{
+//                            createDisabled = false
+//                        }
+//                    }
                 }
-                .navigationTitle("Create New Dog")
-                .navigationBarTitleDisplayMode(.inline)
+                
+            }
+            .navigationTitle("Create New Dog")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear{
             dog.gender = "male"
