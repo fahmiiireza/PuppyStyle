@@ -32,20 +32,20 @@ struct DoggyStyleApp: App {
     // register app delegate for Firebase setup
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-            Dog.self,
-            UserData.self
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+//    var sharedModelContainer: ModelContainer = {
+//        let schema = Schema([
+//            Item.self,
+//            Dog.self,
+//            UserData.self
+//        ])
+//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+//        
+//        do {
+//            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+//        } catch {
+//            fatalError("Could not create ModelContainer: \(error)")
+//        }
+//    }()
     
     @State private var backgroundLogic = BackgroundLogic()
     
@@ -57,7 +57,8 @@ struct DoggyStyleApp: App {
         .environment(backgroundLogic)
         .environmentObject(authenticationViewModel)
         .environmentObject(networkMonitor)
-        .modelContainer(sharedModelContainer)
+      //  .modelContainer(sharedModelContainer)
+        .modelContainer(for: [Dog.self, UserData.self])
 //       .modelContainer(for: Dog.self)
     }
 }

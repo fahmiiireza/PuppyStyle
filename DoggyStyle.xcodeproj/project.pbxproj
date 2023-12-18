@@ -26,6 +26,7 @@
 		4DB0AA5B2B2137CC00E08AAE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA5A2B2137CC00E08AAE /* SearchView.swift */; };
 		4DB0AA672B22669F00E08AAE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB0AA662B22669F00E08AAE /* SignUpView.swift */; };
 		4DF9DD5D2B307C8200F17783 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DF9DD5C2B307C8200F17783 /* GoogleService-Info.plist */; };
+		4DF9DD5F2B308DC600F17783 /* BreedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF9DD5E2B308DC600F17783 /* BreedSelectionView.swift */; };
 		581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */; };
 		581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFD2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion */; };
 		581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 581A4BFF2B1F824C004B7140 /* FirebaseAnalyticsSwift */; };
@@ -71,6 +72,7 @@
 		4DB0AA632B2264E700E08AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB0AA662B22669F00E08AAE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4DF9DD5C2B307C8200F17783 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4DF9DD5E2B308DC600F17783 /* BreedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedSelectionView.swift; sourceTree = "<group>"; };
 		5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoggyStyle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5838B3EB2B1F7C3300E43B91 /* DoggyStyleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoggyStyleApp.swift; sourceTree = "<group>"; };
 		5838B3ED2B1F7C3300E43B91 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				4DB0AA4F2B2131F900E08AAE /* OwnDogView.swift */,
 				5838B3ED2B1F7C3300E43B91 /* ContentView.swift */,
 				4DB0AA662B22669F00E08AAE /* SignUpView.swift */,
+				4DF9DD5E2B308DC600F17783 /* BreedSelectionView.swift */,
 				58FD5E292B2CA1C40026B6F3 /* NoNetworkView.swift */,
 			);
 			path = Views;
@@ -306,6 +309,7 @@
 				58FD5E2A2B2CA1C40026B6F3 /* NoNetworkView.swift in Sources */,
 				B899D4562B2205A000AD2A14 /* CreateDogsFile.swift in Sources */,
 				585E85A92B2B4F3600AB17BB /* MapView.swift in Sources */,
+				4DF9DD5F2B308DC600F17783 /* BreedSelectionView.swift in Sources */,
 				4D68AF0B2B24EECE00BAAEAD /* OwnAccountView.swift in Sources */,
 				58E2ADC52B274EBD00846CF6 /* DogImage.swift in Sources */,
 				4DB0AA572B2131F900E08AAE /* DogCardView.swift in Sources */,

@@ -63,6 +63,6 @@ struct TinderCardView: View {
     }
 }
 
-#Preview {
-    TinderCardView(dog: Dog(documentId: "", imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
-}
+//#Preview {
+//    TinderCardView(dog: Dog(documentId: "", imageNames: ["String"], name: "Nalu", gender: "", breed: "", age: "12", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+//}

@@ -13,7 +13,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct CreateNewDogView: View {
-    
+    @State private var breeds: [String] = []
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(BackgroundLogic.self) private var backgroundLogic
@@ -59,7 +59,7 @@ struct CreateNewDogView: View {
         var dogData: [String: Any] = [
             "name": dog.name,
             "gender": dog.gender,
-            "breed": dog.breed,
+            "breed": breeds.joined(separator: " ‧ "),
             "age": dog.age,
             "weight": dog.weight,
             "size": dog.size,
@@ -109,7 +109,13 @@ struct CreateNewDogView: View {
                         Text("Female").tag("Female")
                     }
                     
-                    TextField("Breed", text: $dog.breed)
+                    NavigationLink {
+                        BreedSelectionView(selectedBreeds: $breeds)
+                    } label: {
+                        Text(breeds.isEmpty ? "Choose Breeds" : breeds.joined(separator: " ‧ "))
+                            .foregroundStyle(breeds.isEmpty ? .accent : .primary)
+                    }
+
                     TextField("Age", text: $dog.age)
                         .keyboardType(.numberPad)
                     TextField("Weight", text: $dog.weight)
