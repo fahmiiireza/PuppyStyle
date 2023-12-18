@@ -13,6 +13,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct CreateNewDogView: View {
+    @Binding var newlyCreated: Bool
     @State private var breeds: [String] = []
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -161,6 +162,8 @@ struct CreateNewDogView: View {
                             saveDogToFirestore(dog: updatedDog)
                             backgroundLogic.imageDataArray.removeAll()
                             dismiss()
+                            newlyCreated = true
+                            
                         }
                     }
                     .disabled(dog.allergies.isEmpty || dog.gender.isEmpty || dog.name.isEmpty || dog.lastvetvisit.isEmpty || dog.vaccination.isEmpty || dog.age.isEmpty || dog.length.isEmpty || dog.size.isEmpty || dog.weight.isEmpty || dog.breed.isEmpty)
@@ -181,11 +184,14 @@ struct CreateNewDogView: View {
         .onAppear{
             dog.gender = "male"
         }
+        .onChange(of: breeds) {
+            dog.breed = breeds.joined(separator: " ‧ ")
+        }
     }
 }
 
 
-#Preview {
-    CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
-        .environment(BackgroundLogic())
-}
+//#Preview {
+//    CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+//        .environment(BackgroundLogic())
+//}

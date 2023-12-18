@@ -85,9 +85,9 @@ struct OwnDogView: View {
                     VStack(alignment: .leading){
                         Text("Breed")
                             .font(.headline)
-                        NavigationLink("Breed"){
-                            CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
-                        }
+                        Text(dog.breed)
+                            .foregroundStyle(.secondary)
+                            .font(.callout)
                         Text("Age")
                             .font(.headline)
                         Text(dog.age)

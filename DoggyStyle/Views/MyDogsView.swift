@@ -10,7 +10,8 @@ import SwiftData
 import FirebaseFirestore
 
 struct MyDogsView: View {
-    
+    @State private var newlyCreated = false
+    @State private var counter = 0
     @Environment(\.modelContext) private var modelContext
     @Bindable var backgroundLogic: BackgroundLogic
     @StateObject private var dogsViewModel = DogsViewModel()
@@ -27,7 +28,7 @@ struct MyDogsView: View {
             }
         }
     }
-
+    
     var body: some View {
         NavigationStack(path: $backgroundLogic.path) {
             ScrollView{
@@ -42,8 +43,8 @@ struct MyDogsView: View {
                                     Button("Remove Dog", role: .destructive){
                                         withAnimation(.linear){
                                             if let documentId = dog.documentId {
-                                                   deleteDogFromFirestore(documentId: documentId)
-                                               }                                        }                                    }
+                                                deleteDogFromFirestore(documentId: documentId)
+                                            }                                        }                                    }
                                 }
                                 .padding(.bottom)
                         }
@@ -52,8 +53,8 @@ struct MyDogsView: View {
                 }else{
                     Text("No Dogs yet")
                 }
-
-
+                
+                
             }
             .refreshable {
                 dogsViewModel.fetchDogs()
@@ -64,10 +65,15 @@ struct MyDogsView: View {
                     justLaunched = false
                 }
             }
+            .onChange(of: newlyCreated) {
+                dogsViewModel.fetchDogs()
+                newlyCreated = false
+            }
             
             .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
-                CreateNewDogView(dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                CreateNewDogView(newlyCreated: $newlyCreated, dog: Dog(documentId: "", imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
+                
             })
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
