@@ -9,8 +9,15 @@ import SwiftUI
 import FirebaseAuth
 import PhotosUI
 import FirebaseFirestore
+import FirebaseStorage
 
 struct OwnAccountView: View {
+    
+    enum ImageUploadError: Error {
+        case imageConversionFailed
+        case uploadFailed
+        case urlRetrievalFailed
+    }
     
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -24,6 +31,41 @@ struct OwnAccountView: View {
     @Binding var user: User?
   //  @Bindable var specificUser: UserData
     
+    func uploadProfileImage(_ image: UIImage, forUser userId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            completion(.failure(ImageUploadError.imageConversionFailed))
+            return
+        }
+
+        let storageRef = Storage.storage().reference().child("profile_images/\(userId).jpg")
+
+        storageRef.putData(imageData, metadata: nil) { metadata, error in
+            guard metadata != nil else {
+                completion(.failure(error ?? ImageUploadError.uploadFailed))
+                return
+            }
+
+            storageRef.downloadURL { url, error in
+                if let url = url {
+                    completion(.success(url.absoluteString))
+                } else {
+                    completion(.failure(error ?? ImageUploadError.urlRetrievalFailed))
+                }
+            }
+        }
+    }
+
+    func updateUserProfilePictureUrl(_ url: String, forUser userId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("user").document(userId).updateData(["profilePictureUrl": url]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
     var body: some View {
         
         NavigationStack{
@@ -31,14 +73,28 @@ struct OwnAccountView: View {
                 Section{
                     HStack(){
                         PhotosPicker(selection: $photosPickerItem, matching: .images) {
-                            Image(uiImage: profilePicture ?? .placeholderDog)
-                                .resizable()
-                               .aspectRatio(contentMode: .fill)
-                                .frame(width: 70, height: 70)
-                                .clipShape(Circle())
-                                
-                                
+                            if let profilePictureUrl = userDataViewModel.currentUser?.profilePictureUrl, let url = URL(string: profilePictureUrl) {
+                                AsyncImage(url: url) { imagePhase in
+                                    switch imagePhase {
+                                    case .empty:
+                                        ProgressView()
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                    case .failure:
+                                        Image(uiImage: .placeholderDog)
+                                    @unknown default:
+                                        EmptyView()
+                                    }
+                                }
+                            } else {
+                                Image(uiImage: .placeholderDog)
+                            }
                         }
+                        .frame(width: 70, height: 70)
+                        .clipShape(Circle())
+                        
                         VStack(alignment: .leading, spacing: 0){
                             Text(userDataViewModel.currentUser?.firstName ?? "")
                                 .font(.title2)
@@ -92,17 +148,43 @@ struct OwnAccountView: View {
         } message: {
             Text("If you cancel your changes will be discarded.")
         }
+//        .onChange(of: photosPickerItem) { _, _ in
+//            Task{
+//                if let photosPickerItem,
+//                   let data = try? await photosPickerItem.loadTransferable(type: Data.self){
+//                    if let image = UIImage(data: data){
+//                        profilePicture = image
+//                    }
+//                }
+//            }
+//        }
+//        
         .onChange(of: photosPickerItem) { _, _ in
-            Task{
-                if let photosPickerItem,
-                   let data = try? await photosPickerItem.loadTransferable(type: Data.self){
-                    if let image = UIImage(data: data){
-                        profilePicture = image
+            Task {
+                if let photosPickerItem = photosPickerItem,
+                   let data = try? await photosPickerItem.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data),
+                   let userId = Auth.auth().currentUser?.uid {
+
+                    uploadProfileImage(image, forUser: userId) { result in
+                        switch result {
+                        case .success(let url):
+                            updateUserProfilePictureUrl(url, forUser: userId) { result in
+                                switch result {
+                                case .success():
+                                    print("Profile picture updated successfully")
+                                case .failure(let error):
+                                    print("Error updating profile picture URL: \(error.localizedDescription)")
+                                }
+                            }
+                        case .failure(let error):
+                            print("Error uploading profile picture: \(error.localizedDescription)")
+                        }
                     }
                 }
             }
         }
-        
+
         
         
         VStack{

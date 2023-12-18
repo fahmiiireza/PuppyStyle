@@ -33,8 +33,10 @@ class UserData {
     var email: String?
     var telNumber: String?
     var withGoogle: Bool?
+    var profilePictureUrl: String? // New field for the profile picture URL
+
     
-    init(id: String? = nil, firstName: String? = nil, LastName: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
+    init(id: String? = nil, firstName: String? = nil, LastName: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil, profilePictureUrl: String? = nil) {
         self.id = id
         self.firstName = firstName
         self.LastName = LastName
@@ -42,6 +44,8 @@ class UserData {
         self.email = email
         self.telNumber = telNumber
         self.withGoogle = withGoogle
+        self.profilePictureUrl = profilePictureUrl
+
     }
 }
 class UserDataViewModel: ObservableObject {
@@ -61,8 +65,8 @@ class UserDataViewModel: ObservableObject {
             }
 
             if let document = snapshot?.documents.first {
+                let profilePictureUrl = document["profilePictureUrl"] as? String
                 let userID = document.documentID
-                print("User ID: \(userID)")
                 self.currentUser = UserData(
                     id: userID,
                     firstName: document["firstName"] as? String,
@@ -70,7 +74,9 @@ class UserDataViewModel: ObservableObject {
 //                    location: document["location"] as? Location,
                     email: document["email"] as? String,
                     telNumber: document["telNumber"] as? String,
-                    withGoogle: document["withGoogle"] as? Bool
+                    withGoogle: document["withGoogle"] as? Bool,
+                    profilePictureUrl: profilePictureUrl
+
                 )
             }
         }
