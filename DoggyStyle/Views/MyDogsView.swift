@@ -7,19 +7,20 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFirestore
 
 struct MyDogsView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Bindable var backgroundLogic: BackgroundLogic
-    @Query private var dogs: [Dog]
+    @StateObject private var dogsViewModel = DogsViewModel()
     
     var body: some View {
         NavigationStack(path: $backgroundLogic.path) {
             ScrollView{
                 
-                if !dogs.isEmpty{
-                    ForEach(dogs){ dog in
+                if !dogsViewModel.dogs.isEmpty{
+                    ForEach(dogsViewModel.dogs, id: \.self){ dog in
                         NavigationLink {
                             OwnDogView(backgroundLogic: backgroundLogic, dog: dog)
                         } label: {
@@ -38,7 +39,8 @@ struct MyDogsView: View {
                     Text("No Dogs yet")
                 }
 
-            }
+
+            }.onAppear(perform: dogsViewModel.fetchDogs)
             .contentMargins(20, for: .scrollContent)
             .sheet(isPresented: $backgroundLogic.addDogSheetPresented, content: {
                 CreateNewDogView(dog: Dog(imageNames: [""], name: "", gender: "", breed: "", age: "", weight: "", size: "", allergies: "", vaccination: "", chronicdeseases: "", lastvetvisit: "", lenth: "", energylevel: "", friendliness: "", travelinglevel: ""))
@@ -52,7 +54,7 @@ struct MyDogsView: View {
                     })
                 }
             })
-            .navigationTitle(Text(dogs.count > 1 ? "My Dogs" : "My Dog"))
+            .navigationTitle(Text(dogsViewModel.dogs.count > 1 ? "My Dogs" : "My Dog"))
         }
     }
 }

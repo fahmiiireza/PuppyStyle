@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftData
+import FirebaseFirestore
+import FirebaseAuth
 
 @Model
 final class Item {
@@ -56,22 +58,51 @@ class Dog: Hashable{
     }
 }
 
-//@Model
-//class UserData{
-//    
-//    var firstName: String?
-//    var LastName: String?
-//    var location: String?
-//    var email: String?
-//    var telNumber: String?
-//    var withGoogle: Bool?
-//    
-//    init(firstName: String? = nil, LastName: String? = nil, location: String? = nil, email: String? = nil, telNumber: String? = nil, withGoogle: Bool? = nil) {
-//        self.firstName = firstName
-//        self.LastName = LastName
-//        self.location = location
-//        self.email = email
-//        self.telNumber = telNumber
-//        self.withGoogle = withGoogle
-//    }
-//}
+class DogsViewModel: ObservableObject {
+    @Published var dogs: [Dog] = []
+    let currentUserId = Auth.auth().currentUser?.uid
+
+    private let db = Firestore.firestore()
+
+    func fetchDogs() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            print("No current user found")
+            return
+        }
+        db.collection("dog")
+            .whereField("user_id", isEqualTo: currentUserId)
+            .getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+            print("ahaa", currentUserId)
+                var fetchedDogs: [Dog] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+
+                    let dog = Dog(
+                        imageNames: data["imageURLs"] as? [String] ?? [],
+                        name: data["name"] as? String ?? "",
+                        gender: data["gender"] as? String ?? "",
+                        breed: data["breed"] as? String ?? "",
+                        age: data["age"] as? String ?? "",
+                        weight: data["weight"] as? String ?? "",
+                        size: data["size"] as? String ?? "",
+                        allergies: data["allergies"] as? String ?? "",
+                        vaccination: data["vaccination"] as? String ?? "",
+                        chronicdeseases: data["chronicdeseases"] as? String ?? "",
+                        lastvetvisit: data["lastvetvisit"] as? String ?? "",
+                        lenth: data["length"] as? String ?? "",
+                        energylevel: data["energylevel"] as? String ?? "",
+                        friendliness: data["friendliness"] as? String ?? "",
+                        travelinglevel: data["travelinglevel"] as? String ?? ""
+                    )
+                    fetchedDogs.append(dog)
+                }
+                DispatchQueue.main.async {
+                    self.dogs = fetchedDogs
+                                }
+            }
+        }
+    }
+}
