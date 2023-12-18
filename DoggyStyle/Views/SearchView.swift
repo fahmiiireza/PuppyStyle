@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct SearchView: View {
     
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var handle: AuthStateDidChangeListenerHandle?
@@ -212,6 +213,9 @@ struct SearchView: View {
                             }
                                        
                         })
+//                        .onAppear{
+//                            print(dog.name)
+//                        }
                        
                     }
                 })
@@ -290,7 +294,7 @@ struct SearchView: View {
         
     }
     
-    private func callApi() async {
+    public func callApi() async {
         
         guard let apiKey = getAPIKey() else {
             return
@@ -320,7 +324,7 @@ struct SearchView: View {
         }
     }
     
-    func getAPIKey() -> String? {
+    public func getAPIKey() -> String? {
         return Bundle.main.object(forInfoDictionaryKey: "NINJA_API_KEY") as? String
     }
 }
