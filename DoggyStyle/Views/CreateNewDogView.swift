@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -17,9 +19,42 @@ struct CreateNewDogView: View {
     @Environment(BackgroundLogic.self) private var backgroundLogic
     @State var dog: Dog
     
+    func uploadImages(_ imageDataArray: [Data], completion: @escaping ([String]) -> Void) {
+        let storageRef = Storage.storage().reference()
+        var uploadedUrls: [String] = []
+        let uploadGroup = DispatchGroup()
+
+        for imageData in imageDataArray {
+            uploadGroup.enter()
+            let imageName = UUID().uuidString
+            let imageRef = storageRef.child("dog_images/\(imageName).jpg")
+
+            imageRef.putData(imageData, metadata: nil) { metadata, error in
+                guard error == nil else {
+                    print("Failed to upload image: \(error!.localizedDescription)")
+                    uploadGroup.leave()
+                    return
+                }
+                imageRef.downloadURL { url, error in
+                    guard let downloadURL = url else {
+                        print("Download URL not found")
+                        uploadGroup.leave()
+                        return
+                    }
+                    uploadedUrls.append(downloadURL.absoluteString)
+                    uploadGroup.leave()
+                }
+            }
+        }
+
+        uploadGroup.notify(queue: .main) {
+            completion(uploadedUrls)
+        }
+    }
+    
     func saveDogToFirestore(dog: Dog) {
         let db = Firestore.firestore()
-        let dogData: [String: Any] = [
+        var dogData: [String: Any] = [
             "name": dog.name,
             "gender": dog.gender,
             "breed": dog.breed,
@@ -37,6 +72,10 @@ struct CreateNewDogView: View {
             "imageURLs": dog.imageURLs, // Assuming these are URLs of uploaded images
             "user_id": Auth.auth().currentUser?.uid ?? "" // Set the user ID
         ]
+
+        if !dog.imageURLs.isEmpty {
+            dogData["imageURLs"] = dog.imageURLs
+        }
 
         // Handle image uploading if necessary, then get URLs to store in Firestore
 
@@ -102,11 +141,18 @@ struct CreateNewDogView: View {
                     
                     ToolbarItem(placement: .primaryAction) {
                         Button("Done") {
-                            saveDogToFirestore(dog: dog)
-                            dog.imageData = backgroundLogic.imageDataArray
-                            modelContext.insert(dog)
-                            backgroundLogic.imageDataArray = []
-                            dismiss()
+//                            saveDogToFirestore(dog: dog)
+//                            dog.imageData = backgroundLogic.imageDataArray
+//                            modelContext.insert(dog)
+//                            backgroundLogic.imageDataArray = []
+//                            dismiss()
+                            uploadImages(backgroundLogic.imageDataArray) { uploadedUrls in
+                                      var updatedDog = dog
+                                      updatedDog.imageURLs = uploadedUrls
+                                      saveDogToFirestore(dog: updatedDog)
+                                      backgroundLogic.imageDataArray.removeAll()
+                                      dismiss()
+                                  }
                         }
                     }
                 }

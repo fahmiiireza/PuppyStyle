@@ -10,6 +10,7 @@
 		294FF3932B27C1B100CBFC6D /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294FF3922B27C1B100CBFC6D /* UserDataViewModel.swift */; };
 		297F22502B2FD69700CD54ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 297F224F2B2FD69700CD54ED /* GoogleService-Info.plist */; };
 		297F22522B2FD72700CD54ED /* TinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F22512B2FD72700CD54ED /* TinderViewModel.swift */; };
+		297F22542B2FED7200CD54ED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 297F22532B2FED7200CD54ED /* FirebaseStorage */; };
 		4D372DF82B2A13DF00AD2CA0 /* TinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF72B2A13DF00AD2CA0 /* TinderView.swift */; };
 		4D372DFA2B2A441700AD2CA0 /* TinderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D372DF92B2A441700AD2CA0 /* TinderCardView.swift */; };
 		4D3F044E2B27D89200E4F73A /* BreedSearchingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F044D2B27D89200E4F73A /* BreedSearchingListView.swift */; };
@@ -94,6 +95,7 @@
 				585614BC2B23019900BF076A /* GoogleSignInSwift in Frameworks */,
 				581A4C002B1F824C004B7140 /* FirebaseAnalyticsSwift in Frameworks */,
 				585614BA2B23019900BF076A /* GoogleSignIn in Frameworks */,
+				297F22542B2FED7200CD54ED /* FirebaseStorage in Frameworks */,
 				581A4BFC2B1F824C004B7140 /* FirebaseAnalytics in Frameworks */,
 				581A4BFE2B1F824C004B7140 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				581A4C042B1F824C004B7140 /* FirebaseAppCheck in Frameworks */,
@@ -227,6 +229,7 @@
 				585614B62B23012900BF076A /* FirebaseAuth */,
 				585614B92B23019900BF076A /* GoogleSignIn */,
 				585614BB2B23019900BF076A /* GoogleSignInSwift */,
+				297F22532B2FED7200CD54ED /* FirebaseStorage */,
 			);
 			productName = DoggyStyle;
 			productReference = 5838B3E82B1F7C3300E43B91 /* DoggyStyle.app */;
@@ -451,7 +454,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 5FUVBWCU3T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -470,7 +473,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sb16.doggystyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -491,7 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoggyStyle/Preview Content\"";
-				DEVELOPMENT_TEAM = QA9FXHQ3QW;
+				DEVELOPMENT_TEAM = 5FUVBWCU3T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DoggyStyle/Info.plist;
@@ -510,7 +513,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.felixparey.doggystyle;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sb16.doggystyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -573,6 +576,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		297F22532B2FED7200CD54ED /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		581A4BFB2B1F824C004B7140 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 581A4BFA2B1F824C004B7140 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -15,22 +15,47 @@ struct DogCardView: View {
         
             ZStack(alignment: .bottomLeading){
 
-                if dog.imageData.isEmpty == false{
-                    
-                    Image(uiImage: UIImage(data: dog.imageData.first!)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .containerRelativeFrame(.vertical) { size, _ in
-                            size * 0.4
-                        }
-                    
-                }else{
-                    Image(.placeholderDog)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 200)
-                    
-                }
+//                if dog.imageData.isEmpty == false{
+//                    
+//                    Image(uiImage: UIImage(data: dog.imageData.first!)!)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .containerRelativeFrame(.vertical) { size, _ in
+//                            size * 0.4
+//                        }
+//                    
+//                }else{
+//                    Image(.placeholderDog)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .frame(height: 200)
+//                    
+//                }
+                
+                if let firstImageUrl = dog.imageURLs.first, let url = URL(string: firstImageUrl) {
+                               AsyncImage(url: url) { phase in
+                                   switch phase {
+                                   case .empty:
+                                       ProgressView()
+                                           .frame(height: 200)
+                                   case .success(let image):
+                                       image
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fill)
+                                           .containerRelativeFrame(.vertical) { size, _ in
+                                                                      size * 0.4
+                                                                  }
+                                                               .frame(height: 200)
+
+                                   case .failure:
+                                       placeholderImage
+                                   @unknown default:
+                                       EmptyView()
+                                   }
+                               }
+                           } else {
+                               placeholderImage
+                           }
                 //Image(uiImage: UIImage(data: dog.imageData![0]) ?? UIImage(resource: .placeholderDog))
                 
 ///               AsyncImage(url: URL(string: "https://i.ibb.co/JckmsK9/IMG-6035.jpg")) { image in
@@ -69,10 +94,13 @@ struct DogCardView: View {
                 
             }
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            
-            
-        
+    }
+    
+    private var placeholderImage: some View {
+        Image(.placeholderDog)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(height: 200)
     }
 }
 

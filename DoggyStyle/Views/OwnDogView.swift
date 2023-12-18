@@ -34,16 +34,25 @@ struct OwnDogView: View {
             ScrollView {
                 LazyVStack(spacing: 0){
                     TabView {
-                            if (dog.imageData.isEmpty){
+                            if (dog.imageURLs.isEmpty){
                                 Text("NO IMAGES")
                                     .bold()
                             }else{
-                                ForEach(dog.imageData, id: \.self){ image in
-                                    
-                                    Image(uiImage: UIImage(data: image)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                    
+                                ForEach(dog.imageURLs, id: \.self){ imageUrl in
+                                    AsyncImage(url: URL(string: imageUrl)) { phase in
+                                         switch phase {
+                                         case .empty:
+                                             ProgressView()
+                                         case .success(let image):
+                                             image
+                                                 .resizable()
+                                                 .aspectRatio(contentMode: .fill)
+                                         case .failure:
+                                             Text("Unable to load image")
+                                         @unknown default:
+                                             EmptyView()
+                                         }
+                                     }
                                 }
                             }
                     }
