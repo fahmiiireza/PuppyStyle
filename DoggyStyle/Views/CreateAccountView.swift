@@ -24,23 +24,12 @@ struct CreateAccountView: View {
     var body: some View {
         NavigationStack{
             Form{
-                
-                
                 PhotosPicker(selection: $photosPickerItem, matching: .images) {
                     Image(uiImage: profilePicture)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 70, height: 70)
                         .clipShape(Circle())
-                }
-                
-                Button("Get my location"){
-                    print("button clicked")
-                    locationViewModel.checkLocationAuthorization()
-                    Task {
-                        await locationViewModel.checkIfLocationServiceIsEnabled()
-            //            fetchUserSameCity()
-                    }
                 }
                 
                 TextField("First Name", text: $firstName)
@@ -50,7 +39,11 @@ struct CreateAccountView: View {
                 TextField("Tel. Number", text: $telNr)
             }
         }
+        .task {
+            await locationViewModel.checkIfLocationServiceIsEnabled()
+        }
     }
+    
 }
 
 #Preview {

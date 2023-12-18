@@ -16,8 +16,8 @@ struct MapView: View {
     @State var users : [Usert]
     @State private var position: MapCameraPosition = .automatic
     @Environment(\.dismiss) private var dismiss
-
     private let db = Firestore.firestore()
+    
     
     var body: some View {
         Map {
@@ -34,8 +34,8 @@ struct MapView: View {
                                     .frame(width: 40,height: 40)
                                     .padding(5)
                             }
-
-                                
+                            
+                            
                             
                             
                         }
@@ -46,9 +46,9 @@ struct MapView: View {
                 }
             }
             else{
-//
+                //
             }
-                
+            
         }
         .fullScreenCover(isPresented: $dogViewPresented, content: {
             //Replace with actual View
@@ -64,7 +64,7 @@ struct MapView: View {
                             .padding(10)
                     }
                 })
-                
+            
         })
         .overlay(alignment: .topTrailing, content: {
             Button {
@@ -77,25 +77,36 @@ struct MapView: View {
                     .padding(10)
             }
         })
-        
         .task {
             await viewModel.checkIfLocationServiceIsEnabled()
-//            fetchUserSameCity()
+            //            fetchUserSameCity()
+            
         }
     }
     
-//    private func fetchUserSameCity () {
-//        db.collection("user").whereField("city", isEqualTo: user.currentUser?.location?.city ?? "Napoli")
-//            .getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    users = querySnapshot!.documents as! [Usert]
-//                  
-//                    
-//                }
-//            }
-//    }
+    //    private func fetchUserSameCity () {
+    //        db.collection("user").whereField("city", isEqualTo: user.currentUser?.location?.city ?? "Napoli")
+    //            .getDocuments() { (querySnapshot, err) in
+    //                if let err = err {
+    //                    print("Error getting documents: \(err)")
+    //                } else {
+    //                    users = querySnapshot!.documents as! [Usert]
+    //
+    //
+    //                }
+    //            }
+    //    }
+    private func getUser() {
+        let userLogin = db.collection("user").document(Auth.auth().currentUser?.email ?? "")
+        userLogin.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
 }
 
 //#Preview {
@@ -121,24 +132,28 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
         guard let locationManager = locationManager else {
             return
         }
-        guard let location = locationManager.location?.coordinate else {
-            return
-        }
-        print(location)
-        let locationCity = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        getCity(latitude: location.latitude, longitude: location.longitude)
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
+            locationManager.requestWhenInUseAuthorization()
             print("show alert they're restricted via parental control")
         case .denied:
+            locationManager.requestWhenInUseAuthorization()
             print("allow it man")
         case .authorizedAlways, .authorizedWhenInUse:
             break
+            //            locationManager.requestWhenInUseAuthorization()
         @unknown default:
-            break
+            locationManager.requestWhenInUseAuthorization()
         }
+        
+        guard let location = locationManager.location?.coordinate else {
+            return
+        }
+        let locationCity = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        getCity(latitude: location.latitude, longitude: location.longitude)
+        
     }
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
@@ -147,6 +162,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     private func getCity(latitude: Double, longitude: Double) {
         let geoCoder = CLGeocoder()
         let locationCity = CLLocation(latitude: latitude, longitude: longitude)
+        let db = Firestore.firestore()
         
         geoCoder.reverseGeocodeLocation(locationCity, completionHandler:
                                             {
@@ -157,7 +173,14 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             
             // City
             if let city = placeMark.subAdministrativeArea {
-                print(city)
+                // Add a new document in collection "cities"
+                db.collection("user").document(Auth.auth().currentUser?.email ?? "").setData([
+                    "location": [
+                        "city" : city,
+                        "latitude" : latitude,
+                        "longitude" : longitude
+                    ]
+                ], merge: true)
             }
         })
         

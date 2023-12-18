@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    
+    @StateObject private var viewModel = MapViewModel()
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(BackgroundLogic.self) private var backgroundLogic
@@ -35,6 +35,11 @@ struct MainView: View {
                 }
                 
                 
+            }
+            
+            .task {
+                await viewModel.checkIfLocationServiceIsEnabled()
+                //            fetchUserSameCity()
             }
             .onChange(of: networkMonitor.isConnected) { oldValue, newValue in
                 if selection == "Search"{
