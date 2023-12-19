@@ -83,15 +83,20 @@ struct OwnAccountView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                     case .failure:
-                                        Image(uiImage: .placeholderDog)
+                                        Image(uiImage: .placeholderProfile)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
                                     @unknown default:
                                         EmptyView()
                                     }
                                 }
                             } else {
-                                Image(uiImage: .placeholderDog)
+                                Image(uiImage: .placeholderProfile)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
                             }
                         }
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 70, height: 70)
                         .clipShape(Circle())
                         
@@ -105,12 +110,11 @@ struct OwnAccountView: View {
                     }
                 }
                 List{
-                    Text("hello")
-                    NavigationLink {
-                        Text("Nothing here")
-                    } label: {
-                        Text("Image")
-                    }
+                    Text(userDataViewModel.currentUser?.email ?? "E-Mail")
+                        .foregroundStyle(.gray)
+                    Text(userDataViewModel.currentUser?.telNumber ?? "Tel. Number")
+                        .foregroundStyle(.gray)
+
 
                 }
                 
@@ -121,8 +125,8 @@ struct OwnAccountView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel"){
-                        cancelAlertPresented.toggle()
+                    Button("Cancel", role: .cancel){
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
